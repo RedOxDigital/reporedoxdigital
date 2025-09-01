@@ -1,0 +1,14 @@
+# Allow all traditional search engine crawlers
+User-agent: *
+Allow: /
+
+# Protocol v7.0: Explicitly allow key AI crawlers for Generative Engine Optimization (GEO).
+User-agent: GPTBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+
+# ⚠ IMPORTANT: Replace with the final production domain.
+Sitemap: https://www.example.com/sitemap.xml

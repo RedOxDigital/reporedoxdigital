@@ -1,0 +1,16 @@
+# Dependencies
+node_modules
+#Build artifacts
+dist
+# IDE config
+.vscode
+.idea
+# System files
+.DS_Store
+# Environment variables
+.env
+.env.*
+!.env.example
+# SEO temp files
+sitemap.xml
+robots.txt.backup
