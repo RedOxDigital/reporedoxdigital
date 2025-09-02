@@ -2,6 +2,15 @@
 
 This file governs all UI changes after the initial build
 
+## Variant Creation Protocol
+When creating design variants (heroes, sections, components):
+- **ALWAYS create standalone HTML files** in a `/variants/` or `/components/` folder
+- **Use CDN for Tailwind CSS and fonts** for immediate desktop viewing
+- **Include complete styling and self-contained structure**
+- **Follow the design.md system religiously** for each variant
+- **Name files descriptively** (e.g., hero-variant-1-security.html)
+- **This prevents JSX errors** and allows instant desktop preview
+
 ## Generating Design Variations
 This workflow is used to explore different UI styles without altering the foundational code.
 
