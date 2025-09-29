@@ -4,7 +4,7 @@ We sell a complete marketing package designed to get local customers. The packag
 
 Professional photo and video shoots.
 
-Pay-per-click (PPC) ads, primarily on Google for local searches.
+Pay-per-click (PPC) ads, primarily on Google for local searches, but also do Meta is your clients are on there
 
 Custom-built landing pages that the ads send traffic to.
 
