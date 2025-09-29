@@ -1,5 +1,5 @@
 {
-  "name": "template-repo",
+  "name": "client-website-shell",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "serve-html": "node serve-html.js",
+    "hero": "node serve-html.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write .",
     "build:analyze": "npm run build && npx vite-bundle-analyzer"

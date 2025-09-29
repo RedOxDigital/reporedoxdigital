@@ -1,12 +1,12 @@
 const defaultSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  'name': 'Your Company Name',
-  'url': 'https://www.example.com',
-  'logo': 'https://www.example.com/logo.png',
+  'name': 'Client Business',
+  'url': 'https://www.clientwebsite.com',
+  'logo': 'https://www.clientwebsite.com/logo.png',
   'contactPoint': {
     '@type': 'ContactPoint',
-    'telephone': '+1-401-555-1212',
+    'telephone': '+1-555-123-4567',
     'contactType': 'customer service',
   },
 }

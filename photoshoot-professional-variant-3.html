@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Photography Portfolio - Red Ox Digital</title>
+    <style>
+        /* 2025 Enhanced Design System - Semantic Tokens */
+        :root {
+            /* Primary Brand Colors */
+            --primary: 220 14% 96%;
+            --primary-foreground: 220 9% 46%;
+            --primary-variant: 220 14% 90%;
+            --primary-dark: 220 14% 85%;
+            --primary-light: 220 14% 98%;
+            
+            /* Secondary Colors */
+            --secondary: 220 9% 46%;
+            --secondary-foreground: 220 14% 96%;
+            --secondary-variant: 220 9% 60%;
+            --secondary-dark: 220 9% 35%;
+            --secondary-light: 220 9% 70%;
+            
+            /* Background System */
+            --background: 0 0% 100%;
+            --foreground: 220 9% 46%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            
+            /* Surface System */
+            --card: 0 0% 100%;
+            --card-foreground: 220 9% 46%;
+            
+            /* Border System */
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 220 14% 96%;
+            
+            /* Status Colors */
+            --destructive: 0 84% 60%;
+            --destructive-foreground: 0 0% 98%;
+            --success: 142 76% 36%;
+            --success-foreground: 0 0% 98%;
+            --warning: 38 92% 50%;
+            --warning-foreground: 0 0% 98%;
+            
+            /* Red Ox Digital Brand Colors */
+            --brand-red: 0 84% 60%;
+            --brand-red-dark: 0 84% 45%;
+            --brand-dark: 220 20% 15%;
+            --brand-dark-light: 220 15% 25%;
+            
+            /* 2025 Creative Color System */
+            --creative-primary: 0 0% 98%;
+            --creative-secondary: 220 20% 15%;
+            --creative-accent: 0 84% 60%;
+            --creative-highlight: 0 84% 70%;
+            
+            /* Enhanced Shadow System */
+            --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+            --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+            --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+            --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+            --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 8px 10px -6px hsl(var(--foreground) / 0.1);
+            --shadow-2xl: 0 25px 50px -12px hsl(var(--foreground) / 0.25);
+            
+            /* 2025 Creative Shadow System */
+            --shadow-creative: 0 20px 40px hsl(var(--creative-accent) / 0.2);
+            --shadow-artistic: 0 15px 35px hsl(var(--creative-accent) / 0.15);
+            --shadow-floating: 0 30px 60px hsl(var(--foreground) / 0.1);
+            --shadow-glow: 0 0 20px hsl(var(--creative-accent) / 0.4);
+            
+            /* Enhanced Animation System */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* 2025 Creative Animation System */
+            --transition-creative: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-artistic: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-morph: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--creative-primary));
+            background: 
+                linear-gradient(180deg,
+                    hsl(var(--creative-secondary)) 0%,
+                    hsl(220 25% 12%) 20%,
+                    hsl(220 25% 8%) 40%,
+                    hsl(var(--creative-secondary)) 60%,
+                    hsl(220 25% 8%) 80%,
+                    hsl(var(--creative-secondary)) 100%),
+                radial-gradient(ellipse at 50% 0%, hsl(var(--creative-accent) / 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at 0% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%),
+                radial-gradient(ellipse at 100% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%);
+            background-attachment: fixed;
+            background-size: 100% 100%, 100% 200%, 200% 100%, 200% 100%;
+            animation: gradient-flow 20s ease-in-out infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Flowing Gradient Animation */
+        @keyframes gradient-flow {
+            0%, 100% {
+                background-position: 0% 0%, 50% 0%, 0% 50%, 100% 50%;
+            }
+            25% {
+                background-position: 0% 0%, 60% 10%, 10% 40%, 90% 60%;
+            }
+            50% {
+                background-position: 0% 0%, 40% 20%, 20% 30%, 80% 70%;
+            }
+            75% {
+                background-position: 0% 0%, 50% 10%, 5% 60%, 95% 40%;
+            }
+        }
+
+        /* Portfolio Component - Desktop Landscape */
+        .portfolio-component {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-floating);
+            animation: component-reveal 1s ease-out both;
+            min-height: 600px;
+        }
+
+        .portfolio-component::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                hsl(var(--creative-primary) / 0.05) 50%,
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        @keyframes component-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Layout Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Content Section */
+        .portfolio-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        /* Portfolio Badge */
+        .portfolio-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid hsl(var(--creative-primary) / 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            align-self: flex-start;
+        }
+
+        .portfolio-badge svg {
+            width: 20px;
+            height: 20px;
+            stroke: hsl(var(--creative-accent));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Main Headline */
+        .portfolio-headline {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: hsl(var(--creative-primary));
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+        }
+
+        .highlight-text {
+            color: hsl(var(--creative-accent));
+        }
+
+        /* Subheading */
+        .portfolio-subheading {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            font-weight: 400;
+            color: hsl(var(--creative-primary) / 0.8);
+            line-height: 1.6;
+        }
+
+        /* Portfolio Stats */
+        .portfolio-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 12px;
+            transition: var(--transition-creative);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.3);
+            border-color: hsl(var(--creative-accent) / 0.2);
+        }
+
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: hsl(var(--creative-accent));
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Service Offer */
+        .service-offer {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid hsl(var(--creative-accent) / 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-offer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.8) 100%);
+        }
+
+        .offer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .offer-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: hsl(var(--creative-primary));
+        }
+
+        .offer-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: hsl(var(--creative-accent));
+        }
+
+        .offer-description {
+            font-size: 0.95rem;
+            color: hsl(var(--creative-primary) / 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* CTA Button */
+        .portfolio-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary));
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 0.025em;
+            box-shadow: var(--shadow-creative);
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .portfolio-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                hsl(var(--creative-primary) / 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .portfolio-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-artistic);
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.9) 0%, 
+                hsl(var(--creative-accent)) 100%);
+        }
+
+        .portfolio-cta:hover::before {
+            left: 100%;
+        }
+
+        .portfolio-cta svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Portfolio Gallery */
+        .portfolio-gallery {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .gallery-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: hsl(var(--creative-primary));
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-subtitle {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.7);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-primary) / 0.1) 0%, 
+                hsl(var(--creative-primary) / 0.05) 100%);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition-creative);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-floating);
+            border-color: hsl(var(--creative-accent) / 0.2);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                transparent 50%,
+                hsl(var(--creative-accent) / 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-icon {
+            width: 48px;
+            height: 48px;
+            stroke: hsl(var(--creative-primary) / 0.3);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            z-index: 2;
+            transition: var(--transition-creative);
+        }
+
+        .gallery-item:hover .gallery-icon {
+            stroke: hsl(var(--creative-accent));
+            transform: scale(1.1);
+        }
+
+        .gallery-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: hsl(var(--creative-primary));
+            padding: 1rem 0.75rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 2;
+        }
+
+        /* Business Types */
+        .business-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .business-type {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid hsl(var(--creative-primary) / 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: hsl(var(--creative-primary) / 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .portfolio-component {
+                padding: 2.5rem;
+                min-height: auto;
+            }
+
+            .portfolio-gallery {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .portfolio-component {
+                padding: 2rem;
+            }
+
+            .portfolio-grid {
+                gap: 2rem;
+            }
+
+            .portfolio-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 0.75rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .service-offer {
+                padding: 1.5rem;
+            }
+
+            .offer-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .offer-price {
+                font-size: 1.75rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .portfolio-component {
+                padding: 1.5rem;
+            }
+
+            .portfolio-stats {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .gallery-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .business-types {
+                justify-content: center;
+            }
+
+            .portfolio-cta {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            body {
+                animation: none;
+            }
+
+            .portfolio-component {
+                animation: none;
+            }
+
+            .gallery-item:hover,
+            .portfolio-cta:hover,
+            .stat-item:hover {
+                transform: none;
+            }
+        }
+
+        /* Focus Management */
+        .portfolio-cta:focus,
+        .gallery-item:focus {
+            outline: 2px solid hsl(var(--creative-accent));
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Portfolio Component -->
+    <div class="portfolio-component">
+        <div class="portfolio-grid">
+            <!-- Content Section -->
+            <div class="portfolio-content">
+                <!-- Portfolio Badge -->
+                <div class="portfolio-badge">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-1.414-.586H13l-2.5 2.5"/>
+                        <path d="m14 12 5 5"/>
+                    </svg>
+                    Portfolio Showcase
+                </div>
+
+                <!-- Main Headline -->
+                <h1 class="portfolio-headline">
+                    Professional <span class="highlight-text">Business Photography</span>
+                </h1>
+
+                <!-- Subheading -->
+                <p class="portfolio-subheading">
+                    Elevate your business presence with professional photography that captures your brand's essence and attracts more customers.
+                </p>
+
+                <!-- Portfolio Stats -->
+                <div class="portfolio-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9★</div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24hr</div>
+                        <div class="stat-label">Delivery</div>
+                    </div>
+                </div>
+
+                <!-- Service Offer -->
+                <div class="service-offer">
+                    <div class="offer-header">
+                        <div class="offer-title">Photography Package</div>
+                        <div class="offer-price">$199</div>
+                    </div>
+                    <div class="offer-description">
+                        Complete professional photography service including on-site session, professional editing, and high-resolution digital files delivered within 24 hours.
+                    </div>
+                    <a href="#view-portfolio" class="portfolio-cta">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                            <circle cx="12" cy="13" r="3"/>
+                        </svg>
+                        View Our Work & Book Session
+                    </a>
+                </div>
+
+                <!-- Business Types -->
+                <div class="business-types">
+                    <div class="business-type">Restaurants</div>
+                    <div class="business-type">Retail</div>
+                    <div class="business-type">Medical</div>
+                    <div class="business-type">Professional Services</div>
+                    <div class="business-type">Beauty & Wellness</div>
+                </div>
+            </div>
+
+            <!-- Portfolio Gallery -->
+            <div class="portfolio-gallery">
+                <div class="gallery-header">
+                    <div class="gallery-title">Our Recent Work</div>
+                    <div class="gallery-subtitle">Professional photography across various business types</div>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item" tabindex="0">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                        <div class="gallery-label">Restaurant Interior</div>
+                    </div>
+
+                    <div class="gallery-item" tabindex="0">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <div class="gallery-label">Team Portraits</div>
+                    </div>
+
+                    <div class="gallery-item" tabindex="0">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                        <div class="gallery-label">Product Showcase</div>
+                    </div>
+
+                    <div class="gallery-item" tabindex="0">
+                        <svg class="gallery-icon" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                            <line x1="7" y1="2" x2="7" y2="22"/>
+                            <line x1="17" y1="2" x2="17" y2="22"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <line x1="2" y1="7" x2="7" y2="7"/>
+                            <line x1="2" y1="17" x2="7" y2="17"/>
+                            <line x1="17" y1="17" x2="22" y2="17"/>
+                            <line x1="17" y1="7" x2="22" y2="7"/>
+                        </svg>
+                        <div class="gallery-label">Storefront Exterior</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CTA Click Analytics
+        document.querySelector('.portfolio-cta').addEventListener('click', (e) => {
+            console.log('Portfolio CTA clicked: View Our Work & Book Session');
+        });
+
+        // Gallery Item Click Analytics
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                const label = item.querySelector('.gallery-label').textContent;
+                console.log(`Gallery item clicked: ${label}`);
+            });
+
+            // Keyboard accessibility
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const label = item.querySelector('.gallery-label').textContent;
+                    console.log(`Gallery item activated via keyboard: ${label}`);
+                }
+            });
+        });
+
+        // Stat Item Hover Analytics
+        document.querySelectorAll('.stat-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', () => {
+                const label = item.querySelector('.stat-label').textContent;
+                console.log(`Stat item hovered: ${label}`);
+            });
+        });
+
+        // Business Type Click Analytics
+        document.querySelectorAll('.business-type').forEach((type, index) => {
+            type.addEventListener('click', () => {
+                console.log(`Business type clicked: ${type.textContent}`);
+            });
+        });
+
+        // Component View Analytics
+        console.log('Portfolio Photography Component loaded');
+    </script>
+</body>
+</html>

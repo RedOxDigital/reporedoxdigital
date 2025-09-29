@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Photography Services - Red Ox Digital</title>
+    <style>
+        /* 2025 Enhanced Design System - Semantic Tokens */
+        :root {
+            /* Primary Brand Colors */
+            --primary: 220 14% 96%;
+            --primary-foreground: 220 9% 46%;
+            --primary-variant: 220 14% 90%;
+            --primary-dark: 220 14% 85%;
+            --primary-light: 220 14% 98%;
+            
+            /* Secondary Colors */
+            --secondary: 220 9% 46%;
+            --secondary-foreground: 220 14% 96%;
+            --secondary-variant: 220 9% 60%;
+            --secondary-dark: 220 9% 35%;
+            --secondary-light: 220 9% 70%;
+            
+            /* Background System */
+            --background: 0 0% 100%;
+            --foreground: 220 9% 46%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            
+            /* Surface System */
+            --card: 0 0% 100%;
+            --card-foreground: 220 9% 46%;
+            
+            /* Border System */
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 220 14% 96%;
+            
+            /* Status Colors */
+            --destructive: 0 84% 60%;
+            --destructive-foreground: 0 0% 98%;
+            --success: 142 76% 36%;
+            --success-foreground: 0 0% 98%;
+            --warning: 38 92% 50%;
+            --warning-foreground: 0 0% 98%;
+            
+            /* Red Ox Digital Brand Colors */
+            --brand-red: 0 84% 60%;
+            --brand-red-dark: 0 84% 45%;
+            --brand-dark: 220 20% 15%;
+            --brand-dark-light: 220 15% 25%;
+            
+            /* 2025 Creative Color System */
+            --creative-primary: 0 0% 98%;
+            --creative-secondary: 220 20% 15%;
+            --creative-accent: 0 84% 60%;
+            --creative-highlight: 0 84% 70%;
+            
+            /* Enhanced Shadow System */
+            --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+            --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+            --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+            --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+            --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 8px 10px -6px hsl(var(--foreground) / 0.1);
+            --shadow-2xl: 0 25px 50px -12px hsl(var(--foreground) / 0.25);
+            
+            /* 2025 Creative Shadow System */
+            --shadow-creative: 0 20px 40px hsl(var(--creative-accent) / 0.2);
+            --shadow-artistic: 0 15px 35px hsl(var(--creative-accent) / 0.15);
+            --shadow-floating: 0 30px 60px hsl(var(--foreground) / 0.1);
+            --shadow-glow: 0 0 20px hsl(var(--creative-accent) / 0.4);
+            
+            /* Enhanced Animation System */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* 2025 Creative Animation System */
+            --transition-creative: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-artistic: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-morph: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--creative-primary));
+            background: 
+                linear-gradient(180deg,
+                    hsl(var(--creative-secondary)) 0%,
+                    hsl(220 25% 12%) 20%,
+                    hsl(220 25% 8%) 40%,
+                    hsl(var(--creative-secondary)) 60%,
+                    hsl(220 25% 8%) 80%,
+                    hsl(var(--creative-secondary)) 100%),
+                radial-gradient(ellipse at 50% 0%, hsl(var(--creative-accent) / 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at 0% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%),
+                radial-gradient(ellipse at 100% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%);
+            background-attachment: fixed;
+            background-size: 100% 100%, 100% 200%, 200% 100%, 200% 100%;
+            animation: gradient-flow 20s ease-in-out infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Flowing Gradient Animation */
+        @keyframes gradient-flow {
+            0%, 100% {
+                background-position: 0% 0%, 50% 0%, 0% 50%, 100% 50%;
+            }
+            25% {
+                background-position: 0% 0%, 60% 10%, 10% 40%, 90% 60%;
+            }
+            50% {
+                background-position: 0% 0%, 40% 20%, 20% 30%, 80% 70%;
+            }
+            75% {
+                background-position: 0% 0%, 50% 10%, 5% 60%, 95% 40%;
+            }
+        }
+
+        /* Service Showcase Component - Desktop Landscape */
+        .service-showcase-component {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-floating);
+            animation: component-reveal 1s ease-out both;
+            min-height: 600px;
+        }
+
+        .service-showcase-component::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                hsl(var(--creative-primary) / 0.05) 50%,
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        @keyframes component-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Header Section */
+        .service-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .service-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid hsl(var(--creative-primary) / 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-badge svg {
+            width: 20px;
+            height: 20px;
+            stroke: hsl(var(--creative-accent));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .service-headline {
+            font-size: clamp(2.5rem, 4vw, 3.25rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: hsl(var(--creative-primary));
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-text {
+            color: hsl(var(--creative-accent));
+        }
+
+        .service-description {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            color: hsl(var(--creative-primary) / 0.8);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Service Features */
+        .service-features {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                hsl(var(--creative-primary) / 0.05) 50%,
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-floating);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.2) 0%, 
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: hsl(var(--creative-accent));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: hsl(var(--creative-primary));
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            color: hsl(var(--creative-primary) / 0.8);
+            line-height: 1.6;
+        }
+
+        /* Package Section */
+        .package-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .package-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.8) 100%);
+        }
+
+        .package-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(var(--creative-accent));
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .package-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: hsl(var(--creative-primary));
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .package-duration {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .package-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .package-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: hsl(var(--creative-primary) / 0.9);
+        }
+
+        .package-feature-icon {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, 
+                hsl(142 76% 36%) 0%, 
+                hsl(142 76% 36% / 0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .package-feature-icon svg {
+            width: 12px;
+            height: 12px;
+            stroke: hsl(var(--creative-primary));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* CTA Button */
+        .service-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary));
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 0.025em;
+            box-shadow: var(--shadow-creative);
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .service-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                hsl(var(--creative-primary) / 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .service-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-artistic);
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.9) 0%, 
+                hsl(var(--creative-accent)) 100%);
+        }
+
+        .service-cta:hover::before {
+            left: 100%;
+        }
+
+        .service-cta svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Guarantee Section */
+        .guarantee-section {
+            background: rgba(142, 76, 36, 0.1);
+            border: 1px solid hsl(142 76% 36% / 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .guarantee-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, 
+                hsl(142 76% 36%) 0%, 
+                hsl(142 76% 36% / 0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .guarantee-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: hsl(var(--creative-primary));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .guarantee-text {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.9);
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .service-showcase-component {
+                padding: 2.5rem;
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .service-showcase-component {
+                padding: 2rem;
+            }
+
+            .service-header {
+                margin-bottom: 2rem;
+            }
+
+            .content-grid {
+                gap: 2rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            .package-card {
+                padding: 2rem;
+            }
+
+            .package-price {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .service-showcase-component {
+                padding: 1.5rem;
+            }
+
+            .feature-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.75rem;
+            }
+
+            .feature-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .feature-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .package-price {
+                font-size: 2rem;
+            }
+
+            .service-cta {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            body {
+                animation: none;
+            }
+
+            .service-showcase-component {
+                animation: none;
+            }
+
+            .feature-card:hover,
+            .service-cta:hover {
+                transform: none;
+            }
+        }
+
+        /* Focus Management */
+        .service-cta:focus {
+            outline: 2px solid hsl(var(--creative-accent));
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Service Showcase Component -->
+    <div class="service-showcase-component">
+        <!-- Header Section -->
+        <div class="service-header">
+            <div class="service-badge">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Professional Service
+            </div>
+
+            <h1 class="service-headline">
+                Business Photography <span class="highlight-text">Services</span>
+            </h1>
+
+            <p class="service-description">
+                Professional photography solutions designed to enhance your business presence and attract more customers through compelling visual content.
+            </p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <!-- Service Features -->
+            <div class="service-features">
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="feature-title">On-Site Photography</div>
+                    </div>
+                    <div class="feature-description">
+                        Professional photographer comes to your business location for a convenient 20-minute session that captures your space, team, and services.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <div class="feature-title">Digital Optimization</div>
+                    </div>
+                    <div class="feature-description">
+                        Images are professionally edited and optimized for various platforms including Google Business Profile, website, and social media channels.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12,6 12,12 16,14"/>
+                            </svg>
+                        </div>
+                        <div class="feature-title">Fast Delivery</div>
+                    </div>
+                    <div class="feature-description">
+                        Receive your professionally edited high-resolution images within 24 hours of your photography session, ready for immediate use.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package Section -->
+            <div class="package-section">
+                <div class="package-card">
+                    <div class="package-label">Photography Package</div>
+                    <div class="package-price">$199</div>
+                    <div class="package-duration">Complete service package</div>
+
+                    <div class="package-features">
+                        <div class="package-feature">
+                            <div class="package-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                            </div>
+                            <span>20-minute professional photoshoot</span>
+                        </div>
+                        <div class="package-feature">
+                            <div class="package-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                            </div>
+                            <span>Professional editing and retouching</span>
+                        </div>
+                        <div class="package-feature">
+                            <div class="package-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                            </div>
+                            <span>High-resolution digital files</span>
+                        </div>
+                        <div class="package-feature">
+                            <div class="package-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                            </div>
+                            <span>Multiple format optimization</span>
+                        </div>
+                        <div class="package-feature">
+                            <div class="package-feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <polyline points="20,6 9,17 4,12"/>
+                                </svg>
+                            </div>
+                            <span>24-hour delivery guarantee</span>
+                        </div>
+                    </div>
+
+                    <a href="#book-service" class="service-cta">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                            <circle cx="12" cy="13" r="3"/>
+                        </svg>
+                        Book Photography Service
+                    </a>
+                </div>
+
+                <div class="guarantee-section">
+                    <div class="guarantee-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="guarantee-text">
+                        <strong>Satisfaction Guaranteed:</strong> We're committed to delivering professional results that exceed your expectations or we'll make it right.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CTA Click Analytics
+        document.querySelector('.service-cta').addEventListener('click', (e) => {
+            console.log('Service CTA clicked: Book Photography Service');
+        });
+
+        // Feature Card Hover Analytics
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.addEventListener('mouseenter', () => {
+                const title = card.querySelector('.feature-title').textContent;
+                console.log(`Feature card hovered: ${title}`);
+            });
+        });
+
+        // Package Feature Click Analytics
+        document.querySelectorAll('.package-feature').forEach((feature, index) => {
+            feature.addEventListener('click', () => {
+                const featureText = feature.querySelector('span').textContent;
+                console.log(`Package feature clicked: ${featureText}`);
+            });
+        });
+
+        // Component View Analytics
+        console.log('Service Showcase Component loaded');
+    </script>
+</body>
+</html>

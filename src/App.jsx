@@ -1,15 +1,8 @@
-import Footer from './components/layout/Footer'
-import Header from './components/layout/Header'
 import HomePage from './pages/HomePage'
+import TestHomePage from './pages/TestHomePage'
+import HomePageSimple from './pages/HomePageSimple'
 
 export default function App() {
-  return (
-    <div className="flex min-h-screen flex-col bg-primary-50 font-sans text-primary-900">
-      <Header />
-      <main className="flex-grow">
-        <HomePage />
-      </main>
-      <Footer />
-    </div>
-  )
+  // Test original HomePage with external CSS
+  return <HomePage />
 }

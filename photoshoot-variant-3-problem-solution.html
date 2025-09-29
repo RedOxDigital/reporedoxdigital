@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Losing Customers to Bad Photos - $199 Professional Photoshoot</title>
+    <style>
+        /* 2025 Enhanced Design System - Semantic Tokens */
+        :root {
+            /* Primary Brand Colors */
+            --primary: 220 14% 96%;
+            --primary-foreground: 220 9% 46%;
+            --primary-variant: 220 14% 90%;
+            --primary-dark: 220 14% 85%;
+            --primary-light: 220 14% 98%;
+            
+            /* Secondary Colors */
+            --secondary: 220 9% 46%;
+            --secondary-foreground: 220 14% 96%;
+            --secondary-variant: 220 9% 60%;
+            --secondary-dark: 220 9% 35%;
+            --secondary-light: 220 9% 70%;
+            
+            /* Background System */
+            --background: 0 0% 100%;
+            --foreground: 220 9% 46%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            
+            /* Surface System */
+            --card: 0 0% 100%;
+            --card-foreground: 220 9% 46%;
+            
+            /* Border System */
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 220 14% 96%;
+            
+            /* Status Colors */
+            --destructive: 0 84% 60%;
+            --destructive-foreground: 0 0% 98%;
+            --success: 142 76% 36%;
+            --success-foreground: 0 0% 98%;
+            --warning: 38 92% 50%;
+            --warning-foreground: 0 0% 98%;
+            
+            /* Red Ox Digital Brand Colors */
+            --brand-red: 0 84% 60%;
+            --brand-red-dark: 0 84% 45%;
+            --brand-dark: 220 20% 15%;
+            --brand-dark-light: 220 15% 25%;
+            
+            /* 2025 Creative Color System */
+            --creative-primary: 0 0% 98%;
+            --creative-secondary: 220 20% 15%;
+            --creative-accent: 0 84% 60%;
+            --creative-highlight: 0 84% 70%;
+            
+            /* Enhanced Shadow System */
+            --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+            --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+            --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+            --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+            --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 8px 10px -6px hsl(var(--foreground) / 0.1);
+            --shadow-2xl: 0 25px 50px -12px hsl(var(--foreground) / 0.25);
+            
+            /* 2025 Creative Shadow System */
+            --shadow-creative: 0 20px 40px hsl(var(--creative-accent) / 0.2);
+            --shadow-artistic: 0 15px 35px hsl(var(--creative-accent) / 0.15);
+            --shadow-floating: 0 30px 60px hsl(var(--foreground) / 0.1);
+            --shadow-glow: 0 0 20px hsl(var(--creative-accent) / 0.4);
+            
+            /* Enhanced Animation System */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* 2025 Creative Animation System */
+            --transition-creative: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-artistic: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-morph: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--creative-primary));
+            background: 
+                linear-gradient(180deg,
+                    hsl(var(--creative-secondary)) 0%,
+                    hsl(220 25% 12%) 20%,
+                    hsl(220 25% 8%) 40%,
+                    hsl(var(--creative-secondary)) 60%,
+                    hsl(220 25% 8%) 80%,
+                    hsl(var(--creative-secondary)) 100%),
+                radial-gradient(ellipse at 50% 0%, hsl(var(--creative-accent) / 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at 0% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%),
+                radial-gradient(ellipse at 100% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%);
+            background-attachment: fixed;
+            background-size: 100% 100%, 100% 200%, 200% 100%, 200% 100%;
+            animation: gradient-flow 20s ease-in-out infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Flowing Gradient Animation */
+        @keyframes gradient-flow {
+            0%, 100% {
+                background-position: 0% 0%, 50% 0%, 0% 50%, 100% 50%;
+            }
+            25% {
+                background-position: 0% 0%, 60% 10%, 10% 40%, 90% 60%;
+            }
+            50% {
+                background-position: 0% 0%, 40% 20%, 20% 30%, 80% 70%;
+            }
+            75% {
+                background-position: 0% 0%, 50% 10%, 5% 60%, 95% 40%;
+            }
+        }
+
+        /* Problem-Solution Component Container */
+        .problem-solution-component {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: var(--shadow-floating);
+            animation: component-reveal 1s ease-out both;
+        }
+
+        .problem-solution-component::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.2) 0%, 
+                hsl(142 76% 36% / 0.2) 50%,
+                hsl(var(--creative-accent) / 0.2) 100%);
+            border-radius: 26px;
+            z-index: -1;
+            animation: border-glow 3s linear infinite;
+        }
+
+        @keyframes component-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes border-glow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Problem Section */
+        .problem-section {
+            margin-bottom: 3rem;
+        }
+
+        .problem-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            color: hsl(var(--creative-primary));
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-creative);
+        }
+
+        .problem-badge svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .problem-headline {
+            font-size: clamp(2rem, 5vw, 2.75rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: hsl(var(--creative-accent));
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+            text-transform: uppercase;
+        }
+
+        .problem-description {
+            font-size: clamp(1rem, 2.2vw, 1.125rem);
+            font-weight: 500;
+            color: hsl(var(--creative-primary) / 0.8);
+            margin-bottom: 2rem;
+            letter-spacing: 0.025em;
+            line-height: 1.6;
+        }
+
+        /* Before/After Comparison */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 3rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+        }
+
+        .comparison-item {
+            text-align: center;
+        }
+
+        .comparison-label {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .before-label {
+            color: hsl(var(--creative-accent));
+        }
+
+        .after-label {
+            color: hsl(142 76% 36%);
+        }
+
+        .comparison-visual {
+            width: 120px;
+            height: 120px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border: 2px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .before-visual {
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                hsl(var(--creative-accent) / 0.05) 100%);
+            border-color: hsl(var(--creative-accent) / 0.3);
+        }
+
+        .after-visual {
+            background: linear-gradient(135deg, 
+                hsl(142 76% 36% / 0.1) 0%, 
+                hsl(142 76% 36% / 0.05) 100%);
+            border-color: hsl(142 76% 36% / 0.3);
+        }
+
+        .comparison-visual svg {
+            width: 48px;
+            height: 48px;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .before-visual svg {
+            stroke: hsl(var(--creative-accent));
+        }
+
+        .after-visual svg {
+            stroke: hsl(142 76% 36%);
+        }
+
+        .comparison-text {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.7);
+            line-height: 1.4;
+        }
+
+        .vs-divider {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vs-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: hsl(var(--creative-primary));
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .arrow-icon {
+            width: 32px;
+            height: 32px;
+            stroke: hsl(var(--creative-primary) / 0.5);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            animation: arrow-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes arrow-pulse {
+            0%, 100% { transform: translateX(0); opacity: 0.5; }
+            50% { transform: translateX(4px); opacity: 1; }
+        }
+
+        /* Solution Section */
+        .solution-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .solution-headline {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: hsl(142 76% 36%);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+            text-transform: uppercase;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .original-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.5);
+            text-decoration: line-through;
+        }
+
+        .current-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: hsl(142 76% 36%);
+        }
+
+        .solution-description {
+            font-size: 1rem;
+            color: hsl(var(--creative-primary) / 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* Benefits List */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            text-align: left;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            transition: var(--transition-creative);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.3);
+            border-color: hsl(142 76% 36% / 0.2);
+        }
+
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, 
+                hsl(142 76% 36%) 0%, 
+                hsl(142 76% 36% / 0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .benefit-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: hsl(var(--creative-primary));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .benefit-text {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.9);
+            font-weight: 500;
+        }
+
+        /* CTA Button */
+        .problem-solution-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: hsl(var(--creative-primary));
+            background: linear-gradient(135deg, 
+                hsl(142 76% 36%) 0%, 
+                hsl(142 76% 36% / 0.9) 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: var(--shadow-creative);
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .problem-solution-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                hsl(var(--creative-primary) / 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .problem-solution-cta:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-artistic);
+            background: linear-gradient(135deg, 
+                hsl(142 76% 36% / 0.9) 0%, 
+                hsl(142 76% 36%) 100%);
+        }
+
+        .problem-solution-cta:hover::before {
+            left: 100%;
+        }
+
+        .problem-solution-cta svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Risk Reversal */
+        .risk-reversal {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.6);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .risk-reversal svg {
+            width: 16px;
+            height: 16px;
+            stroke: hsl(142 76% 36%);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .problem-solution-component {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .comparison-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .vs-divider {
+                order: 2;
+            }
+
+            .comparison-visual {
+                width: 100px;
+                height: 100px;
+            }
+
+            .comparison-visual svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .current-price {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .problem-solution-component {
+                padding: 1.5rem 1rem;
+            }
+
+            .comparison-container {
+                padding: 1rem;
+            }
+
+            .comparison-visual {
+                width: 80px;
+                height: 80px;
+            }
+
+            .comparison-visual svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            .problem-solution-cta {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            body {
+                animation: none;
+            }
+
+            .problem-solution-component {
+                animation: none;
+            }
+
+            .problem-solution-component::before {
+                animation: none;
+            }
+
+            .arrow-icon {
+                animation: none;
+            }
+
+            .problem-solution-cta:hover,
+            .benefit-item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Problem-Solution Photoshoot Component -->
+    <div class="problem-solution-component">
+        <!-- Problem Section -->
+        <div class="problem-section">
+            <div class="problem-badge">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                Problem Alert
+            </div>
+
+            <h1 class="problem-headline">
+                Your Blurry Photos Are<br>
+                Costing You Customers
+            </h1>
+
+            <p class="problem-description">
+                Every day, potential customers scroll past your business because your photos look unprofessional. While your competitors with crisp, professional images steal your sales.
+            </p>
+        </div>
+
+        <!-- Before/After Comparison -->
+        <div class="comparison-container">
+            <div class="comparison-item">
+                <div class="comparison-label before-label">Your Current Photos</div>
+                <div class="comparison-visual before-visual">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                </div>
+                <div class="comparison-text">
+                    Blurry phone photos that make customers scroll past your business
+                </div>
+            </div>
+
+            <div class="vs-divider">
+                <div class="vs-text">VS</div>
+                <svg class="arrow-icon" viewBox="0 0 24 24" fill="none">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12,5 19,12 12,19"/>
+                </svg>
+            </div>
+
+            <div class="comparison-item">
+                <div class="comparison-label after-label">Professional Photos</div>
+                <div class="comparison-visual after-visual">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                        <circle cx="12" cy="13" r="3"/>
+                    </svg>
+                </div>
+                <div class="comparison-text">
+                    Crystal-clear professional images that convert browsers into buyers
+                </div>
+            </div>
+        </div>
+
+        <!-- Solution Section -->
+        <div class="solution-section">
+            <h2 class="solution-headline">
+                The Solution: Professional Photos That Convert
+            </h2>
+
+            <div class="price-container">
+                <span class="original-price">$499</span>
+                <span class="current-price">$199</span>
+            </div>
+
+            <p class="solution-description">
+                Transform your business image in just 20 minutes with our professional on-site photoshoot. Get the high-quality photos that make customers choose YOU over the competition.
+            </p>
+
+            <!-- Benefits Grid -->
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <polyline points="20,6 9,17 4,12"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">20-minute on-site professional photoshoot</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <polyline points="20,6 9,17 4,12"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">High-resolution images ready for all platforms</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <polyline points="20,6 9,17 4,12"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">Perfect for Google Business Profile optimization</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <polyline points="20,6 9,17 4,12"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">Same-day delivery of edited photos</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <polyline points="20,6 9,17 4,12"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">Boost your online presence instantly</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <polyline points="20,6 9,17 4,12"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-text">Professional lighting and composition</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <a href="#solve-problem" class="problem-solution-cta">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                <circle cx="12" cy="13" r="3"/>
+            </svg>
+            Fix My Photo Problem for $199
+        </a>
+
+        <!-- Risk Reversal -->
+        <div class="risk-reversal">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>100% satisfaction guaranteed or your money back</span>
+        </div>
+    </div>
+
+    <script>
+        // CTA Click Analytics
+        document.querySelector('.problem-solution-cta').addEventListener('click', (e) => {
+            console.log('Problem-Solution CTA clicked: Fix My Photo Problem for $199');
+        });
+
+        // Benefit Item Hover Analytics
+        document.querySelectorAll('.benefit-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', () => {
+                const benefitText = item.querySelector('.benefit-text').textContent;
+                console.log(`Benefit item hovered: ${benefitText}`);
+            });
+        });
+
+        // Comparison Visual Click Analytics
+        document.querySelectorAll('.comparison-visual').forEach((visual, index) => {
+            visual.addEventListener('click', () => {
+                const type = index === 0 ? 'Before' : 'After';
+                console.log(`Comparison visual clicked: ${type}`);
+            });
+        });
+
+        // Component View Analytics
+        console.log('Problem-Solution Photoshoot Component loaded');
+    </script>
+</body>
+</html>

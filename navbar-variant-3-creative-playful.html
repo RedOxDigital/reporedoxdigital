@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Ox Digital - Creative & Playful Navbar</title>
+    <style>
+        /* 2025 Enhanced Design System - Semantic Tokens */
+        :root {
+            /* Primary Brand Colors */
+            --primary: 220 14% 96%;
+            --primary-foreground: 220 9% 46%;
+            --primary-variant: 220 14% 90%;
+            --primary-dark: 220 14% 85%;
+            --primary-light: 220 14% 98%;
+            
+            /* Secondary Colors */
+            --secondary: 220 9% 46%;
+            --secondary-foreground: 220 14% 96%;
+            --secondary-variant: 220 9% 60%;
+            --secondary-dark: 220 9% 35%;
+            --secondary-light: 220 9% 70%;
+            
+            /* Background System */
+            --background: 0 0% 100%;
+            --foreground: 220 9% 46%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            
+            /* Surface System */
+            --card: 0 0% 100%;
+            --card-foreground: 220 9% 46%;
+            
+            /* Border System */
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 220 14% 96%;
+            
+            /* Red Ox Digital Brand Colors */
+            --brand-red: 0 84% 60%;
+            --brand-red-dark: 0 84% 45%;
+            --brand-dark: 220 20% 15%;
+            --brand-dark-light: 220 15% 25%;
+            
+            /* 2025 Creative Color System */
+            --creative-primary: 0 0% 98%;
+            --creative-secondary: 220 20% 15%;
+            --creative-accent: 0 84% 60%;
+            --creative-highlight: 0 84% 70%;
+            
+            /* Creative Playful Colors */
+            --playful-purple: 280 100% 70%;
+            --playful-blue: 220 100% 70%;
+            --playful-green: 140 100% 60%;
+            --playful-orange: 30 100% 65%;
+            --playful-pink: 320 100% 75%;
+            
+            /* Enhanced Shadow System */
+            --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+            --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+            --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+            --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+            --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 8px 10px -6px hsl(var(--foreground) / 0.1);
+            --shadow-creative: 0 20px 40px hsl(var(--creative-accent) / 0.2);
+            --shadow-playful: 0 15px 35px hsl(var(--playful-purple) / 0.3);
+            
+            /* Enhanced Animation System */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-creative: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-playful: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--secondary));
+            background: 
+                linear-gradient(45deg, 
+                    hsl(var(--playful-purple) / 0.05) 0%,
+                    hsl(var(--playful-blue) / 0.05) 25%,
+                    hsl(var(--playful-green) / 0.05) 50%,
+                    hsl(var(--playful-orange) / 0.05) 75%,
+                    hsl(var(--playful-pink) / 0.05) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        /* Creative & Playful Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 3px solid transparent;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                             linear-gradient(90deg, 
+                                hsl(var(--playful-purple)) 0%,
+                                hsl(var(--playful-blue)) 25%,
+                                hsl(var(--playful-green)) 50%,
+                                hsl(var(--playful-orange)) 75%,
+                                hsl(var(--playful-pink)) 100%);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            transition: var(--transition-playful);
+            padding: 1rem 0;
+            transform: rotate(-0.5deg);
+            transform-origin: center;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            padding: 0.75rem 0;
+            box-shadow: 
+                var(--shadow-playful),
+                0 0 40px hsl(var(--playful-purple) / 0.2);
+            transform: rotate(0deg) translateY(-3px);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Playful Logo */
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: var(--transition-elastic);
+            position: relative;
+            z-index: 2;
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.1) rotate(5deg) translateY(-5px);
+            animation: logoWobble 0.6s ease-in-out;
+        }
+
+        @keyframes logoWobble {
+            0%, 100% { transform: scale(1.1) rotate(5deg) translateY(-5px); }
+            25% { transform: scale(1.15) rotate(-3deg) translateY(-8px); }
+            50% { transform: scale(1.05) rotate(7deg) translateY(-3px); }
+            75% { transform: scale(1.12) rotate(-2deg) translateY(-6px); }
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, 
+                hsl(var(--playful-purple)) 0%,
+                hsl(var(--playful-pink)) 50%,
+                hsl(var(--playful-orange)) 100%);
+            border-radius: 50% 20% 50% 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                var(--shadow-playful),
+                0 0 20px hsl(var(--playful-purple) / 0.4);
+            transition: var(--transition-elastic);
+            position: relative;
+            overflow: hidden;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        .logo-icon::before {
+            content: '🐂';
+            font-size: 24px;
+            z-index: 2;
+            animation: iconSpin 4s linear infinite;
+        }
+
+        @keyframes iconSpin {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(-5deg); }
+            75% { transform: rotate(15deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                hsl(var(--playful-purple)),
+                hsl(var(--playful-blue)),
+                hsl(var(--playful-green)),
+                hsl(var(--playful-orange)),
+                hsl(var(--playful-pink)),
+                hsl(var(--playful-purple))
+            );
+            animation: iconGradientSpin 3s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes iconGradientSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .navbar-logo:hover .logo-icon {
+            border-radius: 20% 50% 20% 50%;
+            box-shadow: 
+                var(--shadow-xl),
+                0 0 30px hsl(var(--playful-purple) / 0.6);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, 
+                hsl(var(--playful-purple)),
+                hsl(var(--playful-blue)),
+                hsl(var(--playful-green)),
+                hsl(var(--playful-orange)));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 3s ease infinite;
+            letter-spacing: -0.025em;
+        }
+
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Creative Navigation Links */
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .nav-link {
+            color: hsl(var(--secondary));
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 20px;
+            transition: var(--transition-playful);
+            position: relative;
+            overflow: hidden;
+            text-transform: lowercase;
+            font-size: 1rem;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                hsl(var(--playful-purple) / 0.2),
+                hsl(var(--playful-blue) / 0.2),
+                hsl(var(--playful-green) / 0.2));
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover {
+            color: hsl(var(--secondary-dark));
+            transform: translateY(-8px) rotate(2deg) scale(1.05);
+            box-shadow: 0 10px 20px hsl(var(--playful-purple) / 0.3);
+        }
+
+        .nav-link:hover::before {
+            left: 0;
+        }
+
+        .nav-link:nth-child(1):hover { 
+            transform: translateY(-8px) rotate(-3deg) scale(1.05);
+            box-shadow: 0 10px 20px hsl(var(--playful-purple) / 0.3);
+        }
+
+        .nav-link:nth-child(2):hover { 
+            transform: translateY(-10px) rotate(4deg) scale(1.08);
+            box-shadow: 0 12px 24px hsl(var(--playful-blue) / 0.3);
+        }
+
+        .nav-link:nth-child(3):hover { 
+            transform: translateY(-6px) rotate(-2deg) scale(1.06);
+            box-shadow: 0 8px 16px hsl(var(--playful-green) / 0.3);
+        }
+
+        .nav-link:nth-child(4):hover { 
+            transform: translateY(-12px) rotate(5deg) scale(1.1);
+            box-shadow: 0 14px 28px hsl(var(--playful-orange) / 0.3);
+        }
+
+        .nav-link:nth-child(5):hover { 
+            transform: translateY(-7px) rotate(-4deg) scale(1.07);
+            box-shadow: 0 9px 18px hsl(var(--playful-pink) / 0.3);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, 
+                hsl(var(--playful-purple) / 0.2),
+                hsl(var(--playful-blue) / 0.2));
+            color: hsl(var(--secondary-dark));
+            transform: translateY(-3px) rotate(1deg);
+            box-shadow: 0 5px 15px hsl(var(--playful-purple) / 0.2);
+        }
+
+        /* Playful CTA Button */
+        .nav-cta {
+            background: linear-gradient(135deg, 
+                hsl(var(--playful-purple)) 0%,
+                hsl(var(--playful-pink)) 50%,
+                hsl(var(--playful-orange)) 100%);
+            background-size: 200% 200%;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: lowercase;
+            transition: var(--transition-elastic);
+            box-shadow: 
+                var(--shadow-playful),
+                0 0 20px hsl(var(--playful-purple) / 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: ctaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes ctaPulse {
+            0%, 100% { 
+                background-position: 0% 50%;
+                box-shadow: 
+                    var(--shadow-playful),
+                    0 0 20px hsl(var(--playful-purple) / 0.4);
+            }
+            50% { 
+                background-position: 100% 50%;
+                box-shadow: 
+                    var(--shadow-xl),
+                    0 0 30px hsl(var(--playful-pink) / 0.5);
+            }
+        }
+
+        .nav-cta::before {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                transform: rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: rotate(180deg) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-10px) rotate(-5deg) scale(1.1);
+            background-position: 100% 50%;
+            box-shadow: 
+                var(--shadow-xl),
+                0 0 40px hsl(var(--playful-purple) / 0.6);
+            animation: none;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-button {
+            display: none;
+            background: linear-gradient(135deg, 
+                hsl(var(--playful-purple) / 0.2),
+                hsl(var(--playful-blue) / 0.2));
+            border: 2px solid hsl(var(--playful-purple) / 0.3);
+            padding: 0.75rem;
+            cursor: pointer;
+            color: hsl(var(--playful-purple));
+            transition: var(--transition-bounce);
+            border-radius: 50%;
+        }
+
+        .mobile-menu-button:hover {
+            background: linear-gradient(135deg, 
+                hsl(var(--playful-purple) / 0.3),
+                hsl(var(--playful-blue) / 0.3));
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 0 20px hsl(var(--playful-purple) / 0.4);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            border-top: 3px solid hsl(var(--playful-purple) / 0.3);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-playful);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .mobile-nav.active {
+            display: block;
+            animation: mobileSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes mobileSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        .mobile-nav-link {
+            display: block;
+            color: hsl(var(--secondary));
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-bottom: 1px solid hsl(var(--playful-purple) / 0.1);
+            transition: var(--transition-playful);
+            font-weight: 600;
+            text-transform: lowercase;
+            position: relative;
+        }
+
+        .mobile-nav-link:hover {
+            background: linear-gradient(90deg, 
+                hsl(var(--playful-purple) / 0.1),
+                hsl(var(--playful-blue) / 0.1));
+            color: hsl(var(--playful-purple));
+            transform: translateX(15px) rotate(1deg);
+            border-left: 5px solid hsl(var(--playful-purple));
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .navbar-container {
+                padding: 0 1rem;
+            }
+
+            .logo-text {
+                font-size: 1.25rem;
+            }
+
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-icon::before {
+                font-size: 20px;
+            }
+
+            .navbar {
+                transform: rotate(0deg);
+            }
+        }
+
+        /* Content Sections for Scrolling */
+        .content-section {
+            padding: 8rem 2rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(45deg, 
+                hsl(var(--playful-purple)),
+                hsl(var(--playful-blue)),
+                hsl(var(--playful-green)),
+                hsl(var(--playful-orange)),
+                hsl(var(--playful-pink)));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGradient 4s ease infinite;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+            transform: rotate(-1deg);
+        }
+
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        .section-content {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: hsl(var(--secondary) / 0.8);
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            transform: rotate(0.5deg);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at 20% 20%, hsl(var(--playful-purple) / 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, hsl(var(--playful-blue) / 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, hsl(var(--playful-green) / 0.1) 0%, transparent 50%);
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, 
+                hsl(var(--playful-purple)),
+                hsl(var(--playful-blue)),
+                hsl(var(--playful-green)),
+                hsl(var(--playful-orange)),
+                hsl(var(--playful-pink)));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: heroGradient 3s ease infinite;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-transform: lowercase;
+            transform: rotate(-2deg);
+        }
+
+        @keyframes heroGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-content p {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: hsl(var(--secondary) / 0.8);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transform: rotate(1deg);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation: float1 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation: float2 8s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation: float3 7s ease-in-out infinite;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(-15deg); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(8deg); }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus Management */
+        .navbar-logo:focus,
+        .nav-link:focus,
+        .nav-cta:focus,
+        .mobile-menu-button:focus {
+            outline: 3px solid hsl(var(--playful-purple));
+            outline-offset: 2px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            body,
+            .navbar,
+            .navbar-logo,
+            .nav-link,
+            .nav-cta,
+            .mobile-menu-button,
+            .logo-icon,
+            .logo-text,
+            .section-title,
+            .hero-content h1 {
+                animation: none;
+            }
+
+            .navbar-logo:hover,
+            .nav-link:hover,
+            .nav-cta:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Creative & Playful Navbar -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <a href="/" class="navbar-logo" aria-label="Red Ox Digital Home">
+                <div class="logo-icon" aria-hidden="true"></div>
+                <span class="logo-text">red ox digital</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="navbar-nav">
+                <a href="#home" class="nav-link active">home</a>
+                <a href="#services" class="nav-link">services</a>
+                <a href="#about" class="nav-link">about us</a>
+                <a href="#portfolio" class="nav-link">portfolio</a>
+                <a href="#contact" class="nav-link">contact</a>
+                <a href="#quote" class="nav-cta">let's create!</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-button" aria-label="Toggle mobile menu" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobile-nav">
+                <a href="#home" class="mobile-nav-link">home</a>
+                <a href="#services" class="mobile-nav-link">services</a>
+                <a href="#about" class="mobile-nav-link">about us</a>
+                <a href="#portfolio" class="mobile-nav-link">portfolio</a>
+                <a href="#contact" class="mobile-nav-link">contact</a>
+                <a href="#quote" class="mobile-nav-link">let's create!</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="floating-element">🎨</div>
+        <div class="floating-element">✨</div>
+        <div class="floating-element">🚀</div>
+        
+        <div class="hero-content">
+            <h1>creative & playful</h1>
+            <p>asymmetrical elements with bouncy animations and unexpected color combinations</p>
+        </div>
+    </section>
+
+    <!-- Content Sections for Scrolling -->
+    <section class="content-section" id="services">
+        <h2 class="section-title">our creative services</h2>
+        <div class="section-content">
+            <p>We don't just think outside the box – we redesign the box entirely! Our playful approach to digital marketing combines creativity with strategy to create campaigns that are as memorable as they are effective.</p>
+        </div>
+    </section>
+
+    <section class="content-section" id="about">
+        <h2 class="section-title">meet our creative minds</h2>
+        <div class="section-content">
+            <p>Red Ox Digital is where creativity meets strategy. Our team of innovative thinkers and digital artists brings a fresh perspective to every project, turning ordinary businesses into extraordinary brands through playful design and creative storytelling.</p>
+        </div>
+    </section>
+
+    <section class="content-section" id="portfolio">
+        <h2 class="section-title">creative showcase</h2>
+        <div class="section-content">
+            <p>Dive into our colorful portfolio of creative transformations. Each project is a unique journey of artistic expression and strategic thinking, showcasing how playful design can drive serious business results.</p>
+        </div>
+    </section>
+
+    <section class="content-section" id="contact">
+        <h2 class="section-title">let's create magic together</h2>
+        <div class="section-content">
+            <p>Ready to add some color to your brand? Let's collaborate and create something amazing together! Our creative team is excited to bring your wildest marketing dreams to life with our signature playful touch.</p>
+        </div>
+    </section>
+
+    <script>
+        // Enhanced Scroll Effect with Creative Animations
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle with Playful Animation
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileNav.classList.toggle('active');
+            
+            // Playful button animation
+            if (mobileNav.classList.contains('active')) {
+                mobileMenuButton.style.transform = 'scale(1.2) rotate(45deg)';
+                mobileMenuButton.style.borderRadius = '20%';
+            } else {
+                mobileMenuButton.style.transform = 'scale(1) rotate(0deg)';
+                mobileMenuButton.style.borderRadius = '50%';
+            }
+        });
+
+        // Smooth Scrolling with Creative Easing
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Creative Active Link Management
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Playful Parallax Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-section');
+            const floatingElements = document.querySelectorAll('.floating-element');
+            
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px) rotate(${scrolled * 0.01}deg)`;
+            }
+            
+            floatingElements.forEach((element, index) => {
+                const speed = 0.1 + (index * 0.05);
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.02}deg)`;
+            });
+        });
+
+        // Random Color Burst Effect on CTA Hover
+        const ctaButton = document.querySelector('.nav-cta');
+        if (ctaButton) {
+            ctaButton.addEventListener('mouseenter', () => {
+                const colors = ['--playful-purple', '--playful-blue', '--playful-green', '--playful-orange', '--playful-pink'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                ctaButton.style.boxShadow = `
+                    0 15px 35px hsl(var(${randomColor}) / 0.4),
+                    0 0 40px hsl(var(${randomColor}) / 0.6)
+                `;
+            });
+        }
+
+        // Interactive Logo Animation on Click
+        const logo = document.querySelector('.navbar-logo');
+        if (logo) {
+            logo.addEventListener('click', (e) => {
+                e.preventDefault();
+                logo.style.animation = 'logoWobble 0.6s ease-in-out';
+                setTimeout(() => {
+                    logo.style.animation = '';
+                }, 600);
+            });
+        }
+
+        // Dynamic Background Color Shift Based on Scroll
+        window.addEventListener('scroll', () => {
+            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const hue = scrollPercent * 360;
+            document.body.style.filter = `hue-rotate(${hue}deg)`;
+        });
+
+        // Playful Cursor Trail Effect (Optional)
+        let mouseX = 0, mouseY = 0;
+        let trailElements = [];
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function createTrail() {
+            if (trailElements.length > 10) {
+                const oldElement = trailElements.shift();
+                if (oldElement && oldElement.parentNode) {
+                    oldElement.parentNode.removeChild(oldElement);
+                }
+            }
+
+            const trail = document.createElement('div');
+            trail.style.position = 'fixed';
+            trail.style.left = mouseX + 'px';
+            trail.style.top = mouseY + 'px';
+            trail.style.width = '8px';
+            trail.style.height = '8px';
+            trail.style.borderRadius = '50%';
+            trail.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+            trail.style.pointerEvents = 'none';
+            trail.style.zIndex = '999';
+            trail.style.transition = 'all 0.5s ease-out';
+            trail.style.opacity = '0.7';
+            
+            document.body.appendChild(trail);
+            trailElements.push(trail);
+
+            setTimeout(() => {
+                trail.style.opacity = '0';
+                trail.style.transform = 'scale(0)';
+            }, 100);
+        }
+
+        // Uncomment to enable cursor trail
+        // setInterval(createTrail, 50);
+    </script>
+</body>
+</html>

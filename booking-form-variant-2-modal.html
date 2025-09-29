@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Ox Digital - Booking Form Variant 2 (Modal Overlay)</title>
+    <style>
+        /* 2025 Enhanced Design System - Semantic Tokens */
+        :root {
+            /* Primary Brand Colors */
+            --primary: 220 14% 96%;
+            --primary-foreground: 220 9% 46%;
+            --primary-variant: 220 14% 90%;
+            --primary-dark: 220 14% 85%;
+            --primary-light: 220 14% 98%;
+            
+            /* Secondary Colors */
+            --secondary: 220 9% 46%;
+            --secondary-foreground: 220 14% 96%;
+            --secondary-variant: 220 9% 60%;
+            --secondary-dark: 220 9% 35%;
+            --secondary-light: 220 9% 70%;
+            
+            /* Background System */
+            --background: 0 0% 100%;
+            --foreground: 220 9% 46%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            
+            /* Surface System */
+            --card: 0 0% 100%;
+            --card-foreground: 220 9% 46%;
+            
+            /* Border System */
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 220 14% 96%;
+            
+            /* Status Colors */
+            --destructive: 0 84% 60%;
+            --destructive-foreground: 0 0% 98%;
+            --success: 142 76% 36%;
+            --success-foreground: 0 0% 98%;
+            --warning: 38 92% 50%;
+            --warning-foreground: 0 0% 98%;
+            
+            /* Red Ox Digital Brand Colors */
+            --brand-red: 0 84% 60%;
+            --brand-red-dark: 0 84% 45%;
+            --brand-dark: 220 20% 15%;
+            --brand-dark-light: 220 15% 25%;
+            
+            /* 2025 Creative Color System */
+            --creative-primary: 0 0% 98%;
+            --creative-secondary: 220 20% 15%;
+            --creative-accent: 0 84% 60%;
+            --creative-highlight: 0 84% 70%;
+            
+            /* Enhanced Shadow System */
+            --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+            --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+            --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+            --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+            --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 8px 10px -6px hsl(var(--foreground) / 0.1);
+            --shadow-2xl: 0 25px 50px -12px hsl(var(--foreground) / 0.25);
+            
+            /* 2025 Creative Shadow System */
+            --shadow-creative: 0 20px 40px hsl(var(--creative-accent) / 0.2);
+            --shadow-artistic: 0 15px 35px hsl(var(--creative-accent) / 0.15);
+            --shadow-floating: 0 30px 60px hsl(var(--foreground) / 0.1);
+            --shadow-glow: 0 0 20px hsl(var(--creative-accent) / 0.4);
+            
+            /* Enhanced Animation System */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* 2025 Creative Animation System */
+            --transition-creative: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-artistic: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-morph: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--creative-primary));
+            background: 
+                linear-gradient(180deg,
+                    hsl(var(--creative-secondary)) 0%,
+                    hsl(220 25% 12%) 20%,
+                    hsl(220 25% 8%) 40%,
+                    hsl(var(--creative-secondary)) 60%,
+                    hsl(220 25% 8%) 80%,
+                    hsl(var(--creative-secondary)) 100%),
+                radial-gradient(ellipse at 50% 0%, hsl(var(--creative-accent) / 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at 0% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%),
+                radial-gradient(ellipse at 100% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%);
+            background-attachment: fixed;
+            background-size: 100% 100%, 100% 200%, 200% 100%, 200% 100%;
+            animation: gradient-flow 20s ease-in-out infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Flowing Gradient Animation */
+        @keyframes gradient-flow {
+            0%, 100% {
+                background-position: 0% 0%, 50% 0%, 0% 50%, 100% 50%;
+            }
+            25% {
+                background-position: 0% 0%, 60% 10%, 10% 40%, 90% 60%;
+            }
+            50% {
+                background-position: 0% 0%, 40% 20%, 20% 30%, 80% 70%;
+            }
+            75% {
+                background-position: 0% 0%, 50% 10%, 5% 60%, 95% 40%;
+            }
+        }
+
+        /* Initial CTA Button */
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: hsl(var(--creative-primary));
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            color: hsl(var(--creative-primary) / 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .open-form-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary));
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: var(--shadow-creative);
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .open-form-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                hsl(var(--creative-primary) / 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .open-form-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-artistic);
+        }
+
+        .open-form-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-artistic);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-floating);
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: var(--transition-artistic);
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                hsl(var(--creative-primary) / 0.05) 50%,
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: hsl(var(--creative-primary));
+            transition: var(--transition-creative);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Form Header */
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-right: 2rem; /* Account for close button */
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: hsl(var(--creative-primary));
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+        }
+
+        .form-subtitle {
+            font-size: 1rem;
+            color: hsl(var(--creative-primary) / 0.7);
+            font-weight: 400;
+        }
+
+        /* Form Sections */
+        .form-section {
+            transition: var(--transition-artistic);
+        }
+
+        .form-section.hidden {
+            display: none;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary));
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.025em;
+        }
+
+        .form-group label .required {
+            color: hsl(var(--creative-accent));
+            margin-left: 0.25rem;
+        }
+
+        /* Form Inputs */
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid hsl(var(--creative-primary) / 0.2);
+            border-radius: 12px;
+            color: hsl(var(--creative-primary));
+            transition: var(--transition-creative);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input::placeholder {
+            color: hsl(var(--creative-primary) / 0.5);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: hsl(var(--creative-accent) / 0.6);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px hsl(var(--creative-accent) / 0.2);
+            transform: translateY(-1px);
+        }
+
+        .form-input:valid {
+            border-color: hsl(var(--success) / 0.6);
+        }
+
+        /* Textarea */
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        /* Form Buttons */
+        .form-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary));
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: var(--shadow-creative);
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .form-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                hsl(var(--creative-primary) / 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .form-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-artistic);
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.9) 0%, 
+                hsl(var(--creative-accent)) 100%);
+        }
+
+        .form-button:hover::before {
+            left: 100%;
+        }
+
+        .form-button:active {
+            transform: translateY(0);
+        }
+
+        .form-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-button:disabled:hover {
+            transform: none;
+            box-shadow: var(--shadow-creative);
+        }
+
+        /* Secondary Button */
+        .form-button-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid hsl(var(--creative-primary) / 0.3);
+            color: hsl(var(--creative-primary));
+        }
+
+        .form-button-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: hsl(var(--creative-primary) / 0.5);
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .button-group .form-button {
+            flex: 1;
+        }
+
+        /* Modal Animation */
+        .modal-enter {
+            animation: modal-enter 0.4s ease-out;
+        }
+
+        .modal-exit {
+            animation: modal-exit 0.3s ease-in;
+        }
+
+        @keyframes modal-enter {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes modal-exit {
+            from {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 2rem 0;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: success-reveal 0.6s ease-out;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1rem;
+            background: hsl(var(--success));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--creative-primary));
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: hsl(var(--creative-primary));
+            margin-bottom: 0.5rem;
+        }
+
+        .success-text {
+            color: hsl(var(--creative-primary) / 0.8);
+            margin-bottom: 2rem;
+        }
+
+        @keyframes success-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .modal-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .form-title {
+                font-size: 1.75rem;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-container {
+                padding: 1.5rem;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .cta-title {
+                font-size: 1.75rem;
+            }
+
+            .open-form-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Accessibility Enhancements */
+        @media (prefers-reduced-motion: reduce) {
+            body {
+                animation: none;
+            }
+
+            .modal-overlay,
+            .modal-container,
+            .form-button,
+            .form-input {
+                transition: none;
+            }
+
+            .modal-enter,
+            .modal-exit {
+                animation: none;
+            }
+        }
+
+        /* Focus Management */
+        .form-button:focus,
+        .form-input:focus,
+        .close-btn:focus,
+        .open-form-btn:focus {
+            outline: 2px solid hsl(var(--creative-accent));
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Initial CTA -->
+    <div class="cta-container" id="ctaContainer">
+        <h1 class="cta-title">Ready to Get Started?</h1>
+        <p class="cta-subtitle">Let's boost your local presence together</p>
+        <button class="open-form-btn" id="openFormBtn">
+            Get Your Free Quote
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-container" id="modalContainer">
+            <!-- Close Button -->
+            <button class="close-btn" id="closeBtn" aria-label="Close form">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Form Header -->
+            <div class="form-header">
+                <h2 class="form-title">Let's Connect</h2>
+                <p class="form-subtitle">Tell us about your business needs</p>
+            </div>
+
+            <!-- Booking Form -->
+            <form id="bookingForm" class="booking-form">
+                <!-- Step 1: Basic Information -->
+                <div class="form-section" id="basicInfo">
+                    <div class="form-group">
+                        <label for="name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                    </div>
+
+                    <button type="button" class="form-button" id="expandBtn">
+                        Tell Us More
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Step 2: Additional Information (Initially Hidden) -->
+                <div class="form-section hidden" id="additionalInfo">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="business">Business Name</label>
+                        <input type="text" id="business" name="business" class="form-input" placeholder="Enter your business name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell us about your business needs, goals, or any specific questions you have..."></textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="form-button form-button-secondary" id="collapseBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 15l-6-6-6 6"/>
+                            </svg>
+                            Less Info
+                        </button>
+                        <button type="submit" class="form-button" id="submitBtn">
+                            Submit Request
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Submit (When only basic info) -->
+                <div class="form-section" id="quickSubmit">
+                    <button type="submit" class="form-button" id="quickSubmitBtn" style="display: none;">
+                        Submit Request
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                </div>
+                <h3 class="success-title">Thank You!</h3>
+                <p class="success-text">We've received your request and will get back to you within 24 hours to discuss how we can help boost your local presence.</p>
+                <button class="form-button" id="closeSuccessBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elements
+        const openFormBtn = document.getElementById('openFormBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContainer = document.getElementById('modalContainer');
+        const closeBtn = document.getElementById('closeBtn');
+        const form = document.getElementById('bookingForm');
+        const basicInfo = document.getElementById('basicInfo');
+        const additionalInfo = document.getElementById('additionalInfo');
+        const quickSubmit = document.getElementById('quickSubmit');
+        const expandBtn = document.getElementById('expandBtn');
+        const collapseBtn = document.getElementById('collapseBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const quickSubmitBtn = document.getElementById('quickSubmitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+        const ctaContainer = document.getElementById('ctaContainer');
+
+        // Form inputs
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+
+        // State
+        let isExpanded = false;
+
+        // Validation function
+        function validateBasicInfo() {
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            return name.length > 0 && emailRegex.test(email);
+        }
+
+        // Update button states
+        function updateButtonStates() {
+            const isValid = validateBasicInfo();
+            expandBtn.disabled = !isValid;
+            quickSubmitBtn.disabled = !isValid;
+            
+            if (isValid && !isExpanded) {
+                quickSubmitBtn.style.display = 'flex';
+            } else {
+                quickSubmitBtn.style.display = 'none';
+            }
+        }
+
+        // Add event listeners for real-time validation
+        nameInput.addEventListener('input', updateButtonStates);
+        emailInput.addEventListener('input', updateButtonStates);
+
+        // Open modal
+        openFormBtn.addEventListener('click', function() {
+            modalOverlay.classList.add('active');
+            modalContainer.classList.add('modal-enter');
+            document.body.style.overflow = 'hidden';
+            
+            // Focus on first input
+            setTimeout(() => {
+                nameInput.focus();
+            }, 300);
+        });
+
+        // Close modal
+        function closeModal() {
+            modalContainer.classList.add('modal-exit');
+            setTimeout(() => {
+                modalOverlay.classList.remove('active');
+                modalContainer.classList.remove('modal-enter', 'modal-exit');
+                document.body.style.overflow = '';
+                
+                // Reset form state
+                resetForm();
+            }, 300);
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        closeSuccessBtn.addEventListener('click', closeModal);
+
+        // Close modal on overlay click
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Expand form
+        expandBtn.addEventListener('click', function() {
+            if (validateBasicInfo()) {
+                isExpanded = true;
+                additionalInfo.classList.remove('hidden');
+                quickSubmitBtn.style.display = 'none';
+                
+                // Smooth scroll to additional info
+                setTimeout(() => {
+                    document.getElementById('phone').focus();
+                }, 300);
+            }
+        });
+
+        // Collapse form
+        collapseBtn.addEventListener('click', function() {
+            isExpanded = false;
+            additionalInfo.classList.add('hidden');
+            updateButtonStates();
+            
+            // Focus back to expand button
+            setTimeout(() => {
+                expandBtn.focus();
+            }, 300);
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateBasicInfo()) {
+                return;
+            }
+            
+            // Disable submit buttons
+            submitBtn.disabled = true;
+            quickSubmitBtn.disabled = true;
+            
+            const activeSubmitBtn = isExpanded ? submitBtn : quickSubmitBtn;
+            activeSubmitBtn.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12a9 9 0 11-6.219-8.56"/>
+                </svg>
+                Submitting...
+            `;
+
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide form and show success message
+                form.style.display = 'none';
+                document.querySelector('.form-header').style.display = 'none';
+                successMessage.classList.add('show');
+
+                // Log form data (in real implementation, send to server)
+                const formData = new FormData(form);
+                console.log('Form submitted with data:', Object.fromEntries(formData));
+            }, 2000);
+        });
+
+        // Reset form
+        function resetForm() {
+            form.reset();
+            form.style.display = 'block';
+            document.querySelector('.form-header').style.display = 'block';
+            successMessage.classList.remove('show');
+            additionalInfo.classList.add('hidden');
+            isExpanded = false;
+            submitBtn.disabled = false;
+            quickSubmitBtn.disabled = false;
+            
+            // Reset submit button text
+            submitBtn.innerHTML = `
+                Submit Request
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            `;
+            quickSubmitBtn.innerHTML = `
+                Submit Request
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            `;
+            
+            updateButtonStates();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            // Close modal on Escape
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                closeModal();
+            }
+            
+            // Submit on Enter (if valid)
+            if (e.key === 'Enter' && !e.shiftKey) {
+                const activeElement = document.activeElement;
+                
+                if (activeElement === nameInput || activeElement === emailInput) {
+                    if (validateBasicInfo() && !isExpanded) {
+                        e.preventDefault();
+                        form.dispatchEvent(new Event('submit'));
+                    }
+                }
+            }
+        });
+
+        // Auto-resize textarea
+        const textarea = document.getElementById('message');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // Initialize
+        updateButtonStates();
+    </script>
+</body>
+</html>

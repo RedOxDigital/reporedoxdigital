@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 
 export default function Meta({
-  title = "Your Business Name",
+  title = "Client Website",
   description = "Professional services description goes here.",
   keywords = "your, main, keywords, here",
   ogImage = "/og-image.jpg",

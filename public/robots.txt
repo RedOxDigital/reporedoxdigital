@@ -11,4 +11,4 @@ User-agent: Claude-Web
 Allow: /
 
 # ⚠ IMPORTANT: Replace with the final production domain.
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://www.redoxmedia.com.au/sitemap.xml

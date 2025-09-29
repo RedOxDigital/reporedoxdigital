@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     sitemap({
-      hostname: 'https://www.example.com', // ⚠ EDIT THIS to your final domain
+      hostname: 'https://www.redoxmedia.com.au', // RED OX MEDIA domain
     }),
   ],
   resolve: {

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$199 Professional Photoshoot - Limited Time Offer</title>
+    <style>
+        /* 2025 Enhanced Design System - Semantic Tokens */
+        :root {
+            /* Primary Brand Colors */
+            --primary: 220 14% 96%;
+            --primary-foreground: 220 9% 46%;
+            --primary-variant: 220 14% 90%;
+            --primary-dark: 220 14% 85%;
+            --primary-light: 220 14% 98%;
+            
+            /* Secondary Colors */
+            --secondary: 220 9% 46%;
+            --secondary-foreground: 220 14% 96%;
+            --secondary-variant: 220 9% 60%;
+            --secondary-dark: 220 9% 35%;
+            --secondary-light: 220 9% 70%;
+            
+            /* Background System */
+            --background: 0 0% 100%;
+            --foreground: 220 9% 46%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            
+            /* Surface System */
+            --card: 0 0% 100%;
+            --card-foreground: 220 9% 46%;
+            
+            /* Border System */
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 220 14% 96%;
+            
+            /* Status Colors */
+            --destructive: 0 84% 60%;
+            --destructive-foreground: 0 0% 98%;
+            --success: 142 76% 36%;
+            --success-foreground: 0 0% 98%;
+            --warning: 38 92% 50%;
+            --warning-foreground: 0 0% 98%;
+            
+            /* Red Ox Digital Brand Colors */
+            --brand-red: 0 84% 60%;
+            --brand-red-dark: 0 84% 45%;
+            --brand-dark: 220 20% 15%;
+            --brand-dark-light: 220 15% 25%;
+            
+            /* 2025 Creative Color System */
+            --creative-primary: 0 0% 98%;
+            --creative-secondary: 220 20% 15%;
+            --creative-accent: 0 84% 60%;
+            --creative-highlight: 0 84% 70%;
+            
+            /* Enhanced Shadow System */
+            --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+            --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+            --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+            --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+            --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 8px 10px -6px hsl(var(--foreground) / 0.1);
+            --shadow-2xl: 0 25px 50px -12px hsl(var(--foreground) / 0.25);
+            
+            /* 2025 Creative Shadow System */
+            --shadow-creative: 0 20px 40px hsl(var(--creative-accent) / 0.2);
+            --shadow-artistic: 0 15px 35px hsl(var(--creative-accent) / 0.15);
+            --shadow-floating: 0 30px 60px hsl(var(--foreground) / 0.1);
+            --shadow-glow: 0 0 20px hsl(var(--creative-accent) / 0.4);
+            
+            /* Enhanced Animation System */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* 2025 Creative Animation System */
+            --transition-creative: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-artistic: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-morph: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--creative-primary));
+            background: 
+                linear-gradient(180deg,
+                    hsl(var(--creative-secondary)) 0%,
+                    hsl(220 25% 12%) 20%,
+                    hsl(220 25% 8%) 40%,
+                    hsl(var(--creative-secondary)) 60%,
+                    hsl(220 25% 8%) 80%,
+                    hsl(var(--creative-secondary)) 100%),
+                radial-gradient(ellipse at 50% 0%, hsl(var(--creative-accent) / 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at 0% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%),
+                radial-gradient(ellipse at 100% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%);
+            background-attachment: fixed;
+            background-size: 100% 100%, 100% 200%, 200% 100%, 200% 100%;
+            animation: gradient-flow 20s ease-in-out infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Flowing Gradient Animation */
+        @keyframes gradient-flow {
+            0%, 100% {
+                background-position: 0% 0%, 50% 0%, 0% 50%, 100% 50%;
+            }
+            25% {
+                background-position: 0% 0%, 60% 10%, 10% 40%, 90% 60%;
+            }
+            50% {
+                background-position: 0% 0%, 40% 20%, 20% 30%, 80% 70%;
+            }
+            75% {
+                background-position: 0% 0%, 50% 10%, 5% 60%, 95% 40%;
+            }
+        }
+
+        /* Urgency Component Container */
+        .urgency-component {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: var(--shadow-floating);
+            animation: component-reveal 1s ease-out both;
+        }
+
+        .urgency-component::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.3) 0%, 
+                hsl(var(--creative-primary) / 0.1) 50%,
+                hsl(var(--creative-accent) / 0.3) 100%);
+            border-radius: 26px;
+            z-index: -1;
+            animation: border-glow 2s linear infinite;
+        }
+
+        @keyframes component-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes border-glow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Urgency Badge */
+        .urgency-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            color: hsl(var(--creative-primary));
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-creative);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: var(--shadow-creative);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: var(--shadow-glow);
+                transform: scale(1.02);
+            }
+        }
+
+        .urgency-badge svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Main Headline */
+        .urgency-headline {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: hsl(var(--creative-primary));
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+        }
+
+        .price-highlight {
+            color: hsl(var(--creative-accent));
+            text-decoration: line-through;
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+
+        .new-price {
+            color: hsl(142 76% 36%);
+            display: block;
+            font-size: 1.2em;
+            margin-top: 0.5rem;
+        }
+
+        /* Subheading */
+        .urgency-subheading {
+            font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+            font-weight: 500;
+            color: hsl(var(--creative-primary) / 0.8);
+            margin-bottom: 2rem;
+            letter-spacing: 0.025em;
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid hsl(var(--creative-accent) / 0.2);
+        }
+
+        .countdown-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.2) 0%, 
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 12px;
+            padding: 1rem 0.75rem;
+            min-width: 60px;
+            border: 1px solid hsl(var(--creative-accent) / 0.3);
+        }
+
+        .countdown-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: hsl(var(--creative-accent));
+            line-height: 1;
+        }
+
+        .countdown-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        /* Features List */
+        .features-list {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: hsl(var(--creative-primary) / 0.9);
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, 
+                hsl(142 76% 36%) 0%, 
+                hsl(142 76% 36% / 0.8) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon svg {
+            width: 12px;
+            height: 12px;
+            stroke: hsl(var(--creative-primary));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* CTA Button */
+        .urgency-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: hsl(var(--creative-primary));
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: var(--shadow-creative);
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .urgency-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                hsl(var(--creative-primary) / 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .urgency-cta:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-artistic);
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.9) 0%, 
+                hsl(var(--creative-accent)) 100%);
+        }
+
+        .urgency-cta:hover::before {
+            left: 100%;
+        }
+
+        .urgency-cta svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Guarantee Text */
+        .guarantee-text {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.6);
+            font-style: italic;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .urgency-component {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .countdown-timer {
+                gap: 0.5rem;
+            }
+
+            .countdown-unit {
+                min-width: 50px;
+                padding: 0.75rem 0.5rem;
+            }
+
+            .countdown-number {
+                font-size: 1.25rem;
+            }
+
+            .urgency-cta {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .urgency-component {
+                padding: 1.5rem 1rem;
+            }
+
+            .countdown-unit {
+                min-width: 45px;
+                padding: 0.5rem 0.25rem;
+            }
+
+            .countdown-number {
+                font-size: 1.125rem;
+            }
+
+            .countdown-text {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            body {
+                animation: none;
+            }
+
+            .urgency-component,
+            .urgency-badge {
+                animation: none;
+            }
+
+            .urgency-component::before {
+                animation: none;
+            }
+
+            .urgency-cta:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgency-Focused Photoshoot Component -->
+    <div class="urgency-component">
+        <!-- Urgency Badge -->
+        <div class="urgency-badge">
+            <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12,6 12,12 16,14"/>
+            </svg>
+            Limited Time Offer
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="urgency-headline">
+            <span class="price-highlight">$499</span>
+            <span class="new-price">$199</span>
+            PROFESSIONAL PHOTOSHOOT
+        </h1>
+
+        <!-- Subheading -->
+        <p class="urgency-subheading">
+            Transform your business image in just 20 minutes. Professional photos that convert browsers into buyers.
+        </p>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-container">
+            <div class="countdown-label">Offer Expires In:</div>
+            <div class="countdown-timer">
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="hours">23</div>
+                    <div class="countdown-text">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="minutes">45</div>
+                    <div class="countdown-text">Minutes</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="seconds">30</div>
+                    <div class="countdown-text">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="features-list">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                </div>
+                <span>20-minute on-site professional photoshoot</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                </div>
+                <span>High-resolution images for Google Business Profile</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                </div>
+                <span>Perfect for website, social media & marketing</span>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                </div>
+                <span>Same-day delivery of edited photos</span>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <a href="#book-now" class="urgency-cta">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                <circle cx="12" cy="13" r="3"/>
+            </svg>
+            Book Your $199 Photoshoot Now
+        </a>
+
+        <!-- Guarantee -->
+        <p class="guarantee-text">
+            100% satisfaction guaranteed or your money back
+        </p>
+    </div>
+
+    <script>
+        // Countdown Timer Functionality
+        function updateCountdown() {
+            // Set target time (24 hours from now for demo)
+            const now = new Date().getTime();
+            const targetTime = now + (24 * 60 * 60 * 1000); // 24 hours from now
+            
+            function tick() {
+                const currentTime = new Date().getTime();
+                const timeLeft = targetTime - currentTime;
+                
+                if (timeLeft > 0) {
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                } else {
+                    // Timer expired
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                }
+            }
+            
+            // Update immediately and then every second
+            tick();
+            setInterval(tick, 1000);
+        }
+
+        // Initialize countdown when page loads
+        document.addEventListener('DOMContentLoaded', updateCountdown);
+
+        // CTA Click Analytics
+        document.querySelector('.urgency-cta').addEventListener('click', (e) => {
+            console.log('Urgency CTA clicked: Book Your $199 Photoshoot Now');
+        });
+
+        // Component View Analytics
+        console.log('Urgency Photoshoot Component loaded');
+    </script>
+</body>
+</html>

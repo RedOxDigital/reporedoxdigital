@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Business Photography Services - Red Ox Digital</title>
+    <style>
+        /* 2025 Enhanced Design System - Semantic Tokens */
+        :root {
+            /* Primary Brand Colors */
+            --primary: 220 14% 96%;
+            --primary-foreground: 220 9% 46%;
+            --primary-variant: 220 14% 90%;
+            --primary-dark: 220 14% 85%;
+            --primary-light: 220 14% 98%;
+            
+            /* Secondary Colors */
+            --secondary: 220 9% 46%;
+            --secondary-foreground: 220 14% 96%;
+            --secondary-variant: 220 9% 60%;
+            --secondary-dark: 220 9% 35%;
+            --secondary-light: 220 9% 70%;
+            
+            /* Background System */
+            --background: 0 0% 100%;
+            --foreground: 220 9% 46%;
+            --muted: 220 14% 96%;
+            --muted-foreground: 220 9% 46%;
+            
+            /* Surface System */
+            --card: 0 0% 100%;
+            --card-foreground: 220 9% 46%;
+            
+            /* Border System */
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 220 14% 96%;
+            
+            /* Status Colors */
+            --destructive: 0 84% 60%;
+            --destructive-foreground: 0 0% 98%;
+            --success: 142 76% 36%;
+            --success-foreground: 0 0% 98%;
+            --warning: 38 92% 50%;
+            --warning-foreground: 0 0% 98%;
+            
+            /* Red Ox Digital Brand Colors */
+            --brand-red: 0 84% 60%;
+            --brand-red-dark: 0 84% 45%;
+            --brand-dark: 220 20% 15%;
+            --brand-dark-light: 220 15% 25%;
+            
+            /* 2025 Creative Color System */
+            --creative-primary: 0 0% 98%;
+            --creative-secondary: 220 20% 15%;
+            --creative-accent: 0 84% 60%;
+            --creative-highlight: 0 84% 70%;
+            
+            /* Enhanced Shadow System */
+            --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.05);
+            --shadow: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+            --shadow-md: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+            --shadow-lg: 0 10px 15px -3px hsl(var(--foreground) / 0.1), 0 4px 6px -4px hsl(var(--foreground) / 0.1);
+            --shadow-xl: 0 20px 25px -5px hsl(var(--foreground) / 0.1), 0 8px 10px -6px hsl(var(--foreground) / 0.1);
+            --shadow-2xl: 0 25px 50px -12px hsl(var(--foreground) / 0.25);
+            
+            /* 2025 Creative Shadow System */
+            --shadow-creative: 0 20px 40px hsl(var(--creative-accent) / 0.2);
+            --shadow-artistic: 0 15px 35px hsl(var(--creative-accent) / 0.15);
+            --shadow-floating: 0 30px 60px hsl(var(--foreground) / 0.1);
+            --shadow-glow: 0 0 20px hsl(var(--creative-accent) / 0.4);
+            
+            /* Enhanced Animation System */
+            --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-elastic: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* 2025 Creative Animation System */
+            --transition-creative: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-artistic: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-morph: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--creative-primary));
+            background: 
+                linear-gradient(180deg,
+                    hsl(var(--creative-secondary)) 0%,
+                    hsl(220 25% 12%) 20%,
+                    hsl(220 25% 8%) 40%,
+                    hsl(var(--creative-secondary)) 60%,
+                    hsl(220 25% 8%) 80%,
+                    hsl(var(--creative-secondary)) 100%),
+                radial-gradient(ellipse at 50% 0%, hsl(var(--creative-accent) / 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at 0% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%),
+                radial-gradient(ellipse at 100% 50%, hsl(var(--creative-accent) / 0.02) 0%, transparent 70%);
+            background-attachment: fixed;
+            background-size: 100% 100%, 100% 200%, 200% 100%, 200% 100%;
+            animation: gradient-flow 20s ease-in-out infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* Flowing Gradient Animation */
+        @keyframes gradient-flow {
+            0%, 100% {
+                background-position: 0% 0%, 50% 0%, 0% 50%, 100% 50%;
+            }
+            25% {
+                background-position: 0% 0%, 60% 10%, 10% 40%, 90% 60%;
+            }
+            50% {
+                background-position: 0% 0%, 40% 20%, 20% 30%, 80% 70%;
+            }
+            75% {
+                background-position: 0% 0%, 50% 10%, 5% 60%, 95% 40%;
+            }
+        }
+
+        /* Professional Component Container - Desktop Landscape */
+        .professional-component {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-floating);
+            animation: component-reveal 1s ease-out both;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        .professional-component::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                hsl(var(--creative-primary) / 0.05) 50%,
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        @keyframes component-reveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Content Section */
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        /* Brand Badge */
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid hsl(var(--creative-primary) / 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            align-self: flex-start;
+        }
+
+        .brand-badge svg {
+            width: 20px;
+            height: 20px;
+            stroke: hsl(var(--creative-accent));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Main Headline */
+        .professional-headline {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: hsl(var(--creative-primary));
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 8px hsl(var(--creative-secondary) / 0.3);
+        }
+
+        .highlight-text {
+            color: hsl(var(--creative-accent));
+        }
+
+        /* Subheading */
+        .professional-subheading {
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            font-weight: 400;
+            color: hsl(var(--creative-primary) / 0.8);
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        /* Service Details */
+        .service-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .detail-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.2) 0%, 
+                hsl(var(--creative-accent) / 0.1) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .detail-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: hsl(var(--creative-accent));
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary));
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-description {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.7);
+            line-height: 1.5;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pricing-content {
+            flex: 1;
+        }
+
+        .pricing-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: hsl(var(--creative-accent));
+            line-height: 1;
+        }
+
+        .pricing-description {
+            font-size: 0.875rem;
+            color: hsl(var(--creative-primary) / 0.6);
+            margin-top: 0.5rem;
+        }
+
+        /* CTA Button */
+        .professional-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary));
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent)) 0%, 
+                hsl(var(--creative-accent) / 0.9) 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: 0.025em;
+            box-shadow: var(--shadow-creative);
+            transition: var(--transition-creative);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .professional-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                hsl(var(--creative-primary) / 0.2), 
+                transparent);
+            transition: left 0.6s ease;
+        }
+
+        .professional-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-artistic);
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.9) 0%, 
+                hsl(var(--creative-accent)) 100%);
+        }
+
+        .professional-cta:hover::before {
+            left: 100%;
+        }
+
+        .professional-cta svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Visual Section */
+        .visual-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Camera Icon Display */
+        .camera-display {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, 
+                hsl(var(--creative-accent) / 0.1) 0%, 
+                hsl(var(--creative-accent) / 0.05) 100%);
+            border: 2px solid hsl(var(--creative-accent) / 0.2);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .camera-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                hsl(var(--creative-accent) / 0.05) 50%, 
+                transparent 70%);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(0%) translateY(0%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .camera-icon {
+            width: 120px;
+            height: 120px;
+            stroke: hsl(var(--creative-accent));
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            z-index: 2;
+        }
+
+        /* Quality Indicators */
+        .quality-indicators {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .quality-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid hsl(var(--creative-primary) / 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: var(--transition-creative);
+        }
+
+        .quality-item:hover {
+            transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.3);
+            border-color: hsl(var(--creative-accent) / 0.2);
+        }
+
+        .quality-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: hsl(var(--creative-accent));
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .quality-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: hsl(var(--creative-primary) / 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .professional-component {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 2.5rem;
+                min-height: auto;
+            }
+
+            .visual-section {
+                order: -1;
+            }
+
+            .camera-display {
+                width: 250px;
+                height: 250px;
+            }
+
+            .camera-icon {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .professional-component {
+                padding: 2rem;
+                gap: 2rem;
+            }
+
+            .camera-display {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 1.5rem;
+            }
+
+            .camera-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .pricing-section {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .professional-cta {
+                width: 100%;
+            }
+
+            .quality-indicators {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .professional-component {
+                padding: 1.5rem;
+            }
+
+            .camera-display {
+                width: 180px;
+                height: 180px;
+            }
+
+            .camera-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .quality-indicators {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-amount {
+                font-size: 2rem;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            body {
+                animation: none;
+            }
+
+            .professional-component {
+                animation: none;
+            }
+
+            .camera-display::before {
+                animation: none;
+            }
+
+            .professional-cta:hover,
+            .quality-item:hover {
+                transform: none;
+            }
+        }
+
+        /* Focus Management */
+        .professional-cta:focus {
+            outline: 2px solid hsl(var(--creative-accent));
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Business Photography Component -->
+    <div class="professional-component">
+        <!-- Content Section -->
+        <div class="content-section">
+            <!-- Brand Badge -->
+            <div class="brand-badge">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                    <circle cx="12" cy="13" r="3"/>
+                </svg>
+                Professional Photography
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="professional-headline">
+                Elevate Your Business with <span class="highlight-text">Professional Photography</span>
+            </h1>
+
+            <!-- Subheading -->
+            <p class="professional-subheading">
+                High-quality business photography that enhances your brand presence across all digital platforms and marketing materials.
+            </p>
+
+            <!-- Service Details -->
+            <div class="service-details">
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                    </div>
+                    <div class="detail-content">
+                        <div class="detail-title">20-Minute On-Site Session</div>
+                        <div class="detail-description">Efficient professional photoshoot at your business location with minimal disruption to operations.</div>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <div class="detail-content">
+                        <div class="detail-title">Multi-Platform Optimization</div>
+                        <div class="detail-description">Images optimized for Google Business Profile, website, social media, and print materials.</div>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            <path d="M13 8H7"/>
+                            <path d="M17 12H7"/>
+                        </svg>
+                    </div>
+                    <div class="detail-content">
+                        <div class="detail-title">Same-Day Delivery</div>
+                        <div class="detail-description">Professionally edited high-resolution images delivered within 24 hours of your session.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing Section -->
+            <div class="pricing-section">
+                <div class="pricing-content">
+                    <div class="pricing-label">Professional Photography Service</div>
+                    <div class="pricing-amount">$199</div>
+                    <div class="pricing-description">Complete package including session and edited images</div>
+                </div>
+                <a href="#schedule-session" class="professional-cta">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    Schedule Session
+                </a>
+            </div>
+        </div>
+
+        <!-- Visual Section -->
+        <div class="visual-section">
+            <!-- Camera Display -->
+            <div class="camera-display">
+                <svg class="camera-icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                    <circle cx="12" cy="13" r="3"/>
+                </svg>
+            </div>
+
+            <!-- Quality Indicators -->
+            <div class="quality-indicators">
+                <div class="quality-item">
+                    <div class="quality-number">4K</div>
+                    <div class="quality-label">Resolution</div>
+                </div>
+                <div class="quality-item">
+                    <div class="quality-number">24hr</div>
+                    <div class="quality-label">Delivery</div>
+                </div>
+                <div class="quality-item">
+                    <div class="quality-number">Pro</div>
+                    <div class="quality-label">Equipment</div>
+                </div>
+                <div class="quality-item">
+                    <div class="quality-number">Edit</div>
+                    <div class="quality-label">Included</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CTA Click Analytics
+        document.querySelector('.professional-cta').addEventListener('click', (e) => {
+            console.log('Professional CTA clicked: Schedule Session');
+        });
+
+        // Detail Item Hover Analytics
+        document.querySelectorAll('.detail-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', () => {
+                const title = item.querySelector('.detail-title').textContent;
+                console.log(`Detail item hovered: ${title}`);
+            });
+        });
+
+        // Quality Item Hover Analytics
+        document.querySelectorAll('.quality-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', () => {
+                const label = item.querySelector('.quality-label').textContent;
+                console.log(`Quality indicator hovered: ${label}`);
+            });
+        });
+
+        // Component View Analytics
+        console.log('Professional Photography Component loaded');
+    </script>
+</body>
+</html>
