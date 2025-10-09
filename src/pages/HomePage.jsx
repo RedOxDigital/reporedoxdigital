@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/HomePage.css'
-import logoSvg from '../../Images/o svg-cropped.svg'
+import logoSvg from '../assets/o svg-cropped.svg'
+import Meta from '../components/seo/Meta'
+import JsonLdSchema from '../components/seo/JsonLdSchema'
+import FaqSchema from '../components/seo/FaqSchema'
 
 const HomePage = () => {
   console.log('HomePage component rendering...')
@@ -331,6 +334,87 @@ const HomePage = () => {
   
   return (
     <>
+      {/* SEO Components */}
+      <Meta
+        title="Red Ox Digital - Local Business Marketing & Photography Services"
+        description="Transform your local business with professional photography, Google PPC ads, custom landing pages, and automated lead response systems. Get more customers and dominate your local market."
+        keywords="local business marketing, professional photography, Google PPC ads, landing pages, lead generation, business growth, local SEO, customer acquisition, Sydney business services"
+        ogImage="/Hero.png"
+        canonicalUrl="https://redoxdigital.com.au/"
+      />
+
+      {/* Main Content Landmark */}
+      <main id="main-content" role="main">
+
+      <JsonLdSchema data={{
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        'name': 'Red Ox Digital',
+        'image': 'https://redoxdigital.com.au/Hero.png',
+        'url': 'https://redoxdigital.com.au',
+        'telephone': '+61-493-992-661',
+        'email': 'info@redoxdigital.com.au',
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': 'Business Address',
+          'addressLocality': 'Sydney',
+          'addressRegion': 'NSW',
+          'postalCode': '2000',
+          'addressCountry': 'AU'
+        },
+        'geo': {
+          '@type': 'GeoCoordinates',
+          'latitude': -33.8688,
+          'longitude': 151.2093
+        },
+        'openingHoursSpecification': {
+          '@type': 'OpeningHoursSpecification',
+          'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          'opens': '09:00',
+          'closes': '17:00'
+        },
+        'priceRange': '$$',
+        'serviceArea': {
+          '@type': 'Place',
+          'name': 'Sydney Metropolitan Area'
+        },
+        'hasOfferCatalog': {
+          '@type': 'OfferCatalog',
+          'name': 'Local Business Marketing Services',
+          'itemListElement': [
+            {
+              '@type': 'Offer',
+              'itemOffered': {
+                '@type': 'Service',
+                'name': 'Professional Photography',
+                'description': 'High-quality business photography for local businesses'
+              }
+            },
+            {
+              '@type': 'Offer',
+              'itemOffered': {
+                '@type': 'Service',
+                'name': 'Google PPC Advertising',
+                'description': 'Targeted Google Ads campaigns for local customer acquisition'
+              }
+            },
+            {
+              '@type': 'Offer',
+              'itemOffered': {
+                '@type': 'Service',
+                'name': 'Custom Landing Pages',
+                'description': 'Conversion-optimized landing pages for local businesses'
+              }
+            }
+          ]
+        },
+        'aggregateRating': {
+          '@type': 'AggregateRating',
+          'ratingValue': '4.9',
+          'reviewCount': '150'
+        }
+      }} />
+
       {/* Skip Link for Accessibility */}
       <a href="#main-content" className="skip-link">Skip to main content</a>
 
@@ -2117,6 +2201,46 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* FAQ Schema for SEO */}
+      <FaqSchema faqData={[
+        {
+          question: "How quickly will I see new leads from your system?",
+          answer: "Most clients start receiving new leads within 2-4 weeks of launching their PPC campaigns. Our automated SMS system responds to leads within minutes, and the custom landing pages are designed for immediate conversion from day one of your campaign launch."
+        },
+        {
+          question: "What makes your approach different from other marketing agencies?",
+          answer: "We specialize exclusively in local lead generation with a singular focus on \"near me\" searches. Unlike general agencies, we're not a jack-of-all-trades. This extreme focus means we're exceptionally good at turning local searches into paying customers for your specific business type."
+        },
+        {
+          question: "Do you work with both \"come to us\" and \"we come to you\" businesses?",
+          answer: "Absolutely! We work with brick-and-mortar businesses like dentists, med spas, and salons, as well as service area businesses like plumbers, electricians, and landscapers. Our system is designed for any local business that depends on attracting customers from their immediate geographic area."
+        },
+        {
+          question: "What's included in your complete marketing package?",
+          answer: "Our package includes professional photo and video shoots, Google PPC ads targeting local searches, custom-built landing pages, automated SMS lead response system, and automated review generation system. Everything works together to turn \"near me\" searches into booked appointments."
+        },
+        {
+          question: "What's the investment for your marketing system?",
+          answer: "Investment varies based on your market competition and business goals. We offer two main options: our complete marketing package for businesses ready to invest in a full solution, or our $199 photoshoot as a low-risk way to experience our quality and get started."
+        },
+        {
+          question: "How does your automated SMS system work?",
+          answer: "We have two SMS systems: one texts new leads within minutes of their inquiry to maximize conversion, and another automatically asks happy customers for reviews. Both systems run on autopilot, ensuring you never miss a lead or opportunity to build your reputation."
+        },
+        {
+          question: "What if I'm not ready for the full marketing package?",
+          answer: "That's exactly why we offer our $199 photoshoot service! It's a 20-minute, on-site session to update your business photos for Google Business Profile and marketing. It's perfect for business owners who want to experience our quality before committing to the full system."
+        },
+        {
+          question: "What happens if I don't get results?",
+          answer: "Our system is built on proven methods that consistently work for local businesses. We focus only on strategies that turn \"near me\" searches into paying customers. If you're not seeing increased leads and appointments, we'll work with you to optimize until you do."
+        },
+        {
+          question: "How do you measure success for my business?",
+          answer: "We track what matters most: booked appointments and new customers. While we monitor PPC performance, landing page conversions, and lead response times, our ultimate measure of success is filling your appointment book with paying customers from local searches."
+        }
+      ]} />
+
       {/* Floating Action Button */}
       <button 
         className={`fab ${showFab ? 'show' : ''}`} 
@@ -2194,6 +2318,8 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+      </main>
 
       {/* Footer */}
       <footer className="footer" role="contentinfo" aria-label="Site Footer">
