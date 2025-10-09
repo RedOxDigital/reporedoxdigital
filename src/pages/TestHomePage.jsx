@@ -89,7 +89,7 @@ const TestHomePage = () => {
         </button>
         
         <h2>Contact Form</h2>
-        <p>Phone: (555) 123-4567</p>
+        <p>Phone: 0493 992 661</p>
         
         <form style={{ marginTop: '2rem' }}>
           <div style={{ marginBottom: '1rem' }}>

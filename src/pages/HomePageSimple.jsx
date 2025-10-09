@@ -319,7 +319,7 @@ const HomePageSimple = () => {
             </div>
             <div>
               <div style={{ fontSize: '0.875rem', opacity: 0.8 }}>Prefer to call?</div>
-              <a href="tel:+15551234567" className="phone-number">(555) 123-4567</a>
+              <a href="tel:+61493992661" className="phone-number">0493 992 661</a>
             </div>
           </div>
         </div>

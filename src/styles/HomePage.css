@@ -191,6 +191,18 @@
 
 .panel-content {
   padding: 2rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+}
+
+.jotform-container {
+  overflow: auto;
+  max-height: 100%;
+}
+
+.jotform-container iframe {
+  min-height: 600px;
+  max-height: none;
 }
 
 .form-section {
@@ -342,6 +354,7 @@
 
   .panel-content {
     padding: 1.5rem;
+    max-height: calc(100vh - 100px);
   }
 
   .panel-header {
@@ -358,14 +371,23 @@
     width: 56px;
     height: 56px;
   }
+
+  .jotform-container iframe {
+    min-height: 500px;
+  }
 }
 
 @media (max-width: 480px) {
   .panel-content {
     padding: 1rem;
+    max-height: calc(100vh - 80px);
   }
 
   .panel-header {
     padding: 1rem;
+  }
+
+  .jotform-container iframe {
+    min-height: 450px;
   }
 }

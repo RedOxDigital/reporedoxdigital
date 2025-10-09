@@ -6,7 +6,7 @@ const defaultSchema = {
   'logo': 'https://www.clientwebsite.com/logo.png',
   'contactPoint': {
     '@type': 'ContactPoint',
-    'telephone': '+1-555-123-4567',
+    'telephone': '+61-493-992-661',
     'contactType': 'customer service',
   },
 }

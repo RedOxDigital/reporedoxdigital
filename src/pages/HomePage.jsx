@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/HomePage.css'
+import logoSvg from '../../Images/o svg-cropped.svg'
 
 const HomePage = () => {
   console.log('HomePage component rendering...')
@@ -9,7 +10,6 @@ const HomePage = () => {
   const [activeSection, setActiveSection] = useState('home')
   const [activeFaqCategory, setActiveFaqCategory] = useState('all')
   const [isPanelOpen, setIsPanelOpen] = useState(false)
-  const [isExpanded, setIsExpanded] = useState(false)
   const [showFab, setShowFab] = useState(false)
 
   // Navbar scroll effect
@@ -72,52 +72,13 @@ const HomePage = () => {
 
   const closePanel = () => {
     setIsPanelOpen(false)
-    setIsExpanded(false)
     document.body.style.overflow = ''
-    // Reset form if needed
-    const form = document.getElementById('bookingForm')
-    if (form) {
-      form.reset()
-    }
     // Show FAB if scrolled
     if (window.scrollY > 200) {
       setShowFab(true)
     }
   }
 
-  // Form validation
-  const validateBasicInfo = () => {
-    const nameInput = document.getElementById('name')
-    const emailInput = document.getElementById('email')
-    if (!nameInput || !emailInput) return false
-    
-    const name = nameInput.value.trim()
-    const email = emailInput.value.trim()
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    
-    return name.length > 0 && emailRegex.test(email)
-  }
-
-  // Handle form submission
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    
-    if (!validateBasicInfo()) {
-      return
-    }
-    
-    // Get form data
-    const formData = new FormData(e.target)
-    const data = Object.fromEntries(formData)
-    
-    console.log('Form submitted with data:', data)
-    
-    // Simulate submission
-    setTimeout(() => {
-      alert('Thank you! We\'ve received your request and will get back to you within 24 hours.')
-      closePanel()
-    }, 1000)
-  }
 
   // FAQ category filter
   const handleFaqCategoryFilter = (category) => {
@@ -379,27 +340,7 @@ const HomePage = () => {
           {/* Logo */}
           <a href="/" className="navbar-logo" aria-label="Red Ox Digital Home">
             <div className="navbar-logo-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="92.97 187 1222.71 404.74">
-                <defs>
-                  <style>
-                    {`.st0 { fill: hsl(var(--creative-accent)); }`}
-                  </style>
-                </defs>
-                <g id="Layer_3">
-                  <path className="st0" d="M936.915,578.467V187.451c9.351,0,18.404-.037,27.456.006,54.59.261,109.328-1.901,163.735,1.396,77.447,4.694,138.203,39.631,170.651,112.684,32.043,72.142,18.939,163.536-42.531,221.503-31.496,29.701-69.729,45.986-112.183,52.047-17.193,2.455-34.747,3.086-52.148,3.236-48.408.416-96.821.144-145.232.144h-9.748ZM1039.529,382.82c0,33.858.123,67.716-.122,101.572-.041,5.61,1.456,7.446,7.198,7.348,19.073-.326,38.165.27,57.231-.231,21.834-.573,42.556-5.965,60.805-18.329,36.958-25.038,54.084-70.24,43.885-114.478-11.133-48.286-41.181-76.486-90.858-82.052-23.095-2.588-46.648-.913-69.973-1.744-7.132-.254-8.36,2.403-8.307,8.76.274,33.049.127,66.102.142,99.153Z"/>
-                </g>
-                <g id="o">
-                  <g id="Layer_2">
-                    <path className="st0" d="M195.475,454.205v123.876h-102.509V188.692c2.126-.304,4.153-.85,6.179-.846,66.676.138,133.384-.853,200.016.95,40.917,1.107,77.883,15.236,105.626,47.383,24.019,27.832,29.655,61.292,27.383,96.576-1.957,30.391-13.576,56.93-36.248,77.531-12.833,11.661-27.255,21.574-42.16,33.21,29.644,43.915,59.849,88.662,90.584,134.194-2.394.303-4.07.698-5.746.7-34.684.044-69.369.16-104.05-.152-3.073-.028-7.326-2.096-8.998-4.583-25.313-37.634-50.356-75.451-75.241-113.37-2.783-4.242-5.5-6.373-10.853-6.22-14.183.407-28.385.138-43.982.138ZM195.724,372.133c1.205.142,2.484.424,3.761.422,25.792-.042,51.585-.009,77.375-.269,5.581-.056,11.274-.653,16.705-1.909,23.843-5.516,38.976-26.236,37.698-51.1-1.132-22.014-19.093-41.012-43.054-42.417-28.907-1.696-57.94-1.198-86.915-1.818-5.076-.109-5.613,2.622-5.605,6.603.063,29.812.034,59.623.034,90.489Z"/>
-                  </g>
-                </g>
-                <g id="ox">
-                  <path className="st0" d="M683.028,187.046c-111.916,0-202.642,90.594-202.642,202.348,0,69.51,33.602,133.136,88.566,167.263l.09-1.055-.09-.045s3.347-215.705,3.347-220.134c33.219,0,66.437-6.644,79.725-8.858,55.364-11.073,88.583-62.008,95.227-81.939,6.644-19.931,4.429,2.215,2.215,28.789-6.644,44.292-46.506,70.866-55.364,75.296-8.858,2.215-2.215,11.073-2.215,11.073,0,0,73.081,108.514,86.368,124.016,15.502,13.287,6.644,24.36,6.644,24.36-6.644,15.502-22.146,33.219-22.146,33.219-11.073,11.073-44.292-8.858-106.3-4.429-33.134,2.367-40.901,41.908-40.901,41.908l-.008-.004c-.235,1.067-.214,1.32-.214,1.321,0,0,.002,0,.002.001,20.559,9.032,43.955,11.566,67.695,11.566,111.916,0,202.642-90.594,202.642-202.348s-90.726-202.348-202.642-202.348Z"/>
-                  <g id="Layer_1">
-                    <path className="st0" d="M687.696,411.97c-6.743-5.669-12.43-10.45-18.468-15.526,5.432-3.886,11.593-5.32,16.917-1.56,5.763,4.07,3.96,10.301,1.551,17.086Z"/>
-                  </g>
-                </g>
-              </svg>
+              <img src={logoSvg} alt="Red Ox Digital Logo" />
             </div>
           </a>
 
@@ -2221,134 +2162,36 @@ const HomePage = () => {
             </div>
             <div className="phone-content">
               <span className="phone-label">Prefer to call?</span>
-              <a href="tel:+15551234567" className="phone-number">(555) 123-4567</a>
+              <a href="tel:+61493992661" className="phone-number">0493 992 661</a>
             </div>
           </div>
         </div>
 
         {/* Panel Content */}
         <div className="panel-content">
-          <form id="bookingForm" className="booking-form" onSubmit={handleFormSubmit}>
-            {/* Basic Information */}
-            <div className="form-section" id="basicInfo">
-              <div className="form-group">
-                <label htmlFor="name">Full Name <span className="required">*</span></label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  className="form-input" 
-                  placeholder="Enter your full name" 
-                  required 
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email Address <span className="required">*</span></label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email" 
-                  className="form-input" 
-                  placeholder="Enter your email address" 
-                  required 
-                />
-              </div>
-
-              <button 
-                type="button" 
-                className="form-button expand-btn" 
-                onClick={() => setIsExpanded(!isExpanded)}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d={isExpanded ? "M18 15l-6-6-6 6" : "M6 9l6 6 6-6"}/>
-                </svg>
-                {isExpanded ? 'Less Details' : 'Add More Details (Optional)'}
-              </button>
-
-              {!isExpanded && (
-                <button type="submit" className="form-button">
-                  Get My Free Quote
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                  </svg>
-                </button>
-              )}
-            </div>
-
-            {/* Additional Information */}
-            {isExpanded && (
-              <div className="form-section expanded">
-                <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
-                  <input 
-                    type="tel" 
-                    id="phone" 
-                    name="phone" 
-                    className="form-input" 
-                    placeholder="Enter your phone number" 
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="business">Business Name</label>
-                  <input 
-                    type="text" 
-                    id="business" 
-                    name="business" 
-                    className="form-input" 
-                    placeholder="Enter your business name" 
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="industry">Industry</label>
-                  <select id="industry" name="industry" className="form-input">
-                    <option value="">Select your industry</option>
-                    <option value="restaurant">Restaurant & Food Service</option>
-                    <option value="retail">Retail & E-commerce</option>
-                    <option value="healthcare">Healthcare & Medical</option>
-                    <option value="professional">Professional Services</option>
-                    <option value="home-services">Home Services</option>
-                    <option value="automotive">Automotive</option>
-                    <option value="fitness">Fitness & Wellness</option>
-                    <option value="beauty">Beauty & Personal Care</option>
-                    <option value="real-estate">Real Estate</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="budget">Monthly Marketing Budget</label>
-                  <select id="budget" name="budget" className="form-input">
-                    <option value="">Select your budget range</option>
-                    <option value="under-500">Under $500</option>
-                    <option value="500-1000">$500 - $1,000</option>
-                    <option value="1000-2500">$1,000 - $2,500</option>
-                    <option value="2500-5000">$2,500 - $5,000</option>
-                    <option value="over-5000">Over $5,000</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="message">Tell Us About Your Goals</label>
-                  <textarea 
-                    id="message" 
-                    name="message" 
-                    className="form-input form-textarea" 
-                    placeholder="What are your main business goals? What challenges are you facing? Any specific services you're interested in?"
-                  ></textarea>
-                </div>
-
-                <button type="submit" className="form-button">
-                  Submit Request
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                  </svg>
-                </button>
-              </div>
-            )}
-          </form>
+          {/* JotForm Iframe */}
+          <div className="jotform-container">
+            <iframe
+              id="JotFormIFrame-252807783245060"
+              title="Client Intake Form"
+              onload="window.parent.scrollTo(0,0)"
+              allowtransparency="true"
+              allow="geolocation; microphone; camera; fullscreen; payment"
+              src="https://form.jotform.com/252807783245060"
+              frameborder="0"
+              style={{
+                minWidth: '100%',
+                maxWidth: '100%',
+                height: '600px',
+                border: 'none'
+              }}
+              scrolling="auto"
+            />
+            <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+            <script dangerouslySetInnerHTML={{
+              __html: "window.jotformEmbedHandler(\"iframe[id='JotFormIFrame-252807783245060']\", \"https://form.jotform.com/\")"
+            }} />
+          </div>
         </div>
       </div>
 
@@ -2617,27 +2460,7 @@ const HomePage = () => {
             <div className="footer-brand">
               <a href="#home" className="footer-logo" aria-label="Red Ox Digital Home">
                 <div className="footer-logo-icon" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="92.97 187 1222.71 404.74">
-                    <defs>
-                      <style>
-                        {`.st0 { fill: #ef4444; }`}
-                      </style>
-                    </defs>
-                    <g id="Layer_3">
-                      <path className="st0" d="M936.915,578.467V187.451c9.351,0,18.404-.037,27.456.006,54.59.261,109.328-1.901,163.735,1.396,77.447,4.694,138.203,39.631,170.651,112.684,32.043,72.142,18.939,163.536-42.531,221.503-31.496,29.701-69.729,45.986-112.183,52.047-17.193,2.455-34.747,3.086-52.148,3.236-48.408.416-96.821.144-145.232.144h-9.748ZM1039.529,382.82c0,33.858.123,67.716-.122,101.572-.041,5.61,1.456,7.446,7.198,7.348,19.073-.326,38.165.27,57.231-.231,21.834-.573,42.556-5.965,60.805-18.329,36.958-25.038,54.084-70.24,43.885-114.478-11.133-48.286-41.181-76.486-90.858-82.052-23.095-2.588-46.648-.913-69.973-1.744-7.132-.254-8.36,2.403-8.307,8.76.274,33.049.127,66.102.142,99.153Z"/>
-                    </g>
-                    <g id="o">
-                      <g id="Layer_2">
-                        <path className="st0" d="M195.475,454.205v123.876h-102.509V188.692c2.126-.304,4.153-.85,6.179-.846,66.676.138,133.384-.853,200.016.95,40.917,1.107,77.883,15.236,105.626,47.383,24.019,27.832,29.655,61.292,27.383,96.576-1.957,30.391-13.576,56.93-36.248,77.531-12.833,11.661-27.255,21.574-42.16,33.21,29.644,43.915,59.849,88.662,90.584,134.194-2.394.303-4.07.698-5.746.7-34.684.044-69.369.16-104.05-.152-3.073-.028-7.326-2.096-8.998-4.583-25.313-37.634-50.356-75.451-75.241-113.37-2.783-4.242-5.5-6.373-10.853-6.22-14.183.407-28.385.138-43.982.138ZM195.724,372.133c1.205.142,2.484.424,3.761.422,25.792-.042,51.585-.009,77.375-.269,5.581-.056,11.274-.653,16.705-1.909,23.843-5.516,38.976-26.236,37.698-51.1-1.132-22.014-19.093-41.012-43.054-42.417-28.907-1.696-57.94-1.198-86.915-1.818-5.076-.109-5.613,2.622-5.605,6.603.063,29.812.034,59.623.034,90.489Z"/>
-                      </g>
-                    </g>
-                    <g id="ox">
-                      <path className="st0" d="M683.028,187.046c-111.916,0-202.642,90.594-202.642,202.348,0,69.51,33.602,133.136,88.566,167.263l.09-1.055-.09-.045s3.347-215.705,3.347-220.134c33.219,0,66.437-6.644,79.725-8.858,55.364-11.073,88.583-62.008,95.227-81.939,6.644-19.931,4.429,2.215,2.215,28.789-6.644,44.292-46.506,70.866-55.364,75.296-8.858,2.215-2.215,11.073-2.215,11.073,0,0,73.081,108.514,86.368,124.016,15.502,13.287,6.644,24.36,6.644,24.36-6.644,15.502-22.146,33.219-22.146,33.219-11.073,11.073-44.292-8.858-106.3-4.429-33.134,2.367-40.901,41.908-40.901,41.908l-.008-.004c-.235,1.067-.214,1.32-.214,1.321,0,0,.002,0,.002.001,20.559,9.032,43.955,11.566,67.695,11.566,111.916,0,202.642-90.594,202.642-202.348s-90.726-202.348-202.642-202.348Z"/>
-                      <g id="Layer_1">
-                        <path className="st0" d="M687.696,411.97c-6.743-5.669-12.43-10.45-18.468-15.526,5.432-3.886,11.593-5.32,16.917-1.56,5.763,4.07,3.96,10.301,1.551,17.086Z"/>
-                      </g>
-                    </g>
-                  </svg>
+                  <img src={logoSvg} alt="Red Ox Digital Logo" />
                 </div>
                 ROD
               </a>
@@ -2679,7 +2502,7 @@ const HomePage = () => {
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                   </svg>
                 </div>
-                <span>(555) 123-4567</span>
+                <span>0493 992 661</span>
               </div>
 
               <div className="footer-contact-item">
@@ -2689,7 +2512,7 @@ const HomePage = () => {
                     <polyline points="22,6 12,13 2,6"/>
                   </svg>
                 </div>
-                <span>hello@redoxdigital.com</span>
+                <span>info@redoxdigital.com.au</span>
               </div>
 
               <div className="footer-contact-item">
@@ -2699,7 +2522,7 @@ const HomePage = () => {
                     <circle cx="12" cy="10" r="3"/>
                   </svg>
                 </div>
-                <span>Serving Local Businesses<br/>Nationwide</span>
+                <span>Serving Local Businesses<br/>Gold Coast Brisbane Sunshine Coast</span>
               </div>
 
               {/* Social Links */}
