@@ -4,7 +4,7 @@ export default function Meta({
   title = "Red Ox Digital - Local Business Marketing & Photography Services",
   description = "Transform your local business with professional photography, Google PPC ads, custom landing pages, and automated lead response systems. Get more customers and dominate your local market in Sydney, Australia.",
   keywords = "local business marketing, professional photography, Google PPC ads, landing pages, lead generation, business growth, local SEO, customer acquisition, Sydney business services, Australian business marketing",
-  ogImage = "/Hero.png",
+  ogImage = "/ROD-logo.svg",
   canonicalUrl = "https://redoxdigital.com.au/",
 }) {
   const currentUrl = canonicalUrl || (typeof window !== 'undefined' ? window.location.href : '')
