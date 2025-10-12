@@ -103,11 +103,11 @@ const HomePage = () => {
   // Image Loading with Alternative Paths
   const tryAlternativeImagePaths = (img) => {
     const imagePaths = [
-      'Hero.png',
-      './Hero.png',
-      '/Hero.png',
-      '../Hero.png',
-      '../../Hero.png'
+      '/Images/Funnelhero.webp',
+      './Images/Funnelhero.webp',
+      'Images/Funnelhero.webp',
+      '../Images/Funnelhero.webp',
+      '../../Images/Funnelhero.webp'
     ]
     
     let currentIndex = 0
@@ -119,7 +119,7 @@ const HomePage = () => {
         img.src = imagePaths[currentIndex]
         currentIndex++
       } else {
-        console.error('All Hero.png image paths failed. Original src:', originalSrc)
+        console.error('All Funnelhero.webp image paths failed. Original src:', originalSrc)
         showImageFallback()
       }
     }
@@ -150,11 +150,11 @@ const HomePage = () => {
       if (img && !img.complete) {
         console.log('Background image not loaded on DOMContentLoaded, checking...')
         if (img.naturalWidth === 0) {
-          console.log('Background image failed to load naturally, trying alternatives...')
+          console.log('Funnel hero image failed to load naturally, trying alternatives...')
           tryAlternativeImagePaths(img)
         }
       } else if (img && img.complete) {
-        console.log('Background image loaded successfully on DOMContentLoaded:', img.src)
+        console.log('Funnel hero image loaded successfully on DOMContentLoaded:', img.src)
       }
     }, 100)
 
@@ -336,9 +336,9 @@ const HomePage = () => {
     <>
       {/* SEO Components */}
       <Meta
-        title="Red Ox Digital - Local Business Marketing & Photography Services"
-        description="Transform your local business with professional photography, Google PPC ads, custom landing pages, and automated lead response systems. Get more customers and dominate your local market."
-        keywords="local business marketing, professional photography, Google PPC ads, landing pages, lead generation, business growth, local SEO, customer acquisition, Sydney business services"
+        title="Red Ox Digital - Sales Funnel Automation & Marketing for Local Businesses"
+        description="Transform your local business with custom sales funnels, automated lead response systems, and targeted ad campaigns. Turn cold traffic into paying customers on autopilot."
+        keywords="sales funnels, marketing automation, lead generation, local business marketing, automated sales systems, funnel optimization, customer acquisition, business growth, sales automation"
         ogImage="/ROD-logo.svg"
         canonicalUrl="https://redoxdigital.com.au/"
       />
@@ -350,7 +350,7 @@ const HomePage = () => {
         '@context': 'https://schema.org',
         '@type': 'LocalBusiness',
         'name': 'Red Ox Digital',
-        'image': 'https://redoxdigital.com.au/Hero.png',
+        'image': 'https://redoxdigital.com.au/Images/Funnelhero.webp',
         'url': 'https://redoxdigital.com.au',
         'telephone': '+61-493-992-661',
         'email': 'info@redoxdigital.com.au',
@@ -380,30 +380,30 @@ const HomePage = () => {
         },
         'hasOfferCatalog': {
           '@type': 'OfferCatalog',
-          'name': 'Local Business Marketing Services',
+          'name': 'Sales Funnel Automation Services',
           'itemListElement': [
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Professional Photography',
-                'description': 'High-quality business photography for local businesses'
+                'name': 'Custom Sales Funnels',
+                'description': 'Complete sales funnel builds and optimization for local businesses'
               }
             },
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Google PPC Advertising',
-                'description': 'Targeted Google Ads campaigns for local customer acquisition'
+                'name': 'Marketing Automation',
+                'description': 'Automated lead response systems and email/SMS sequences'
               }
             },
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Custom Landing Pages',
-                'description': 'Conversion-optimized landing pages for local businesses'
+                'name': 'Paid Ads Management',
+                'description': 'Targeted Google and Meta ad campaigns for qualified traffic'
               }
             }
           ]
@@ -451,8 +451,8 @@ const HomePage = () => {
             >
               How It Works
             </a>
-            <a 
-              href="#photography-services" 
+            <a
+              href="#photography-services"
               className={`nav-link ${activeSection === 'photography-services' ? 'active' : ''}`}
               onClick={(e) => handleSmoothScroll(e, '#photography-services')}
             >
@@ -516,8 +516,8 @@ const HomePage = () => {
         <div className="hero-image" aria-hidden="true">
           <img 
             id="hero-background-image" 
-            src="Hero.png" 
-            alt="3D isometric city with location pin visualization" 
+            src="/Images/Funnelhero.webp" 
+            alt="Sales funnel visualization showing customer journey from awareness to conversion" 
             loading="eager"
             decoding="async"
             className="background-image"
@@ -528,27 +528,27 @@ const HomePage = () => {
         {/* Main Content */}
         <div className="hero-content" id="main-content">
           <h1 className="hero-headline">
-            LOCAL CUSTOMERS,<br />
-            MEET YOUR BUSINESS
+            You're Wasting Money on Leads.<br />
+            <span className="highlight">Until You Know This.</span>
           </h1>
-          
+
           <p className="hero-subheading">
-            Red Ox Digital Connects You
+            We'll show you how to maximize every view into a lead, and every lead into a sale.
           </p>
-          
-          <button 
-            className="cta-button" 
+
+          <button
+            className="cta-button"
             role="button"
-            aria-label="Get on the map - Contact Red Ox Digital to connect with local customers"
+            aria-label="Ready to learn - Contact Red Ox Digital for sales optimization strategies"
             onClick={openPanel}
           >
-            GET ON THE MAP
+            Ready to learn?
           </button>
         </div>
 
         {/* Screen Reader Description */}
         <div className="sr-only">
-          <p>Hero section featuring a 3D isometric city visualization with location pin positioned behind the main text, representing Red Ox Digital's local business connection services and emphasizing connecting local customers with businesses through digital marketing solutions.</p>
+          <p>Hero section featuring a sales funnel visualization showing customer journey from awareness to conversion, representing Red Ox Digital's sales optimization services and emphasizing maximizing leads and conversions through strategic marketing solutions.</p>
         </div>
       </section>
 
@@ -558,11 +558,11 @@ const HomePage = () => {
           {/* Services Header */}
           <div className="services-header">
             <h2 className="services-title">
-              OUR SERVICES:<br/>
-              BOOST YOUR LOCAL PRESENCE
+              How We Turn Views into Sales
             </h2>
             <p className="services-subtitle">
-              Target customers in your third neighborhood with digital strategies tailored for SMBs.
+              You're ready to stop wasting money on digital marketing.<br/><br/>
+              This is the proven system we'll build for you to make every view, every lead, and every dollar count.
             </p>
             <button className="services-cta-primary" onClick={openPanel}>
               GET STARTED
@@ -571,45 +571,19 @@ const HomePage = () => {
 
           {/* Services Grid */}
           <div className="services-grid">
-            {/* Professional Photography */}
+            {/* Custom Funnel Builds & Optimization */}
             <div className="service-card">
               <div className="service-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                  <circle cx="12" cy="13" r="3"/>
+                  <path d="M3 3v18h18"/>
+                  <path d="m19 9-5 5-4-4-3 3"/>
                 </svg>
               </div>
-              <h3 className="service-title">Professional Photography</h3>
-              <p className="service-description">High-quality business photos for Google Business Profile and marketing</p>
+              <h3 className="service-title">Custom Funnel Builds & Optimization</h3>
+              <p className="service-description">We build and optimize your entire sales funnel, turning cold traffic into paying customers with our proven system.</p>
             </div>
 
-            {/* Professional Video */}
-            <div className="service-card">
-              <div className="service-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="23 7 16 12 23 17 23 7"/>
-                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-                </svg>
-              </div>
-              <h3 className="service-title">Professional Video</h3>
-              <p className="service-description">Engaging video content to showcase your business and services</p>
-            </div>
-
-            {/* Google PPC Ads */}
-            <div className="service-card">
-              <div className="service-icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                  <circle cx="8.5" cy="8.5" r="1.5"/>
-                  <path d="m21 15-3.086-3.086a2 2 0 0 0-1.414-.586H13l-2.5 2.5"/>
-                  <path d="m14 12 5 5"/>
-                </svg>
-              </div>
-              <h3 className="service-title">Google PPC Ads</h3>
-              <p className="service-description">Pay-per-click advertising targeting local "near me" searches on Google</p>
-            </div>
-
-            {/* Custom Landing Pages */}
+            {/* High-Converting Landing Pages */}
             <div className="service-card">
               <div className="service-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -620,11 +594,11 @@ const HomePage = () => {
                   <path d="M7 12h6"/>
                 </svg>
               </div>
-              <h3 className="service-title">Custom Landing Pages</h3>
-              <p className="service-description">High-converting pages that turn PPC ad traffic into paying customers</p>
+              <h3 className="service-title">High-Converting Landing Pages</h3>
+              <p className="service-description">Our pages are designed with one goal: to convert visitors into valuable leads and appointments.</p>
             </div>
 
-            {/* Automated Lead Response */}
+            {/* Email & SMS Automation */}
             <div className="service-card">
               <div className="service-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -633,19 +607,47 @@ const HomePage = () => {
                   <path d="M8 14h4"/>
                 </svg>
               </div>
-              <h3 className="service-title">Automated Lead Response</h3>
-              <p className="service-description">SMS system that contacts new leads within minutes of inquiry</p>
+              <h3 className="service-title">Email & SMS Automation</h3>
+              <p className="service-description">Nurture leads and build customer loyalty on autopilot with automated follow-up sequences.</p>
             </div>
 
-            {/* Review Generation */}
+            {/* Paid Ads Management */}
             <div className="service-card">
               <div className="service-icon">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <path d="m21 15-3.086-3.086a2 2 0 0 0-1.414-.586H13l-2.5 2.5"/>
+                  <path d="m14 12 5 5"/>
                 </svg>
               </div>
-              <h3 className="service-title">Review Generation</h3>
-              <p className="service-description">Automated SMS system that asks happy customers for reviews</p>
+              <h3 className="service-title">Paid Ads Management</h3>
+              <p className="service-description">We drive high-intent, qualified traffic to your funnel with targeted Google and Meta ad campaigns.</p>
+            </div>
+
+            {/* Sales & Booking Automation */}
+            <div className="service-card">
+              <div className="service-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+              </div>
+              <h3 className="service-title">Sales & Booking Automation</h3>
+              <p className="service-description">Instantly qualify leads and fill your calendar with appointments without lifting a finger.</p>
+            </div>
+
+            {/* Analytics & Reporting */}
+            <div className="service-card">
+              <div className="service-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                </svg>
+              </div>
+              <h3 className="service-title">Analytics & Reporting</h3>
+              <p className="service-description">We give you a clear, real-time view of your funnel's performance, so you always know what's working.</p>
             </div>
           </div>
         </div>
@@ -1028,15 +1030,11 @@ const HomePage = () => {
             {/* Problem Content */}
             <div className="problem-content">
               <h2 className="problem-title">
-                STRUGGLING TO<br/>
-                STAND OUT?
+                STRUGGLING TO GROW?
               </h2>
               <p className="problem-description">
-                Your amazing local business is a hidden gem. Customers searching "near me", but competitors are stealing the spotlight. Don't let digital noise make you invisible.
+                You have a website, you've boosted a post on Instagram, and you've even thrown money at Google Ads. But you didn't get into business to spend all day doing digital marketing. Your marketing is stuck on a manual treadmill, and you know you're leaving money on the table.
               </p>
-              <button className="problem-cta" onClick={openPanel}>
-                SEE HOW WE HELP
-              </button>
             </div>
 
             {/* Problem Image */}
@@ -1092,15 +1090,11 @@ const HomePage = () => {
             {/* Agitation Content - Second on desktop, first on mobile */}
             <div className="agitation-content">
               <h2 className="agitation-title">
-                EVERY DAY YOU WAIT<br/>
-                IS MONEY LOST
+                THE REAL COST OF A MISSED LEAD
               </h2>
               <p className="agitation-description">
-                While you're reading this, your competitors are capturing YOUR customers. Every "near me" search that doesn't find you is revenue walking out the door. How much longer can you afford to stay invisible?
+                You know you've missed out on leads, and you know there must be a simpler way. Without a structured system, wasted money and time on leads are going to keep happening. Your manual efforts aren't just limiting your potential; they're actively costing you revenue.
               </p>
-              <button className="agitation-cta" onClick={openPanel}>
-                STOP LOSING CUSTOMERS
-              </button>
             </div>
           </div>
         </section>
@@ -1111,11 +1105,11 @@ const HomePage = () => {
             {/* Solution Content */}
             <div className="solution-content">
               <h2 className="solution-title">
-                WE PUT YOU<br/>
-                ON THE MAP
+                WE BUILD YOUR<br/>
+                <span className="highlight">SALES MACHINE</span>
               </h2>
               <p className="solution-description">
-                Red Ox Digital transforms invisible businesses into local landmarks. Our proven system gets you found by customers actively searching for your services. No more losing to competitors - it's time to dominate your local market.
+                It's time to build a system that works for you. We'll show you how to maximize every view into a lead and every lead into a sale. We build your automated sales machine, a proven system that transforms your business into a predictable growth engine. Stop leaving money on the table and start seeing the returns you deserve.
               </p>
               <button className="solution-cta" onClick={openPanel}>
                 GET STARTED NOW
@@ -1417,10 +1411,11 @@ const HomePage = () => {
           {/* Header */}
           <div className="how-it-works-header">
             <h2 className="how-it-works-title">
-              FROM INVISIBLE TO UNSTOPPABLE
+              FROM MANUAL TO<br/>
+              <span className="highlight">AUTOMATED</span>
             </h2>
             <p className="how-it-works-subtitle">
-              Our proven 4-step system transforms local businesses into market leaders. Here's exactly how we make it happen.
+              Our proven 4-step system builds and optimizes a complete sales funnel that works 24/7. Here's exactly how we make it happen.
             </p>
           </div>
 
@@ -1437,7 +1432,7 @@ const HomePage = () => {
               </div>
               <h3 className="step-title">DISCOVERY</h3>
               <p className="step-description">
-                We audit your services, competitors, and local demand, then design a PPC‑first plan with clear targets, budget, and revenue goals.
+                We audit your current sales process, target audience, and competitors. Then, we design a custom funnel strategy with clear targets and automation goals.
               </p>
             </div>
 
@@ -1459,7 +1454,7 @@ const HomePage = () => {
               </div>
               <h3 className="step-title">OPTIMIZE</h3>
               <p className="step-description">
-                We capture photos and video, build high‑converting landing pages, and optimize Google Business Profile and tracking to maximize lead conversions.
+                We create professional photo and video content, build high-converting landing pages, and set up tracking to ensure every action is measured.
               </p>
             </div>
 
@@ -1473,22 +1468,21 @@ const HomePage = () => {
               </div>
               <h3 className="step-title">LAUNCH</h3>
               <p className="step-description">
-                We launch targeted PPC across Google Search and Maps, sending clicks to your landing pages with SMS follow‑up on leads.
+                We launch targeted ad campaigns (Google & Meta), sending qualified traffic to your funnel with instant lead response systems.
               </p>
             </div>
 
-            {/* Step 4: Dominate */}
+            {/* Step 4: Automate */}
             <div className="step-card">
               <div className="step-number">4</div>
               <div className="step-icon">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <polyline points="23,7 13.5,16.5 8.5,11.5 1,19"/>
-                  <polyline points="17,7 23,7 23,13"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
                 </svg>
               </div>
-              <h3 className="step-title">DOMINATE</h3>
+              <h3 className="step-title">AUTOMATE</h3>
               <p className="step-description">
-                We monitor keywords, bids, and creative, optimize weekly, scale winners, and drive reviews so you dominate local search.
+                We continuously monitor and optimize your funnel, building out automated email and SMS sequences so you can scale your business and dominate your local market.
               </p>
             </div>
           </div>
@@ -1497,7 +1491,7 @@ const HomePage = () => {
           <div className="final-cta-section">
             <h3 className="final-cta-title">READY TO GET STARTED?</h3>
             <p className="final-cta-description">
-              Join hundreds of local businesses who've transformed their visibility and revenue with our proven system.
+              Join hundreds of local businesses who have automated their sales and revenue with our proven system.
             </p>
             <button className="final-cta-button" onClick={openPanel}>
               START YOUR TRANSFORMATION
@@ -1506,8 +1500,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Business Photography Services Section */}
-      <section className="photography-services-section" id="photography-services" aria-label="Business Photography Services">
+      {/* Introductory Photography & Growth Session Section */}
+      <section className="photography-services-section" id="photography-services" aria-label="Introductory Photography & Growth Session">
         <style jsx>{`
           .photography-services-section {
             padding: 8rem 2rem !important;
@@ -1878,11 +1872,16 @@ const HomePage = () => {
             {/* Header Section */}
             <div className="service-header">
               <h2 className="service-headline">
-                Introductory Photography <span className="highlight-text">Offer</span>
+                Introductory Photography &<br />
+                <span className="highlight-text">Growth Session</span>
               </h2>
 
               <p className="service-description">
-                Get started with our professional photography service at a special introductory rate. Perfect for businesses ready to enhance their visual presence and attract more local customers.
+                Capture Attention. Build Trust. Attract More Clients.
+              </p>
+
+              <p className="service-description">
+                Get started with our professional photography service at a special introductory rate. This isn't just about photos; it's about making your business instantly more appealing and helping you attract your next customer.
               </p>
             </div>
 
@@ -1898,10 +1897,10 @@ const HomePage = () => {
                         <circle cx="12" cy="10" r="3"/>
                       </svg>
                     </div>
-                    <div className="feature-title">On-Site Photography</div>
+                    <div className="feature-title">On-Site Photography Session</div>
                   </div>
                   <div className="feature-description">
-                    Professional photographer comes to your business location for a convenient 20-minute session that captures your space, team, and services.
+                    Our professional photographer comes to your business for a convenient 20-minute session, capturing high-quality images that showcase your space, team, and services.
                   </div>
                 </div>
 
@@ -1909,15 +1908,13 @@ const HomePage = () => {
                   <div className="feature-header">
                     <div className="feature-icon">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                        <line x1="8" y1="21" x2="16" y2="21"/>
-                        <line x1="12" y1="17" x2="12" y2="21"/>
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6-6.3 6.3-3.2-3.2-1.6 1.6a1 1 0 0 0 1.4 1.4l2.3-2.3 2.8 2.8a1 1 0 0 0 1.4-1.4l-7-7a1 1 0 0 0-1.4 0l-2.3 2.3a1 1 0 0 0 0 1.4l1.6 1.6-6.3 6.3-3.2-3.2-1.6 1.6a1 1 0 0 0 1.4 1.4l2.3-2.3 2.8 2.8a1 1 0 0 0 1.4-1.4l-7-7"/>
                       </svg>
                     </div>
-                    <div className="feature-title">Digital Optimization</div>
+                    <div className="feature-title">Growth Consultation & Photo Strategy</div>
                   </div>
                   <div className="feature-description">
-                    Images are professionally edited and optimized for various platforms including Google Business Profile, website, and social media channels.
+                    Beyond just photos, we'll provide expert advice on how to use your new visuals effectively across your digital channels to build trust and convert leads.
                   </div>
                 </div>
 
@@ -1929,10 +1926,10 @@ const HomePage = () => {
                         <polyline points="12,6 12,12 16,14"/>
                       </svg>
                     </div>
-                    <div className="feature-title">Fast Delivery</div>
+                    <div className="feature-title">Digital Optimization & Fast Delivery</div>
                   </div>
                   <div className="feature-description">
-                    Receive your professionally edited high-resolution images within 24 hours of your photography session, ready for immediate use.
+                    Your images are professionally edited, optimized for platforms like Google Business Profile and social media, and delivered within 24 hours.
                   </div>
                 </div>
               </div>
@@ -1940,7 +1937,7 @@ const HomePage = () => {
               {/* Package Section */}
               <div className="package-section">
                 <div className="package-card">
-                  <div className="package-label">Photography Package</div>
+                  <div className="package-label">Photography & Growth Package</div>
                   <div className="package-price">$199</div>
                   <div className="package-duration">Complete service package</div>
 
@@ -1951,7 +1948,7 @@ const HomePage = () => {
                           <polyline points="20,6 9,17 4,12"/>
                         </svg>
                       </div>
-                      <span>20-minute professional photoshoot</span>
+                      <span>20-minute professional photoshoot at your location</span>
                     </div>
                     <div className="package-feature">
                       <div className="package-feature-icon">
@@ -1967,7 +1964,7 @@ const HomePage = () => {
                           <polyline points="20,6 9,17 4,12"/>
                         </svg>
                       </div>
-                      <span>High-resolution digital files</span>
+                      <span>High-resolution digital files for all platforms</span>
                     </div>
                     <div className="package-feature">
                       <div className="package-feature-icon">
@@ -1975,7 +1972,7 @@ const HomePage = () => {
                           <polyline points="20,6 9,17 4,12"/>
                         </svg>
                       </div>
-                      <span>Multiple format optimization</span>
+                      <span>Expert advice on using photos for lead conversion</span>
                     </div>
                     <div className="package-feature">
                       <div className="package-feature-icon">
@@ -1992,7 +1989,7 @@ const HomePage = () => {
                       <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                       <circle cx="12" cy="13" r="3"/>
                     </svg>
-                    Book Photography Service
+                    Book Your Photography Session
                   </button>
                 </div>
 
@@ -2021,7 +2018,7 @@ const HomePage = () => {
               YOUR QUESTIONS ANSWERED
             </h2>
             <p className="faq-subtitle">
-              Everything you need to know about our complete marketing package designed to get local customers and how we help businesses dominate "near me" searches.
+              Everything you need to know about building your automated sales machine and how we help you maximize every view into a lead and every lead into a sale.
             </p>
           </div>
 
@@ -2069,9 +2066,9 @@ const HomePage = () => {
                   <polyline points="12,6 12,12 16,14"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">How quickly will I see new leads from your system?</h3>
+              <h3 className="faq-card-question">How quickly can I expect to see results with your system?</h3>
               <p className="faq-card-answer">
-                Most clients start receiving new leads within 2-4 weeks of launching their PPC campaigns. Our automated SMS system responds to leads within minutes, and the custom landing pages are designed for immediate conversion from day one of your campaign launch.
+                Most clients start seeing measurable improvements within 2-4 weeks of launch. Our automated systems respond to leads instantly, and our high-converting landing pages are designed to maximize every view into a lead from day one. The real transformation happens as your automated sales machine continuously optimizes and compounds results over time.
               </p>
             </div>
 
@@ -2082,9 +2079,9 @@ const HomePage = () => {
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">What makes your approach different from other marketing agencies?</h3>
+              <h3 className="faq-card-question">What makes your approach different from throwing money at ads?</h3>
               <p className="faq-card-answer">
-                We specialize exclusively in local lead generation with a singular focus on "near me" searches. Unlike general agencies, we're not a jack-of-all-trades. This extreme focus means we're exceptionally good at turning local searches into paying customers for your specific business type.
+                We don't just drive traffic, we build complete sales machines. While others focus on boosting posts and running ads, we create a proven system that captures every lead, follows up automatically, and turns views into sales. You're not paying for clicks; you're investing in a predictable growth engine that works for you 24/7.
               </p>
             </div>
 
@@ -2097,9 +2094,9 @@ const HomePage = () => {
                   <line x1="12" y1="22.08" x2="12" y2="12"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">Do you work with both "come to us" and "we come to you" businesses?</h3>
+              <h3 className="faq-card-question">What types of businesses do you work with?</h3>
               <p className="faq-card-answer">
-                Absolutely! We work with brick-and-mortar businesses like dentists, med spas, and salons, as well as service area businesses like plumbers, electricians, and landscapers. Our system is designed for any local business that depends on attracting customers from their immediate geographic area.
+                We specialize in local businesses that are tired of leaving money on the table. Whether you're a professional service (dentist, med spa, lawyer), service area business (plumber, electrician, contractor), or any local business looking to stop wasting money on leads, our system is designed to maximize every view into a sale for your specific industry.
               </p>
             </div>
 
@@ -2113,9 +2110,9 @@ const HomePage = () => {
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">What's included in your complete marketing package?</h3>
+              <h3 className="faq-card-question">What exactly is included in your automated sales machine?</h3>
               <p className="faq-card-answer">
-                Our package includes professional photo and video shoots, Google PPC ads targeting local searches, custom-built landing pages, automated SMS lead response system, and automated review generation system. Everything works together to turn "near me" searches into booked appointments.
+                Your complete system includes custom-built sales funnels optimized for your industry, high-converting landing pages, automated email & SMS follow-up sequences, targeted paid ads management (Google & Meta), sales and booking automation, and real-time analytics. Everything works together seamlessly to turn every view into a lead and every lead into a sale, all on autopilot.
               </p>
             </div>
 
@@ -2127,9 +2124,9 @@ const HomePage = () => {
                   <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">What's the investment for your marketing system?</h3>
+              <h3 className="faq-card-question">How much does it cost to build my automated sales machine?</h3>
               <p className="faq-card-answer">
-                Investment varies based on your market competition and business goals. We offer two main options: our complete marketing package for businesses ready to invest in a full solution, or our $199 photoshoot as a low-risk way to experience our quality and get started.
+                Investment varies based on your business goals, market competition, and current systems. We offer two pathways: our complete marketing package for businesses ready to build their full sales machine, or our $199 Photography & Growth Session as an accessible entry point to experience our quality and start building trust with your audience immediately.
               </p>
             </div>
 
@@ -2141,9 +2138,9 @@ const HomePage = () => {
                   <circle cx="12" cy="13" r="3"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">How does your automated SMS system work?</h3>
+              <h3 className="faq-card-question">How does the automated system actually work day-to-day?</h3>
               <p className="faq-card-answer">
-                We have two SMS systems: one texts new leads within minutes of their inquiry to maximize conversion, and another automatically asks happy customers for reviews. Both systems run on autopilot, ensuring you never miss a lead or opportunity to build your reputation.
+                Once built, your sales machine runs on autopilot. It captures leads from your ads and landing pages, instantly follows up via SMS and email with personalized sequences, nurtures prospects with strategic content, qualifies leads automatically, and books appointments directly into your calendar, all without you lifting a finger. You focus on serving customers; the system handles the rest.
               </p>
             </div>
 
@@ -2155,9 +2152,9 @@ const HomePage = () => {
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">What if I'm not ready for the full marketing package?</h3>
+              <h3 className="faq-card-question">I'm not ready for the full system yet—what are my options?</h3>
               <p className="faq-card-answer">
-                That's exactly why we offer our $199 photoshoot service! It's a 20-minute, on-site session to update your business photos for Google Business Profile and marketing. It's perfect for business owners who want to experience our quality before committing to the full system.
+                Start with our $199 Photography & Growth Session! You'll get professional on-site photography (delivered in 24 hours), expert consultation on using visuals to convert leads, and a clear picture of how our complete system can transform your business. It's the perfect low-risk way to experience our quality and start making every view count.
               </p>
             </div>
 
@@ -2168,9 +2165,9 @@ const HomePage = () => {
                   <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">What happens if I don't get results?</h3>
+              <h3 className="faq-card-question">What if the system doesn't deliver results for my business?</h3>
               <p className="faq-card-answer">
-                Our system is built on proven methods that consistently work for local businesses. We focus only on strategies that turn "near me" searches into paying customers. If you're not seeing increased leads and appointments, we'll work with you to optimize until you do.
+                Our proven system is built on strategies that consistently turn views into leads and leads into sales. We only work with methods that maximize every dollar you invest. If you're not seeing increased leads and conversions, we don't just walk away, we analyze, optimize, and adjust until your sales machine is performing at its peak. Your success is our success.
               </p>
             </div>
 
@@ -2181,18 +2178,18 @@ const HomePage = () => {
                   <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
                 </svg>
               </div>
-              <h3 className="faq-card-question">How do you measure success for my business?</h3>
+              <h3 className="faq-card-question">How will I know if the system is working and making me money?</h3>
               <p className="faq-card-answer">
-                We track what matters most: booked appointments and new customers. While we monitor PPC performance, landing page conversions, and lead response times, our ultimate measure of success is filling your appointment book with paying customers from local searches.
+                We track what actually matters to your bottom line: qualified leads, booked appointments, new customers, and positive ROI. You'll have real-time access to clear analytics showing exactly how many views are turning into leads, how many leads are becoming sales, and how much revenue your automated system is generating. No vanity metrics, just real results you can bank on.
               </p>
             </div>
           </div>
 
           {/* Final CTA */}
           <div className="faq-final-cta-section" id="contact">
-            <h3 className="faq-final-cta-title">READY TO STOP LOSING CUSTOMERS?</h3>
+            <h3 className="faq-final-cta-title">READY TO AUTOMATE YOUR GROWTH?</h3>
             <p className="faq-final-cta-description">
-              Apply for a strategy session to discuss how our proven system can fill your appointment book with local customers actively searching for your services.
+              Apply for a strategy session to discuss how our proven system can fill your calendar with qualified leads and paying customers.
             </p>
             <button className="faq-final-cta-button" onClick={openPanel}>
               APPLY FOR STRATEGY SESSION
@@ -2204,40 +2201,40 @@ const HomePage = () => {
       {/* FAQ Schema for SEO */}
       <FaqSchema faqData={[
         {
-          question: "How quickly will I see new leads from your system?",
-          answer: "Most clients start receiving new leads within 2-4 weeks of launching their PPC campaigns. Our automated SMS system responds to leads within minutes, and the custom landing pages are designed for immediate conversion from day one of your campaign launch."
+          question: "How quickly can I expect to see results with your system?",
+          answer: "Most clients start seeing measurable improvements within 2-4 weeks of launch. Our automated systems respond to leads instantly, and our high-converting landing pages are designed to maximize every view into a lead from day one. The real transformation happens as your automated sales machine continuously optimizes and compounds results over time."
         },
         {
-          question: "What makes your approach different from other marketing agencies?",
-          answer: "We specialize exclusively in local lead generation with a singular focus on \"near me\" searches. Unlike general agencies, we're not a jack-of-all-trades. This extreme focus means we're exceptionally good at turning local searches into paying customers for your specific business type."
+          question: "What makes your approach different from throwing money at ads?",
+          answer: "We don't just drive traffic, we build complete sales machines. While others focus on boosting posts and running ads, we create a proven system that captures every lead, follows up automatically, and turns views into sales. You're not paying for clicks; you're investing in a predictable growth engine that works for you 24/7."
         },
         {
-          question: "Do you work with both \"come to us\" and \"we come to you\" businesses?",
-          answer: "Absolutely! We work with brick-and-mortar businesses like dentists, med spas, and salons, as well as service area businesses like plumbers, electricians, and landscapers. Our system is designed for any local business that depends on attracting customers from their immediate geographic area."
+          question: "What types of businesses do you work with?",
+          answer: "We specialize in local businesses that are tired of leaving money on the table. Whether you're a professional service (dentist, med spa, lawyer), service area business (plumber, electrician, contractor), or any local business looking to stop wasting money on leads, our system is designed to maximize every view into a sale for your specific industry."
         },
         {
-          question: "What's included in your complete marketing package?",
-          answer: "Our package includes professional photo and video shoots, Google PPC ads targeting local searches, custom-built landing pages, automated SMS lead response system, and automated review generation system. Everything works together to turn \"near me\" searches into booked appointments."
+          question: "What exactly is included in your automated sales machine?",
+          answer: "Your complete system includes custom-built sales funnels optimized for your industry, high-converting landing pages, automated email & SMS follow-up sequences, targeted paid ads management (Google & Meta), sales and booking automation, and real-time analytics. Everything works together seamlessly to turn every view into a lead and every lead into a sale, all on autopilot."
         },
         {
-          question: "What's the investment for your marketing system?",
-          answer: "Investment varies based on your market competition and business goals. We offer two main options: our complete marketing package for businesses ready to invest in a full solution, or our $199 photoshoot as a low-risk way to experience our quality and get started."
+          question: "How much does it cost to build my automated sales machine?",
+          answer: "Investment varies based on your business goals, market competition, and current systems. We offer two pathways: our complete marketing package for businesses ready to build their full sales machine, or our $199 Photography & Growth Session as an accessible entry point to experience our quality and start building trust with your audience immediately."
         },
         {
-          question: "How does your automated SMS system work?",
-          answer: "We have two SMS systems: one texts new leads within minutes of their inquiry to maximize conversion, and another automatically asks happy customers for reviews. Both systems run on autopilot, ensuring you never miss a lead or opportunity to build your reputation."
+          question: "How does the automated system actually work day-to-day?",
+          answer: "Once built, your sales machine runs on autopilot. It captures leads from your ads and landing pages, instantly follows up via SMS and email with personalized sequences, nurtures prospects with strategic content, qualifies leads automatically, and books appointments directly into your calendar—all without you lifting a finger. You focus on serving customers; the system handles the rest."
         },
         {
-          question: "What if I'm not ready for the full marketing package?",
-          answer: "That's exactly why we offer our $199 photoshoot service! It's a 20-minute, on-site session to update your business photos for Google Business Profile and marketing. It's perfect for business owners who want to experience our quality before committing to the full system."
+          question: "I'm not ready for the full system yet—what are my options?",
+          answer: "Start with our $199 Photography & Growth Session! You'll get professional on-site photography (delivered in 24 hours), expert consultation on using visuals to convert leads, and a clear picture of how our complete system can transform your business. It's the perfect low-risk way to experience our quality and start making every view count."
         },
         {
-          question: "What happens if I don't get results?",
-          answer: "Our system is built on proven methods that consistently work for local businesses. We focus only on strategies that turn \"near me\" searches into paying customers. If you're not seeing increased leads and appointments, we'll work with you to optimize until you do."
+          question: "What if the system doesn't deliver results for my business?",
+          answer: "Our proven system is built on strategies that consistently turn views into leads and leads into sales. We only work with methods that maximize every dollar you invest. If you're not seeing increased leads and conversions, we don't just walk away—we analyze, optimize, and adjust until your sales machine is performing at its peak. Your success is our success."
         },
         {
-          question: "How do you measure success for my business?",
-          answer: "We track what matters most: booked appointments and new customers. While we monitor PPC performance, landing page conversions, and lead response times, our ultimate measure of success is filling your appointment book with paying customers from local searches."
+          question: "How will I know if the system is working and making me money?",
+          answer: "We track what actually matters to your bottom line: qualified leads, booked appointments, new customers, and positive ROI. You'll have real-time access to clear analytics showing exactly how many views are turning into leads, how many leads are becoming sales, and how much revenue your automated system is generating. No vanity metrics—just real results you can bank on."
         }
       ]} />
 
@@ -2591,7 +2588,7 @@ const HomePage = () => {
                 ROD
               </a>
               <p className="footer-description">
-                Transforming local businesses into market leaders through proven digital marketing strategies and local SEO expertise.
+                Transforming local businesses into automated growth machines through proven sales funnels and marketing automation expertise.
               </p>
               <button className="footer-cta" onClick={openPanel}>
                 GET STARTED TODAY
@@ -2602,7 +2599,7 @@ const HomePage = () => {
             <div className="footer-column">
               <h3 className="footer-column-title">SERVICES</h3>
               <a href="#services" className="footer-link">Our Services</a>
-              <a href="#photography-services" className="footer-link">Offer</a>
+              <a href="#photography-services" className="footer-link">Introductory Offer</a>
               <a href="#how-it-works" className="footer-link">How It Works</a>
               <a href="#faq" className="footer-link">FAQ</a>
               <a href="#contact" className="footer-link">Contact Us</a>
@@ -2613,7 +2610,7 @@ const HomePage = () => {
               <h3 className="footer-column-title">QUICK LINKS</h3>
               <a href="#home" className="footer-link">Home</a>
               <a href="#services" className="footer-link">Services Overview</a>
-              <a href="#photography-services" className="footer-link">Offer Package</a>
+              <a href="#photography-services" className="footer-link">Introductory Offer</a>
               <a href="#how-it-works" className="footer-link">Our Process</a>
               <a href="#faq" className="footer-link">Questions & Answers</a>
             </div>
