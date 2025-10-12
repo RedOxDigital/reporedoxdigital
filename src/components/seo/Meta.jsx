@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet'
 
 export default function Meta({
-  title = "Red Ox Digital - Local Business Marketing & Photography Services",
-  description = "Transform your local business with professional photography, Google PPC ads, custom landing pages, and automated lead response systems. Get more customers and dominate your local market in Sydney, Australia.",
-  keywords = "local business marketing, professional photography, Google PPC ads, landing pages, lead generation, business growth, local SEO, customer acquisition, Sydney business services, Australian business marketing",
-  ogImage = "/ROD-logo.svg",
+  title = "Red Ox Digital - Sales Funnel Automation & Marketing for Local Businesses",
+  description = "Transform your local business with custom sales funnels, automated lead response systems, and targeted ad campaigns. Turn cold traffic into paying customers on autopilot. Build your automated sales machine today.",
+  keywords = "sales funnels, marketing automation, lead generation, automated sales systems, funnel optimization, customer acquisition, business growth, sales automation, email automation, SMS automation, conversion optimization, lead nurturing, sales machine, marketing funnel, local business automation",
+  ogImage = "/Images/Funnelhero.webp",
   canonicalUrl = "https://redoxdigital.com.au/",
 }) {
   const currentUrl = canonicalUrl || (typeof window !== 'undefined' ? window.location.href : '')
