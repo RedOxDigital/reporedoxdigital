@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myth Busting - Variant 2: Two Column Layout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --creative-primary: 220 25% 10%;
+      --creative-secondary: 220 25% 14%;
+      --creative-accent: 0 84% 60%;
+      --text-primary: 220 20% 98%;
+      --text-secondary: 220 15% 75%;
+      --border-color: 220 15% 25%;
+      --transition-creative: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        hsl(var(--creative-accent) / 0.02) 20%,
+        hsl(var(--creative-accent) / 0.04) 40%,
+        hsl(var(--creative-accent) / 0.03) 60%,
+        hsl(var(--creative-accent) / 0.02) 80%,
+        transparent 100%);
+      background-color: hsl(var(--creative-primary));
+      color: hsl(var(--text-primary));
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem;
+    }
+
+    .myth-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .myth-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .myth-content {
+      position: relative;
+    }
+
+    .myth-label {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: linear-gradient(135deg, 
+        hsl(var(--creative-accent) / 0.15) 0%, 
+        hsl(var(--creative-accent) / 0.08) 100%);
+      border: 1px solid hsl(var(--creative-accent) / 0.3);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: hsl(var(--creative-accent));
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+
+    .myth-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      color: hsl(var(--creative-accent));
+      text-transform: uppercase;
+    }
+
+    .myth-description {
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      line-height: 1.6;
+      color: hsl(var(--text-secondary));
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .myth-image {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .myth-image img {
+      width: 100%;
+      height: auto;
+      min-height: 500px;
+      object-fit: cover;
+      transition: var(--transition-creative);
+      display: block;
+    }
+
+    .myth-icon-overlay {
+      position: absolute;
+      top: 30%;
+      left: 25%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .myth-icon {
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, 
+        hsl(var(--creative-accent) / 0.15) 0%, 
+        hsl(var(--creative-accent) / 0.05) 100%);
+      border: 2px solid hsl(var(--creative-accent) / 0.3);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 
+        0 0 20px hsl(var(--creative-accent) / 0.6),
+        0 0 40px hsl(var(--creative-accent) / 0.4),
+        0 0 80px hsl(var(--creative-accent) / 0.3),
+        0 0 120px hsl(var(--creative-accent) / 0.2),
+        inset 0 0 30px hsl(var(--creative-accent) / 0.1);
+      animation: icon-glow-pulse 2.5s ease-in-out infinite;
+    }
+
+    .myth-icon::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      border: 2px solid hsl(var(--creative-accent) / 0.2);
+      border-radius: 50%;
+      animation: outer-ring-pulse 2.5s ease-in-out infinite;
+    }
+
+    .myth-icon svg {
+      width: 60px;
+      height: 60px;
+      stroke: hsl(var(--creative-accent));
+      stroke-width: 2;
+      filter: drop-shadow(0 0 10px hsl(var(--creative-accent) / 0.8));
+      z-index: 1;
+    }
+
+    @keyframes icon-glow-pulse {
+      0%, 100% {
+        box-shadow: 
+          0 0 20px hsl(var(--creative-accent) / 0.6),
+          0 0 40px hsl(var(--creative-accent) / 0.4),
+          0 0 80px hsl(var(--creative-accent) / 0.3),
+          0 0 120px hsl(var(--creative-accent) / 0.2),
+          inset 0 0 30px hsl(var(--creative-accent) / 0.1);
+        border-color: hsl(var(--creative-accent) / 0.3);
+      }
+      50% {
+        box-shadow: 
+          0 0 30px hsl(var(--creative-accent) / 0.8),
+          0 0 60px hsl(var(--creative-accent) / 0.6),
+          0 0 120px hsl(var(--creative-accent) / 0.4),
+          0 0 180px hsl(var(--creative-accent) / 0.3),
+          inset 0 0 40px hsl(var(--creative-accent) / 0.15);
+        border-color: hsl(var(--creative-accent) / 0.5);
+      }
+    }
+
+    @keyframes outer-ring-pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.6;
+      }
+    }
+
+    .myth-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, 
+        hsl(var(--creative-accent)) 0%, 
+        hsl(var(--creative-accent) / 0.9) 100%);
+      color: hsl(var(--creative-primary));
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.025em;
+      border-radius: 12px;
+      transition: var(--transition-creative);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 8px 24px hsl(var(--creative-accent) / 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.1);
+      text-transform: uppercase;
+      margin-top: 2rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .myth-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+      transition: left 0.6s ease;
+    }
+
+    .myth-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 32px hsl(var(--creative-accent) / 0.4),
+        0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .myth-cta:hover::before {
+      left: 100%;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 4rem 1rem;
+      }
+
+      .myth-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+      }
+
+      .myth-content {
+        order: 1;
+      }
+
+      .myth-image {
+        order: 2;
+      }
+
+      .myth-icon-overlay {
+        display: none;
+      }
+
+      .myth-cta {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="myth-section">
+    <div class="myth-container">
+      <!-- Content -->
+      <div class="myth-content">
+        <div class="myth-label">The Biggest Myth</div>
+        
+        <h2 class="myth-title">
+          "But I Already Have a Website."
+        </h2>
+        
+        <p class="myth-description">
+          A website is a great front door for your business, but without a dedicated system to convert visitors!
+        </p>
+        
+        <p class="myth-description">
+          Every business card you hand out is a missed opportunity if there's no one on the other side to sell. Your website is no different. It may look great, but it's not a sales machine.
+        </p>
+        
+        <p class="myth-description">
+          Our system changes that. We build high-converting landing pages that act as specialised salespeople, dedicated to a single objective: turning every view into a qualified lead.
+        </p>
+        
+        <button class="myth-cta">
+          BUILD YOUR SALES MACHINE
+        </button>
+      </div>
+
+      <!-- Image with Icon Overlay -->
+      <div class="myth-image">
+        <img 
+          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80" 
+          alt="Analytics dashboard showing conversion rates and performance metrics"
+          loading="lazy"
+        />
+        
+        <!-- SVG Overlay -->
+        <div class="myth-icon-overlay">
+          <div class="myth-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="15" y1="9" x2="9" y2="15"/>
+              <line x1="9" y1="9" x2="15" y2="15"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
