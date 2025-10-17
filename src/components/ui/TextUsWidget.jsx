@@ -26,33 +26,38 @@ export default function TextUsWidget() {
 
     try {
       // Format data to match n8n workflow expectations
-      const payload = {
-        query: {
-          name: formData.name,
-          mobile: formData.number,
-          message: formData.message
-        }
-      };
+      // n8n GET webhook expects data as URL query parameters
+      const params = new URLSearchParams({
+        name: formData.name,
+        mobile: formData.number,
+        message: formData.message
+      });
       
-      console.log('Submitting form data:', payload);
+      const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4?${params.toString()}`;
       
-      const response = await fetch('https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4', {
-        method: 'POST',
+      console.log('=== WEBHOOK DEBUG ===');
+      console.log('Current URL:', window.location.href);
+      console.log('Form data:', { name: formData.name, mobile: formData.number, message: formData.message });
+      console.log('Query params:', params.toString());
+      console.log('Full webhook URL:', webhookUrl);
+      
+      const response = await fetch(webhookUrl, {
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
+          'Accept': 'application/json',
+        }
       });
 
       console.log('Response status:', response.status);
       console.log('Response ok:', response.ok);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
       
       // Try to get response text for debugging
       const responseText = await response.text();
       console.log('Response body:', responseText);
 
       if (response.ok) {
-        console.log('Form submitted successfully!');
+        console.log('✅ Form submitted successfully!');
         setSubmitStatus('success');
         // Reset form after successful submission
         setFormData({ name: '', number: '', message: '' });
@@ -62,19 +67,21 @@ export default function TextUsWidget() {
           setSubmitStatus(null);
         }, 2000);
       } else {
-        console.error('Response not OK:', response.status, response.statusText);
+        console.error('❌ Response not OK:', response.status, response.statusText);
         console.error('Response body:', responseText);
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('❌ Error submitting form:', error);
       console.error('Error details:', error.message);
       console.error('Error name:', error.name);
+      console.error('Error stack:', error.stack);
       if (error.name === 'TypeError' && error.message.includes('fetch')) {
-        console.error('Network error - check if n8n webhook is accessible and CORS is enabled');
+        console.error('🔴 Network error - check if n8n webhook is accessible and CORS is enabled');
       }
       setSubmitStatus('error');
     } finally {
+      console.log('=== END WEBHOOK DEBUG ===');
       setIsSubmitting(false);
     }
   };
