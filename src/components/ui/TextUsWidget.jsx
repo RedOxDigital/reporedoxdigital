@@ -25,13 +25,21 @@ export default function TextUsWidget() {
     setSubmitStatus(null);
 
     try {
-      // Convert form data to URL query parameters for GET request
-      const params = new URLSearchParams(formData).toString();
-      const response = await fetch(`https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4?${params}`, {
-        method: 'GET',
+      console.log('Submitting form data:', formData);
+      
+      const response = await fetch('https://n8n-boringwork-u57538.vm.elestio.app/webhook-test/60de8bbc-63ba-41ef-88f6-b9c1543c78b4', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
       if (response.ok) {
+        console.log('Form submitted successfully!');
         setSubmitStatus('success');
         // Reset form after successful submission
         setFormData({ name: '', number: '', message: '' });
@@ -41,10 +49,12 @@ export default function TextUsWidget() {
           setSubmitStatus(null);
         }, 2000);
       } else {
+        console.error('Response not OK:', response.status, response.statusText);
         setSubmitStatus('error');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
+      console.error('Error details:', error.message);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
