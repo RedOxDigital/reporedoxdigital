@@ -1,0 +1,173 @@
+{
+  "name": "Red Ox Digital Sms Agent - UPDATED",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "60de8bbc-63ba-41ef-88f6-b9c1543c78b4",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        240,
+        -16
+      ],
+      "id": "184e2c37-8aca-4870-a067-6be0233c85b6",
+      "name": "Webhook",
+      "webhookId": "60de8bbc-63ba-41ef-88f6-b9c1543c78b4"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type"
+              }
+            ]
+          },
+          "responseKey": "{\"success\": true, \"message\": \"Message received successfully\"}"
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        912,
+        -16
+      ],
+      "id": "1d85bba9-319f-4169-9ec4-91037def6fb9",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.smsglobal.com/http-api.php",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "action",
+              "value": "sendsms"
+            },
+            {
+              "name": "user",
+              "value": "iz73yl75"
+            },
+            {
+              "name": "password",
+              "value": "wbxLztck"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.query.mobile }}"
+            },
+            {
+              "name": "text",
+              "value": "=Hi {{ $('Webhook').item.json.query.name }}, thanks for reaching out to Red Ox Digital! We'll get back to you as soon as possible."
+            },
+            {
+              "name": "from",
+              "value": "61461444399"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        -16
+      ],
+      "id": "e740638f-5c69-4893-bff7-c0a0b15e248c",
+      "name": "Send SMS via SMSGlobal"
+    },
+    {
+      "parameters": {
+        "sendTo": "boringworkteam@gmail.com",
+        "subject": "=New web query from  {{ $('Webhook').item.json.query.name }}",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Red Ox Digital - New Web Query Notification</title>\n  <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap\" rel=\"stylesheet\">\n</head>\n<body style=\"margin: 0; padding: 0; font-family: 'Inter', sans-serif; background-color: #f4f4f4;\">\n  <table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);\">\n    <!-- Header -->\n    <tr>\n      <td style=\"padding: 20px; text-align: center; background-color: #ffffff; border-bottom: 1px solid #e0e0e0;\">\n        <h1 style=\"margin: 10px 0 0; font-size: 32px; font-weight: 600;\">\n          <span style=\"color: #DC2626;\">Red Ox</span><span style=\"color: #212121;\"> Digital</span>\n        </h1>\n      </td>\n    </tr>\n    <!-- Body -->\n    <tr>\n      <td style=\"padding: 30px 20px; text-align: center;\">\n        <h2 style=\"font-size: 20px; font-weight: 600; color: #212121; margin: 0 0 15px;\">New Web Query Received!</h2>\n        <p style=\"font-size: 16px; color: #4B5563; line-height: 1.5; margin: 0 0 20px;\">\n          Exciting news! You have received a new web query. Here are the details:\n        </p>\n        <table role=\"presentation\" width=\"100%\" cellspacing=\"0\" cellpadding=\"10\" style=\"background-color: #F9FAFB; border-radius: 6px; font-size: 14px; color: #4B5563;\">\n          <tr>\n            <td style=\"font-weight: 600; width: 30%;\">Name:</td>\n            <td>{{ $('Webhook').item.json.query.name }}</td>\n          </tr>\n          <tr>\n            <td style=\"font-weight: 600;\">Mobile:</td>\n            <td>{{ $('Webhook').item.json.query.mobile }}</td>\n          </tr>\n          <tr>\n            <td style=\"font-weight: 600;\">Message:</td>\n            <td>{{ $('Webhook').item.json.query.message }}</td>\n          </tr>\n        </table>\n        <p style=\"font-size: 14px; color: #4B5563; margin: 20px 0 0;\">\n          Follow up soon to keep the conversation going!\n        </p>\n      </td>\n    </tr>\n    <!-- Footer -->\n    <tr>\n      <td style=\"padding: 20px; text-align: center; background-color: #F9FAFB; border-top: 1px solid #e0e0e0; border-radius: 0 0 8px 8px;\">\n        <p style=\"font-size: 12px; color: #6B7280; margin: 0;\">\n          Red Ox Digital | Digital Marketing Solutions<br>\n          <a href=\"https://www.redoxmedia.com.au\" style=\"color: #DC2626; text-decoration: none;\">www.redoxmedia.com.au</a>\n        </p>\n      </td>\n    </tr>\n  </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        688,
+        -16
+      ],
+      "id": "088cc6bb-25a6-4b39-984c-83d3dd468225",
+      "name": "Send a message",
+      "webhookId": "498a552a-41e5-4f82-a0c1-e788b957c6b5",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2gxmjHYpR9NIBJcS",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Send SMS via SMSGlobal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "Send SMS via SMSGlobal": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c3038e3c-bfe4-45d4-9741-81492c038411",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1514233a1b60cf6419ef9554741b5ef92d7f6ff4dd679a7d987746bf36d68b82"
+  },
+  "id": "nyc4CGW43Vn8QDrC",
+  "tags": []
+}
+

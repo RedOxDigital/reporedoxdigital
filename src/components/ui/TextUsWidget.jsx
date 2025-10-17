@@ -25,14 +25,23 @@ export default function TextUsWidget() {
     setSubmitStatus(null);
 
     try {
-      console.log('Submitting form data:', formData);
+      // Format data to match n8n workflow expectations
+      const payload = {
+        query: {
+          name: formData.name,
+          mobile: formData.number,
+          message: formData.message
+        }
+      };
+      
+      console.log('Submitting form data:', payload);
       
       const response = await fetch('https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
 
       console.log('Response status:', response.status);
@@ -108,7 +117,7 @@ export default function TextUsWidget() {
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900"
                 placeholder="Your name"
                 disabled={isSubmitting}
               />
@@ -126,7 +135,7 @@ export default function TextUsWidget() {
                 value={formData.number}
                 onChange={handleInputChange}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900"
                 placeholder="0400 000 000"
                 disabled={isSubmitting}
               />
@@ -144,7 +153,7 @@ export default function TextUsWidget() {
                 onChange={handleInputChange}
                 required
                 rows="4"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none text-gray-900"
                 placeholder="How can we help you?"
                 disabled={isSubmitting}
               />
