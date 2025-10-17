@@ -1,0 +1,142 @@
+{
+  "name": "Text Us Widget - Contact Form",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "60de8bbc-63ba-41ef-88f6-b9c1543c78b4",
+        "options": {
+          "allowedOrigins": "*"
+        },
+        "responseMode": "responseNode",
+        "responseData": "allEntries"
+      },
+      "id": "webhook-node-1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "60de8bbc-63ba-41ef-88f6-b9c1543c78b4"
+    },
+    {
+      "parameters": {
+        "content": "=# New Contact Form Submission\n\n**Name:** {{ $json.body.name }}\n**Phone:** {{ $json.body.number }}\n**Message:** {{ $json.body.message }}\n\n**Timestamp:** {{ $now.format('YYYY-MM-DD HH:mm:ss') }}",
+        "options": {}
+      },
+      "id": "sticky-note-1",
+      "name": "Format Data",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "{{ $secrets.SENDER_EMAIL }}",
+        "toEmail": "{{ $secrets.NOTIFICATION_EMAIL }}",
+        "subject": "=New Contact Form: {{ $json.body.name }}",
+        "emailType": "text",
+        "message": "=You received a new message from your website:\n\nName: {{ $json.body.name }}\nPhone: {{ $json.body.number }}\nMessage: {{ $json.body.message }}\n\nSubmitted at: {{ $now.format('YYYY-MM-DD HH:mm:ss') }}"
+      },
+      "id": "gmail-node-1",
+      "name": "Send Email Notification",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        680,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIALS_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true, \"message\": \"Message received successfully\" }",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              },
+              {
+                "name": "Access-Control-Allow-Methods",
+                "value": "POST, OPTIONS"
+              },
+              {
+                "name": "Access-Control-Allow-Headers",
+                "value": "Content-Type"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-node-1",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        900,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Format Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Data": {
+      "main": [
+        [
+          {
+            "node": "Send Email Notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email Notification": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-17T00:00:00.000Z",
+  "versionId": "text-us-widget-v1"
+}
+

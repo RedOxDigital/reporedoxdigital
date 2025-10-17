@@ -27,7 +27,7 @@ export default function TextUsWidget() {
     try {
       console.log('Submitting form data:', formData);
       
-      const response = await fetch('https://n8n-boringwork-u57538.vm.elestio.app/webhook-test/60de8bbc-63ba-41ef-88f6-b9c1543c78b4', {
+      const response = await fetch('https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,6 +37,10 @@ export default function TextUsWidget() {
 
       console.log('Response status:', response.status);
       console.log('Response ok:', response.ok);
+      
+      // Try to get response text for debugging
+      const responseText = await response.text();
+      console.log('Response body:', responseText);
 
       if (response.ok) {
         console.log('Form submitted successfully!');
@@ -50,11 +54,16 @@ export default function TextUsWidget() {
         }, 2000);
       } else {
         console.error('Response not OK:', response.status, response.statusText);
+        console.error('Response body:', responseText);
         setSubmitStatus('error');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       console.error('Error details:', error.message);
+      console.error('Error name:', error.name);
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        console.error('Network error - check if n8n webhook is accessible and CORS is enabled');
+      }
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
