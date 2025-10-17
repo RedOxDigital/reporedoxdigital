@@ -25,12 +25,10 @@ export default function TextUsWidget() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
+      // Convert form data to URL query parameters for GET request
+      const params = new URLSearchParams(formData).toString();
+      const response = await fetch(`https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4?${params}`, {
+        method: 'GET',
       });
 
       if (response.ok) {
