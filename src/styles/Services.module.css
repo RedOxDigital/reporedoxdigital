@@ -1,0 +1,114 @@
+/* Services Section Styles */
+.servicesSection {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  padding: 6rem 2rem;
+}
+
+.servicesSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 0;
+}
+
+.servicesContainer {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.servicesHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.servicesTitle {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: hsl(var(--text-primary));
+}
+
+.servicesSubtitle {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: hsl(var(--text-secondary));
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.serviceCard {
+  background: hsl(var(--creative-secondary));
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  border: 1px solid hsl(var(--border-color));
+  transition: var(--transition-creative);
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px hsl(var(--creative-accent) / 0.15);
+}
+
+.serviceIcon {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, 
+    hsl(var(--creative-accent) / 0.1) 0%, 
+    hsl(var(--creative-accent) / 0.05) 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.serviceIcon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: hsl(var(--creative-accent));
+}
+
+.serviceTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(var(--text-primary));
+  margin-bottom: 1rem;
+}
+
+.serviceDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--text-secondary));
+}
+
+@media (max-width: 768px) {
+  .servicesSection {
+    padding: 4rem 1rem;
+  }
+  
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+

@@ -408,6 +408,8 @@ const ProblemAgitationSolution = ({ onCtaClick }) => {
             <img 
               src="/Images/Tradiebefound.png" 
               alt="Frustrated business owner working on laptop, missing out on local sales opportunities"
+              width="800"
+              height="600"
               className="problem-bg-image"
               loading="lazy"
               decoding="async"
@@ -435,6 +437,8 @@ const ProblemAgitationSolution = ({ onCtaClick }) => {
             <img 
               src="/Images/Gemini_Generated_Image_jx75ymjx75ymjx75.webp" 
               alt="Business owner losing customers to competitors due to poor online visibility"
+              width="800"
+              height="600"
               className="agitation-bg-image"
               loading="lazy"
               decoding="async"
@@ -489,6 +493,8 @@ const ProblemAgitationSolution = ({ onCtaClick }) => {
             <img 
               src="/Images/Successful business owner celebrating increased local visibility and customer growth.png" 
               alt="Successful business owner celebrating increased local visibility and customer growth"
+              width="800"
+              height="600"
               className="solution-bg-image"
               loading="lazy"
               decoding="async"

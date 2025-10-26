@@ -329,6 +329,8 @@ const MythBusting = ({ onCtaClick }) => {
           id="myth-parallax-image"
           src="/Images/SEQlandingpage.webp" 
           alt="SEQ landing page background"
+          width="1920"
+          height="1080"
           loading="lazy"
           decoding="async"
         />

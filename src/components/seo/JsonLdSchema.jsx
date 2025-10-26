@@ -12,15 +12,15 @@ const defaultSchema = {
   'address': {
     '@type': 'PostalAddress',
     'streetAddress': 'Business Address',
-    'addressLocality': 'Sydney',
-    'addressRegion': 'NSW',
-    'postalCode': '2000',
+    'addressLocality': 'Dakabin',
+    'addressRegion': 'QLD',
+    'postalCode': '4503',
     'addressCountry': 'AU'
   },
   'geo': {
     '@type': 'GeoCoordinates',
-    'latitude': -33.8688,
-    'longitude': 151.2093
+    'latitude': -27.1986,
+    'longitude': 152.9574
   },
   'openingHoursSpecification': {
     '@type': 'OpeningHoursSpecification',
@@ -31,7 +31,7 @@ const defaultSchema = {
   'priceRange': '$$',
   'serviceArea': {
     '@type': 'Place',
-    'name': 'Sydney Metropolitan Area'
+    'name': 'Gold Coast, Brisbane, and Sunshine Coast'
   },
   'contactPoint': {
     '@type': 'ContactPoint',

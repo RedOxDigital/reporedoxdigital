@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, lazy, Suspense } from 'react'
 import '../styles/HomePage.css'
 import Meta from '../components/seo/Meta'
 import JsonLdSchema from '../components/seo/JsonLdSchema'
+import HowToSchema from '../components/seo/HowToSchema'
+import OfferSchema from '../components/seo/OfferSchema'
+import ServiceSchema from '../components/seo/ServiceSchema'
+import Breadcrumbs from '../components/ui/Breadcrumbs'
 import NavigationBar from '../components/sections/NavigationBar'
 import Hero from '../components/sections/Hero'
 import Services from '../components/sections/Services'
 import ProblemAgitationSolution from '../components/sections/ProblemAgitationSolution'
-import MythBusting from '../components/sections/MythBusting'
-import HowItWorks from '../components/sections/HowItWorks'
-import PhotographyServices from '../components/sections/PhotographyServices'
-import Faq from '../components/sections/Faq'
-import SidePanel from '../components/sections/SidePanel'
-import FloatingActionButton from '../components/sections/FloatingActionButton'
-import FooterSection from '../components/sections/FooterSection'
+
+// Lazy load heavy components
+const MythBusting = lazy(() => import('../components/sections/MythBusting'))
+const HowItWorks = lazy(() => import('../components/sections/HowItWorks'))
+const PhotographyServices = lazy(() => import('../components/sections/PhotographyServices'))
+const Testimonials = lazy(() => import('../components/sections/Testimonials'))
+const Faq = lazy(() => import('../components/sections/Faq'))
+const GoogleMapSection = lazy(() => import('../components/sections/GoogleMapSection'))
+const ResourcesSection = lazy(() => import('../components/sections/ResourcesSection'))
+const SidePanel = lazy(() => import('../components/sections/SidePanel'))
+const FloatingActionButton = lazy(() => import('../components/sections/FloatingActionButton'))
+const FooterSection = lazy(() => import('../components/sections/FooterSection'))
 
 const HomePage = () => {
   console.log('HomePage component rendering...')
@@ -143,9 +152,9 @@ const HomePage = () => {
     <>
       {/* SEO Components */}
       <Meta
-        title="Red Ox Digital - Sales Funnel Automation & Marketing for Local Businesses"
-        description="Transform your local business with custom sales funnels, automated lead response systems, and targeted ad campaigns. Turn cold traffic into paying customers on autopilot."
-        keywords="sales funnels, marketing automation, lead generation, local business marketing, automated sales systems, funnel optimization, customer acquisition, business growth, sales automation"
+        title="Digital Strategy Consulting for Brisbane & Gold Coast Service Businesses | Red Ox Digital"
+        description="Transform your local business with strategic marketing systems: PPC ads, landing pages, automated SMS, and professional photography. Turn 'near me' searches into booked appointments."
+        keywords="digital strategy consulting, local lead generation, Brisbane marketing, Gold Coast marketing, service business marketing, PPC ads, marketing automation, local SEO, appointment booking systems"
         ogImage="/ROD-logo.svg"
         canonicalUrl="https://redoxdigital.com.au/"
       />
@@ -161,15 +170,15 @@ const HomePage = () => {
         'address': {
           '@type': 'PostalAddress',
           'streetAddress': 'Business Address',
-          'addressLocality': 'Sydney',
-          'addressRegion': 'NSW',
-          'postalCode': '2000',
+          'addressLocality': 'Dakabin',
+          'addressRegion': 'QLD',
+          'postalCode': '4503',
           'addressCountry': 'AU'
         },
         'geo': {
           '@type': 'GeoCoordinates',
-          'latitude': -33.8688,
-          'longitude': 151.2093
+          'latitude': -27.1986,
+          'longitude': 152.9574
         },
         'openingHoursSpecification': {
           '@type': 'OpeningHoursSpecification',
@@ -180,34 +189,34 @@ const HomePage = () => {
         'priceRange': '$$',
         'serviceArea': {
           '@type': 'Place',
-          'name': 'Sydney Metropolitan Area'
+          'name': 'Gold Coast, Brisbane, and Sunshine Coast'
         },
         'hasOfferCatalog': {
           '@type': 'OfferCatalog',
-          'name': 'Sales Funnel Automation Services',
+          'name': 'Digital Marketing Services',
           'itemListElement': [
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Custom Sales Funnels',
-                'description': 'Complete sales funnel builds and optimization for local businesses'
+                'name': 'Complete Online Review & Plan',
+                'description': 'Comprehensive online review and competitive analysis with step-by-step marketing plan'
               }
             },
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Marketing Automation',
-                'description': 'Automated lead response systems and email/SMS sequences'
+                'name': 'Marketing Integration',
+                'description': 'Connect website, social media, and email marketing as one unified team'
               }
             },
             {
               '@type': 'Offer',
               'itemOffered': {
                 '@type': 'Service',
-                'name': 'Paid Ads Management',
-                'description': 'Targeted Google and Meta ad campaigns for qualified traffic'
+                'name': 'Content & Trust Building',
+                'description': 'Create compelling content that attracts ideal customers and builds brand trust'
               }
             }
           ]
@@ -219,8 +228,19 @@ const HomePage = () => {
         }
       }} />
 
+      {/* Additional Schemas */}
+      <HowToSchema />
+      <OfferSchema />
+      <ServiceSchema />
+
       {/* Skip Link for Accessibility */}
       <a href="#main-content" className="skip-link">Skip to main content</a>
+
+      {/* Breadcrumb Navigation */}
+      <Breadcrumbs items={[
+        { name: 'Home', url: 'https://redoxdigital.com.au/' },
+        { name: 'Marketing Services', url: 'https://redoxdigital.com.au/#services' }
+      ]} />
 
       {/* Navigation Bar */}
       <NavigationBar
@@ -243,27 +263,45 @@ const HomePage = () => {
         {/* Problem-Agitation-Solution Section */}
         <ProblemAgitationSolution onCtaClick={openPanel} />
 
-      {/* Myth Busting Section */}
+      {/* Lazy-loaded sections with Suspense */}
+      <Suspense fallback={<div style={{minHeight: '100vh', background: 'hsl(var(--creative-secondary))'}} />}>
+        {/* Myth Busting Section */}
         <MythBusting onCtaClick={openPanel} />
 
-      {/* How It Works Section */}
+        {/* How It Works Section */}
         <HowItWorks onCtaClick={openPanel} />
 
         {/* Photography Services Section */}
         <PhotographyServices onCtaClick={openPanel} />
 
+        {/* Testimonials Section */}
+        <Testimonials />
+
+        {/* Resources/Blog Section - Hidden until content is ready */}
+        {/* <ResourcesSection /> */}
+
       {/* FAQ Section */}
         <Faq onCtaClick={openPanel} />
+
+        {/* Google Map Section */}
+        <GoogleMapSection />
+      </Suspense>
       </main>
 
       {/* Footer */}
-      <FooterSection onCtaClick={openPanel} />
+      <Suspense fallback={<div />}>
+        <FooterSection onCtaClick={openPanel} />
+      </Suspense>
 
       {/* Floating Action Button */}
-      <FloatingActionButton show={showFab} onClick={openPanel} />
+      <Suspense fallback={<div />}>
+        <FloatingActionButton show={showFab} onClick={openPanel} />
+      </Suspense>
 
       {/* Side Panel */}
-      <SidePanel isOpen={isPanelOpen} onClose={closePanel} />
+      <Suspense fallback={<div />}>
+        <SidePanel isOpen={isPanelOpen} onClose={closePanel} />
+      </Suspense>
     </>
   )
 }

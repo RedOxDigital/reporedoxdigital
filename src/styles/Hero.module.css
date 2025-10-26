@@ -1,0 +1,61 @@
+/* Hero Section Styles */
+.heroContainer {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.heroBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+.heroImage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Responsive Hero Headline */
+.heroHeadline {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: hsl(var(--text-primary));
+}
+
+.heroHeadline .highlight {
+  color: hsl(var(--creative-accent));
+}
+
+/* Mobile responsiveness handled via CSS */
+@media (max-width: 768px) {
+  .heroHeadline {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+

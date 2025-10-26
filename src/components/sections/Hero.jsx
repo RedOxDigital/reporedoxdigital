@@ -110,8 +110,11 @@ const Hero = ({ onCtaClick }) => {
           id="hero-background-image" 
           src="/Images/ab2cccf2-7d2e-4bcf-8aba-5d606ce8992f.webp" 
           alt="Sales funnel visualization showing customer journey from awareness to conversion" 
+          width="1920"
+          height="1080"
           loading="eager"
           decoding="async"
+          fetchpriority="high"
           className="background-image"
           onError={(e) => tryAlternativeImagePaths(e.target)}
           style={{
@@ -130,22 +133,13 @@ const Hero = ({ onCtaClick }) => {
       {/* Main Content Wrapper - Matches navbar container */}
       <div className="hero-content-wrapper">
         <div className="hero-content" id="main-content">
-          <h1 className="hero-headline">
-            <span className="desktop-headline">
-              Views to Leads.<br />
-              Leads to Sales.<br />
-              <span className="highlight">Sales to Advocates.</span>
-            </span>
-            <span className="mobile-headline">
-              Views<br />
-              <span className="arrow-down">↓</span><br />
-              Leads<br />
-              <span className="arrow-down">↓</span><br />
-              Sales<br />
-              <span className="arrow-down">↓</span><br />
-              <span className="highlight">Advocates</span>
-            </span>
+          <h1 className="hero-eyebrow">
+            Digital Strategy Consulting for Brisbane & Gold Coast Service Businesses
           </h1>
+
+          <h2 className="hero-headline">
+            Views to Leads. Leads to Sales. <span className="highlight">Sales to Advocates.</span>
+          </h2>
 
           <p className="hero-subheading">
             We handle the strategy to make it happen.
