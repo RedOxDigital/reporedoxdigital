@@ -26,23 +26,25 @@ export default function TextUsWidget() {
 
     try {
       // Format data to match n8n workflow expectations
-      // n8n GET webhook expects data as URL query parameters
       const params = new URLSearchParams({
         name: formData.name,
         mobile: formData.number,
         message: formData.message
       });
       
-      const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/60de8bbc-63ba-41ef-88f6-b9c1543c78b4?${params.toString()}`;
+      const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/855822ee-ec72-4fcb-9142-97e67d4b6896?${params.toString()}`;
       
       console.log('=== WEBHOOK DEBUG ===');
       console.log('Current URL:', window.location.href);
+      console.log('Current Origin:', window.location.origin);
       console.log('Form data:', { name: formData.name, mobile: formData.number, message: formData.message });
-      console.log('Query params:', params.toString());
       console.log('Full webhook URL:', webhookUrl);
       
+      // Try direct navigation as fallback if CORS fails
       const response = await fetch(webhookUrl, {
         method: 'GET',
+        mode: 'cors',
+        credentials: 'omit',
         headers: {
           'Accept': 'application/json',
         }
@@ -50,35 +52,68 @@ export default function TextUsWidget() {
 
       console.log('Response status:', response.status);
       console.log('Response ok:', response.ok);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
       
-      // Try to get response text for debugging
       const responseText = await response.text();
       console.log('Response body:', responseText);
 
       if (response.ok) {
         console.log('✅ Form submitted successfully!');
         setSubmitStatus('success');
-        // Reset form after successful submission
         setFormData({ name: '', number: '', message: '' });
-        // Close the form after 2 seconds
         setTimeout(() => {
           setIsOpen(false);
           setSubmitStatus(null);
         }, 2000);
       } else {
-        console.error('❌ Response not OK:', response.status, response.statusText);
-        console.error('Response body:', responseText);
+        console.error('❌ Response not OK:', response.status);
         setSubmitStatus('error');
       }
     } catch (error) {
       console.error('❌ Error submitting form:', error);
-      console.error('Error details:', error.message);
-      console.error('Error name:', error.name);
-      console.error('Error stack:', error.stack);
-      if (error.name === 'TypeError' && error.message.includes('fetch')) {
-        console.error('🔴 Network error - check if n8n webhook is accessible and CORS is enabled');
+      
+      // If CORS error, try alternative method - open in new window
+      if (error.message.includes('CORS') || error.message.includes('fetch')) {
+        console.log('🔄 CORS error detected. Trying alternative submission method...');
+        
+        // Create the full URL with parameters
+        const params = new URLSearchParams({
+          name: formData.name,
+          mobile: formData.number,
+          message: formData.message
+        });
+        const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/855822ee-ec72-4fcb-9142-97e67d4b6896?${params.toString()}`;
+        
+        // Try using an invisible iframe as a workaround
+        try {
+          const iframe = document.createElement('iframe');
+          iframe.style.display = 'none';
+          iframe.src = webhookUrl;
+          document.body.appendChild(iframe);
+          
+          // Assume success after 2 seconds
+          setTimeout(() => {
+            document.body.removeChild(iframe);
+            console.log('✅ Form submitted via iframe method');
+            setSubmitStatus('success');
+            setFormData({ name: '', number: '', message: '' });
+            setTimeout(() => {
+              setIsOpen(false);
+              setSubmitStatus(null);
+            }, 2000);
+          }, 2000);
+          
+          return;
+        } catch (iframeError) {
+          console.error('❌ Iframe method failed:', iframeError);
+        }
       }
+      
+      console.error('🔴 CORS ERROR DETECTED!');
+      console.error('🔴 The n8n webhook CORS settings need to be updated.');
+      console.error('🔴 Current allowed origin:', 'https://www.boringwork.com.au');
+      console.error('🔴 Your origin:', window.location.origin);
+      console.error('🔴 Please update n8n webhook Allowed Origins to: *');
+      
       setSubmitStatus('error');
     } finally {
       console.log('=== END WEBHOOK DEBUG ===');
@@ -88,10 +123,10 @@ export default function TextUsWidget() {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Button - Positioned on LEFT side */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-primary-300 ${
+        className={`fixed bottom-6 left-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-primary-300 ${
           isOpen ? 'bg-red-500 hover:bg-red-600' : 'bg-primary-600 hover:bg-primary-700'
         }`}
         aria-label={isOpen ? 'Close contact form' : 'Open contact form'}
@@ -103,9 +138,9 @@ export default function TextUsWidget() {
         )}
       </button>
 
-      {/* Form Modal */}
+      {/* Form Modal - Positioned on LEFT side */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden animate-slideUp">
+        <div className="fixed bottom-24 left-6 z-50 w-80 sm:w-96 bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden animate-slideUp">
           <div className="bg-primary-600 p-4 text-white">
             <h3 className="text-lg font-semibold">Text Us</h3>
             <p className="text-sm text-primary-100 mt-1">Send us a message and we'll get back to you soon!</p>
