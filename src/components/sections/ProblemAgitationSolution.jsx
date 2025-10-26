@@ -433,7 +433,7 @@ const ProblemAgitationSolution = ({ onCtaClick }) => {
           {/* Agitation Image - First on desktop, second on mobile */}
           <div className="agitation-image">
             <img 
-              src="/Images/Business owner losing customers to competitors due to poor online visibility.png" 
+              src="/Images/Gemini_Generated_Image_jx75ymjx75ymjx75.webp" 
               alt="Business owner losing customers to competitors due to poor online visibility"
               className="agitation-bg-image"
               loading="lazy"
