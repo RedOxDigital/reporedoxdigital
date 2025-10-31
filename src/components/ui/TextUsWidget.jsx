@@ -32,7 +32,7 @@ export default function TextUsWidget() {
         message: formData.message
       });
       
-      const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/855822ee-ec72-4fcb-9142-97e67d4b6896?${params.toString()}`;
+      const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/contact-form-webhook?${params.toString()}`;
       
       console.log('=== WEBHOOK DEBUG ===');
       console.log('Current URL:', window.location.href);
@@ -81,7 +81,7 @@ export default function TextUsWidget() {
           mobile: formData.number,
           message: formData.message
         });
-        const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/855822ee-ec72-4fcb-9142-97e67d4b6896?${params.toString()}`;
+        const webhookUrl = `https://n8n-boringwork-u57538.vm.elestio.app/webhook/contact-form-webhook?${params.toString()}`;
         
         // Try using an invisible iframe as a workaround
         try {
