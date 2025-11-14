@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhenDidIt Variant 1 - Asymmetric Bento Grid</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: #ffffff;
+            color: #2A323C;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .headline {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            line-height: 1.2;
+        }
+
+        .headline .highlight {
+            text-decoration: underline;
+            text-decoration-color: #DC2626;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 6px;
+        }
+
+        /* Bento Grid Layout - Asymmetric */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            grid-auto-rows: 280px;
+        }
+
+        /* Card positioning */
+        .card:nth-child(1) { grid-column: span 8; grid-row: span 2; }
+        .card:nth-child(2) { grid-column: span 4; grid-row: span 1; }
+        .card:nth-child(3) { grid-column: span 4; grid-row: span 1; }
+        .card:nth-child(4) { grid-column: span 5; grid-row: span 1; }
+        .card:nth-child(5) { grid-column: span 7; grid-row: span 1; }
+        .card:nth-child(6) { grid-column: span 12; grid-row: span 1; }
+
+        .card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #F9FAFB;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #E5E7EB;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s ease;
+        }
+
+        .card.expanded .card-image {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            transition: opacity 0.4s ease;
+        }
+
+        .card.expanded .card-overlay {
+            opacity: 0;
+        }
+
+        .card-content {
+            position: relative;
+            height: 100%;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+            transition: color 0.4s ease;
+        }
+
+        .card.expanded .card-title {
+            color: #2A323C;
+        }
+
+        .card-description {
+            font-size: 1.125rem;
+            color: #2A323C;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .card.expanded .card-description {
+            opacity: 1;
+            max-height: 800px;
+            margin-top: 16px;
+        }
+        
+        .card.expanded .card-content {
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .card.expanded .card-title {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .card.expanded .card-icon {
+            background: #DC2626;
+            transform: rotate(45deg);
+        }
+
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            .card:nth-child(1) { grid-column: span 6; }
+            .card:nth-child(2) { grid-column: span 3; }
+            .card:nth-child(3) { grid-column: span 3; }
+            .card:nth-child(4) { grid-column: span 6; }
+            .card:nth-child(5) { grid-column: span 6; }
+            .card:nth-child(6) { grid-column: span 6; }
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 240px;
+            }
+            .card { grid-column: span 1 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="headline">
+            When Did Digital Marketing Become Something You Just Did, and <span class="highlight">Stop Being for Profit!</span>
+        </h2>
+
+        <div class="bento-grid">
+            <div class="card" data-card="1">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80" alt="Analytics Dashboard" class="card-image">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">+</div>
+                    <h3 class="card-title">The Rise of "Vanity Metrics"</h3>
+                    <p class="card-description">As platforms like social media grew, metrics like "likes," "shares," "impressions," and "clicks" became easy to report. While these can indicate engagement, they often don't directly correlate with revenue. Agencies and internal teams started optimizing for these easier-to-achieve numbers rather than the harder-to-track ROI.</p>
+                </div>
+            </div>
+
+            <div class="card" data-card="2">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Complex Data" class="card-image">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">+</div>
+                    <h3 class="card-title">Increased Complexity & Overwhelm</h3>
+                    <p class="card-description">Digital marketing isn't just one thing anymore. It's SEO, SEM, social media, content marketing, email marketing, display ads, video, analytics, conversion rate optimization... the sheer volume of channels and tactics makes it overwhelming.</p>
+                </div>
+            </div>
+
+            <div class="card" data-card="3">
+                <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80" alt="Keeping Up With Competition" class="card-image">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">+</div>
+                    <h3 class="card-title">The "Keeping Up With The Joneses" Effect</h3>
+                    <p class="card-description">Competitors are online, so businesses feel they have to be online. This leads to reactive, rather than proactive, marketing where the goal is simply presence, not necessarily profit.</p>
+                </div>
+            </div>
+
+            <div class="card" data-card="4">
+                <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80" alt="Data Analytics" class="card-image">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">+</div>
+                    <h3 class="card-title">Lack of Clear Attribution & Tracking</h3>
+                    <p class="card-description">Especially for smaller businesses, truly understanding the journey from ad click to customer purchase can be difficult. Without robust analytics, it's hard to prove ROI, so focus shifts to more visible (even if less valuable) metrics.</p>
+                </div>
+            </div>
+
+            <div class="card" data-card="5">
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1000&q=80" alt="Business Meeting" class="card-image">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">+</div>
+                    <h3 class="card-title">Agency Model Incentives</h3>
+                    <p class="card-description">Some agencies are incentivized by ad spend (taking a percentage) rather than actual client profit. This can lead to recommendations for larger budgets or broader campaigns that generate more clicks, even if the conversion rate is poor.</p>
+                </div>
+            </div>
+
+            <div class="card" data-card="6">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1400&q=80" alt="Team Strategy" class="card-image">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">+</div>
+                    <h3 class="card-title">"Best Practices" vs. Bespoke Strategy</h3>
+                    <p class="card-description">The proliferation of generic "digital marketing best practices" often leads to cookie-cutter campaigns that aren't optimized for a specific business's unique profit levers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Close all other cards
+                document.querySelectorAll('.card').forEach(otherCard => {
+                    if (otherCard !== this) {
+                        otherCard.classList.remove('expanded');
+                    }
+                });
+                // Toggle current card
+                this.classList.toggle('expanded');
+            });
+        });
+    </script>
+</body>
+</html>
+

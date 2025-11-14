@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Home - Vertical Tabs with Changing Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #d32f2f;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 60px;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .services-container.image-right {
+            grid-template-columns: 1fr 350px;
+        }
+
+        .tab-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tab-button {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .tab-button:hover {
+            background: #fff;
+            border-color: #d32f2f;
+            transform: translateX(8px);
+        }
+
+        .tab-button.active {
+            background: #d32f2f;
+            color: white;
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(211, 47, 47, 0.3);
+        }
+
+        .tab-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .tab-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .content-area {
+            display: grid;
+            grid-template-rows: 400px 1fr;
+            gap: 40px;
+        }
+
+        .services-container.image-right .tab-list {
+            order: 2;
+        }
+
+        .services-container.image-right .content-area {
+            order: 1;
+        }
+
+        .services-container.image-right .tab-button:hover,
+        .services-container.image-right .tab-button.active {
+            transform: translateX(-8px);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-image.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .service-image:nth-child(1) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .service-image:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .service-image:nth-child(3) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .service-image:nth-child(4) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .description-container {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .service-content {
+            display: none;
+        }
+
+        .service-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .content-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+
+        .content-description {
+            font-size: 1.125rem;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .divider {
+            text-align: center;
+            padding: 60px 0;
+            font-size: 3rem;
+        }
+
+        @media (max-width: 968px) {
+            .services-container,
+            .services-container.image-right {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-list {
+                order: 1;
+            }
+
+            .content-area {
+                order: 2;
+            }
+
+            .services-container.image-right .tab-list,
+            .services-container.image-right .content-area {
+                order: unset;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .content-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 40px 15px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .intro-text {
+                font-size: 1.125rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .image-container {
+                height: 300px;
+            }
+
+            .service-image {
+                font-size: 5rem;
+            }
+
+            .description-container {
+                padding: 30px 20px;
+            }
+
+            .content-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="main-title">Your Business Shouldn't Accept, One-Size-Fits-All.</h1>
+            <p class="intro-text">
+                We reject cookie-cutter solutions that force you into a pre-defined box. Instead, our process begins with a deep dive into your specific market, your customers, and your ambition to grow!
+            </p>
+            <h2 class="section-title">Our Profit-Driving Services (The Solution)</h2>
+        </div>
+
+        <!-- First 4 Services - Image on Right -->
+        <div class="services-container" id="services-group-1">
+            <div class="tab-list">
+                <button class="tab-button active" data-service="0" onclick="showService(0, 'services-group-1')">
+                    <span class="tab-icon">🎯</span>
+                    <span class="tab-title">Performance Advertising</span>
+                </button>
+                <button class="tab-button" data-service="1" onclick="showService(1, 'services-group-1')">
+                    <span class="tab-icon">🔍</span>
+                    <span class="tab-title">SEO (Search Engine Optimization)</span>
+                </button>
+                <button class="tab-button" data-service="2" onclick="showService(2, 'services-group-1')">
+                    <span class="tab-icon">📍</span>
+                    <span class="tab-title">Local SEO</span>
+                </button>
+                <button class="tab-button" data-service="3" onclick="showService(3, 'services-group-1')">
+                    <span class="tab-icon">💻</span>
+                    <span class="tab-title">Web Design</span>
+                </button>
+            </div>
+
+            <div class="content-area">
+                <div class="image-container">
+                    <div class="service-image active">🎯</div>
+                    <div class="service-image">🔍</div>
+                    <div class="service-image">📍</div>
+                    <div class="service-image">💻</div>
+                </div>
+
+                <div class="description-container">
+                    <div class="service-content active">
+                        <span class="content-icon">🎯</span>
+                        <h3 class="content-title">Performance Advertising</h3>
+                        <p class="content-description">
+                            We deep research your business and its unique market. Through relentless A/B testing and data analysis, we identify the exact keywords and audiences that convert, then scale these proven channels to maximize your $1 Spent = $3+ Back goal.
+                        </p>
+                    </div>
+                    <div class="service-content">
+                        <span class="content-icon">🔍</span>
+                        <h3 class="content-title">SEO (Search Engine Optimization)</h3>
+                        <p class="content-description">
+                            Go beyond basic rankings. Our SEO strategies are built to capture high-intent organic traffic that converts. From technical optimization to content strategy, we ensure your business is visible exactly when potential customers are searching for what you offer, driving sustainable, profitable growth.
+                        </p>
+                    </div>
+                    <div class="service-content">
+                        <span class="content-icon">📍</span>
+                        <h3 class="content-title">Local SEO</h3>
+                        <p class="content-description">
+                            Dominate your local market. We optimize your online presence to ensure you're the first choice for customers in your geographic area. Perfect for brick-and-mortar businesses, our local SEO tactics drive foot traffic and local conversions directly to your door.
+                        </p>
+                    </div>
+                    <div class="service-content">
+                        <span class="content-icon">💻</span>
+                        <h3 class="content-title">Web Design</h3>
+                        <p class="content-description">
+                            Your website isn't just an online brochure; it's your primary sales tool. We design high-converting, user-friendly websites engineered for performance, not just aesthetics. Every element is optimized to guide visitors towards conversion, making your site a true profit machine.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">⬇️</div>
+
+        <!-- Next 4 Services - Image on Left -->
+        <div class="services-container image-right" id="services-group-2">
+            <div class="tab-list">
+                <button class="tab-button active" data-service="0" onclick="showService(0, 'services-group-2')">
+                    <span class="tab-icon">📄</span>
+                    <span class="tab-title">Landing Pages</span>
+                </button>
+                <button class="tab-button" data-service="1" onclick="showService(1, 'services-group-2')">
+                    <span class="tab-icon">📷</span>
+                    <span class="tab-title">Photography</span>
+                </button>
+                <button class="tab-button" data-service="2" onclick="showService(2, 'services-group-2')">
+                    <span class="tab-icon">🎬</span>
+                    <span class="tab-title">Videography</span>
+                </button>
+                <button class="tab-button" data-service="3" onclick="showService(3, 'services-group-2')">
+                    <span class="tab-icon">🛡️</span>
+                    <span class="tab-title">Reputation Management</span>
+                </button>
+            </div>
+
+            <div class="content-area">
+                <div class="image-container">
+                    <div class="service-image active">📄</div>
+                    <div class="service-image">📷</div>
+                    <div class="service-image">🎬</div>
+                    <div class="service-image">🛡️</div>
+                </div>
+
+                <div class="description-container">
+                    <div class="service-content active">
+                        <span class="content-icon">📄</span>
+                        <h3 class="content-title">Landing Pages</h3>
+                        <p class="content-description">
+                            Turn clicks into customers. We create hyper-focused landing pages, optimized with persuasive copy and clear calls-to-action, specifically designed to convert paid traffic into leads and sales. Each page is a profit-generating funnel unto itself.
+                        </p>
+                    </div>
+                    <div class="service-content">
+                        <span class="content-icon">📷</span>
+                        <h3 class="content-title">Photography</h3>
+                        <p class="content-description">
+                            Visuals sell. Our professional photography services capture your brand's essence, products, and services in a way that resonates with your target audience, enhancing trust, engagement, and ultimately, conversion rates across all your digital channels.
+                        </p>
+                    </div>
+                    <div class="service-content">
+                        <span class="content-icon">🎬</span>
+                        <h3 class="content-title">Videography</h3>
+                        <p class="content-description">
+                            Engage, inform, and convert with compelling video content. From short-form ads to in-depth brand stories, our videography services help you connect with your audience on a deeper level, boosting brand recall and driving action.
+                        </p>
+                    </div>
+                    <div class="service-content">
+                        <span class="content-icon">🛡️</span>
+                        <h3 class="content-title">Reputation Management</h3>
+                        <p class="content-description">
+                            Your online reputation is your most valuable asset. We actively monitor, protect, and enhance your brand's image across all digital platforms, ensuring positive sentiment and building the trust essential for sustained business growth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showService(index, groupId) {
+            const group = document.getElementById(groupId);
+            
+            // Update tabs
+            const tabs = group.querySelectorAll('.tab-button');
+            tabs.forEach((tab, i) => {
+                if (i === index) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            // Update images
+            const images = group.querySelectorAll('.service-image');
+            images.forEach((img, i) => {
+                if (i === index) {
+                    img.classList.add('active');
+                } else {
+                    img.classList.remove('active');
+                }
+            });
+
+            // Update content
+            const contents = group.querySelectorAll('.service-content');
+            contents.forEach((content, i) => {
+                if (i === index) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -5,7 +5,7 @@ const GoogleMapSection = () => {
     <section className="map-section" id="location" aria-label="Our Location">
       <style jsx>{`
         .map-section {
-          padding: 6rem 2rem;
+          padding: 4rem 2rem;
           background: hsl(var(--creative-secondary));
           position: relative;
         }
@@ -21,17 +21,21 @@ const GoogleMapSection = () => {
         }
 
         .map-title {
-          font-size: clamp(2rem, 4vw, 3rem);
-          font-weight: 900;
+          font-size: clamp(3rem, 6vw, 5rem);
+          font-weight: 400;
           color: hsl(var(--text-primary));
-          margin-bottom: 1rem;
+          margin-bottom: 1.5rem;
+          letter-spacing: -0.02em;
+          line-height: 1.1;
         }
 
         .map-subtitle {
-          font-size: 1.125rem;
+          font-size: clamp(1.125rem, 2vw, 1.5rem);
           color: hsl(var(--text-secondary));
           max-width: 600px;
           margin: 0 auto;
+          font-weight: 400;
+          line-height: 1.5;
         }
 
         .map-content {
@@ -77,18 +81,20 @@ const GoogleMapSection = () => {
         }
 
         .contact-details h3 {
-          font-size: 1.125rem;
-          font-weight: 700;
+          font-size: 1.25rem;
+          font-weight: 500;
           color: hsl(var(--text-primary));
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.75rem;
+          letter-spacing: -0.01em;
         }
 
         .contact-details p,
         .contact-details a {
-          font-size: 1rem;
+          font-size: 1.125rem;
           color: hsl(var(--text-secondary));
           text-decoration: none;
           line-height: 1.6;
+          font-weight: 400;
         }
 
         .contact-details a:hover {
@@ -120,23 +126,23 @@ const GoogleMapSection = () => {
         }
 
         .service-area h3 {
-          font-size: 1rem;
-          font-weight: 700;
+          font-size: 1.125rem;
+          font-weight: 500;
           color: hsl(var(--text-primary));
           margin-bottom: 0.75rem;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: -0.01em;
         }
 
         .service-area p {
-          font-size: 0.9375rem;
+          font-size: 1rem;
           color: hsl(var(--text-secondary));
           line-height: 1.6;
+          font-weight: 400;
         }
 
         @media (max-width: 768px) {
           .map-section {
-            padding: 4rem 1rem;
+            padding: 3rem 1rem;
           }
 
           .map-content {
@@ -231,7 +237,7 @@ const GoogleMapSection = () => {
 
           <div className="map-embed">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113888.11187214874!2d152.95738975!3d-27.19857605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b93e8b7c0b7c8f5%3A0x502a35af3dea8f0!2sDakabin%20QLD%204503!5e0!3m2!1sen!2sau!4v1234567890123!5m2!1sen!2sau"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d634945.9206992692!2d152.89345841949122!3d-27.296978174032905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b93faeeb57ce147%3A0x502a35af3de8640!2sDakabin%20QLD%204503!5e1!3m2!1sen!2sau!4v1763103609102!5m2!1sen!2sau"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works - Material Design</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #fafafa;
+      color: #202124;
+      line-height: 1.6;
+    }
+
+    /* Material Design inspired */
+    .how-it-works-container {
+      width: 100%;
+      min-height: 100vh;
+      padding: 96px 24px;
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    }
+
+    .how-it-works-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .main-title {
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
+      color: #202124;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .intro-text {
+      font-size: 20px;
+      font-weight: 400;
+      color: #5f6368;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .steps-timeline {
+      position: relative;
+      padding-left: 80px;
+      margin-top: 48px;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 36px;
+      top: 40px;
+      bottom: 40px;
+      width: 3px;
+      background: linear-gradient(180deg, #4285f4 0%, #34a853 50%, #fbbc04 100%);
+      border-radius: 2px;
+    }
+
+    .step-item {
+      position: relative;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .step-marker {
+      position: absolute;
+      left: -80px;
+      top: 0;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      z-index: 2;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step-item:nth-child(1) .step-marker {
+      background: linear-gradient(135deg, #4285f4 0%, #5e97f6 100%);
+    }
+
+    .step-item:nth-child(2) .step-marker {
+      background: linear-gradient(135deg, #ea4335 0%, #f06d60 100%);
+    }
+
+    .step-item:nth-child(3) .step-marker {
+      background: linear-gradient(135deg, #fbbc04 0%, #fcc934 100%);
+    }
+
+    .step-item:nth-child(4) .step-marker {
+      background: linear-gradient(135deg, #34a853 0%, #5bb974 100%);
+    }
+
+    .step-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 
+        0 1px 2px rgba(60, 64, 67, 0.3),
+        0 2px 6px 2px rgba(60, 64, 67, 0.15);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: currentColor;
+    }
+
+    .step-item:nth-child(1) .step-card::before {
+      background: #4285f4;
+    }
+
+    .step-item:nth-child(2) .step-card::before {
+      background: #ea4335;
+    }
+
+    .step-item:nth-child(3) .step-card::before {
+      background: #fbbc04;
+    }
+
+    .step-item:nth-child(4) .step-card::before {
+      background: #34a853;
+    }
+
+    .step-card:hover {
+      box-shadow: 
+        0 1px 3px rgba(60, 64, 67, 0.3),
+        0 4px 8px 3px rgba(60, 64, 67, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .step-header {
+      margin-bottom: 20px;
+    }
+
+    .step-number {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .step-item:nth-child(1) .step-number {
+      color: #4285f4;
+    }
+
+    .step-item:nth-child(2) .step-number {
+      color: #ea4335;
+    }
+
+    .step-item:nth-child(3) .step-number {
+      color: #fbbc04;
+    }
+
+    .step-item:nth-child(4) .step-number {
+      color: #34a853;
+    }
+
+    .step-title {
+      font-size: 28px;
+      font-weight: 500;
+      color: #202124;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .step-description {
+      font-size: 16px;
+      color: #5f6368;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      white-space: pre-line;
+    }
+
+    .step-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      background: #1a73e8;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.25px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      text-transform: none;
+      box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .step-cta:hover {
+      background: #1765cc;
+      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3),
+                  0 4px 8px rgba(60, 64, 67, 0.15);
+    }
+
+    .step-cta:active::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .step-cta:focus-visible {
+      outline: 2px solid #1a73e8;
+      outline-offset: 2px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 960px) {
+      .main-title {
+        font-size: 40px;
+      }
+
+      .intro-text {
+        font-size: 18px;
+      }
+
+      .steps-timeline {
+        padding-left: 60px;
+      }
+
+      .step-marker {
+        left: -60px;
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+      }
+
+      .timeline-line {
+        left: 26px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .how-it-works-container {
+        padding: 64px 16px;
+      }
+
+      .main-title {
+        font-size: 32px;
+      }
+
+      .intro-text {
+        font-size: 16px;
+      }
+
+      .steps-timeline {
+        padding-left: 48px;
+      }
+
+      .step-marker {
+        left: -48px;
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+      }
+
+      .timeline-line {
+        left: 22px;
+      }
+
+      .step-card {
+        padding: 24px;
+      }
+
+      .step-title {
+        font-size: 22px;
+      }
+
+      .step-description {
+        font-size: 15px;
+      }
+
+      .section-header {
+        margin-bottom: 48px;
+      }
+    }
+
+    /* Accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+</head>
+<body>
+  <section class="how-it-works-container" id="how-it-works-home" role="region" aria-label="How Red Ox Digital Works">
+    <div class="how-it-works-content">
+      <div class="section-header">
+        <h2 class="main-title">How It Works</h2>
+        <p class="intro-text">Our proven process transforms your digital marketing from a cost center into a profit machine.</p>
+      </div>
+
+      <div class="steps-timeline">
+        <div class="timeline-line" aria-hidden="true"></div>
+
+        <!-- Step 1 -->
+        <div class="step-item">
+          <div class="step-marker" aria-hidden="true">📝</div>
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">Step 1</span>
+              <h3 class="step-title">Apply for Your 3x Growth Discussion</h3>
+            </div>
+            <p class="step-description">It all begins with a simple, no-obligation application. Tell us a bit about your business, your current digital marketing efforts, and what 'profit machine' looks like for you. This helps us understand your needs and prepare for a focused, valuable conversation.</p>
+            <button class="step-cta" onclick="alert('CTA clicked - integrate with your form')">
+              Apply for Your Free Consultation
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-item">
+          <div class="step-marker" aria-hidden="true">💬</div>
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">Step 2</span>
+              <h3 class="step-title">We Check for Mutual Fit (Free Alignment Chat)</h3>
+            </div>
+            <p class="step-description">Once your application is reviewed, we'll schedule a complimentary 30-minute chat. This is a critical discussion to understand your challenges, validate your goals, and determine if your business is the right fit for our profit-driven approach.
+
+If your business is primarily looking for pretty web design or more likes on social media, we are not the right partner. We work exclusively with businesses demanding measurable ROI and aiming for that $1 Spent = $3+ Back vision.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-item">
+          <div class="step-marker" aria-hidden="true">🗺️</div>
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">Step 3</span>
+              <h3 class="step-title">Your Custom 3x Growth Blueprint</h3>
+            </div>
+            <p class="step-description">If we're a mutual fit, our consultants will then dive deep, crafting a bespoke 3x Growth Road Map tailored specifically for your business. This comprehensive plan outlines the precise strategies, channels, and a clear implementation timeline designed to turn your marketing into a verifiable profit engine. It defines exactly how we'll get you to your $1 Spent = $3+ Back target.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-item">
+          <div class="step-marker" aria-hidden="true">🚀</div>
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">Step 4</span>
+              <h3 class="step-title">Launch & Continuous Profit Optimization</h3>
+            </div>
+            <p class="step-description">With your custom roadmap approved, our expert freelancer network gets to work. We meticulously launch your profit-driven campaigns, continuously monitor performance against your 3x ROI goals, and scale only what's proven to generate consistent returns. Your marketing stops being an expense and starts delivering predictable, growing profits.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen Reader Description -->
+    <div class="sr-only">
+      <p>Section explaining Red Ox Digital's 4-step process: Apply for Your 3x Growth Discussion, Free Alignment Chat, Custom 3x Growth Blueprint, and Launch with Continuous Profit Optimization.</p>
+    </div>
+  </section>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.step-item').forEach((item) => {
+      observer.observe(item);
+    });
+
+    // Ripple effect for CTA button
+    document.querySelectorAll('.step-cta').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        button.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+  </script>
+</body>
+</html>
+

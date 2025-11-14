@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChangeIt Variant 4 - Split Screen Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #202124;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 80px 24px 40px;
+            background: linear-gradient(180deg, #202124 0%, #2a2d30 100%);
+        }
+
+        .label {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(220, 38, 38, 0.2);
+            color: #EF4444;
+            border-radius: 24px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .headline {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .intro {
+            font-size: 1.25rem;
+            color: #9aa0a6;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .intro strong {
+            color: #EF4444;
+        }
+
+        /* Split Screen Container */
+        .split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .split-panel {
+            padding: 60px 48px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .split-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .split-panel:hover::before,
+        .split-panel.active::before {
+            opacity: 1;
+        }
+
+        .split-panel.active {
+            flex: 1.5;
+        }
+
+        .panel-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: rgba(220, 38, 38, 0.15);
+            border: 2px solid #DC2626;
+            color: #EF4444;
+            border-radius: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .split-panel:hover .panel-number,
+        .split-panel.active .panel-number {
+            background: #DC2626;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .panel-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 2;
+        }
+
+        .panel-description {
+            font-size: 1.125rem;
+            color: #9aa0a6;
+            line-height: 1.8;
+            margin-bottom: 32px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .split-panel.active .panel-description {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        .panel-features {
+            list-style: none;
+            margin-top: 32px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .split-panel.active .panel-features {
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        .panel-features li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid #DC2626;
+            color: #e8eaed;
+            font-size: 1rem;
+        }
+
+        .panel-features li::before {
+            content: '→';
+            color: #EF4444;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .panel-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: #DC2626;
+            color: #ffffff;
+            border: none;
+            border-radius: 28px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 32px;
+            transition: all 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .split-panel.active .panel-cta {
+            max-height: 100px;
+            opacity: 1;
+        }
+
+        .panel-cta:hover {
+            background: #b91c1c;
+            transform: translateX(8px);
+        }
+
+        /* Divider Line */
+        .divider {
+            position: absolute;
+            top: 10%;
+            bottom: 10%;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(180deg, transparent 0%, #DC2626 50%, transparent 100%);
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .divider::before {
+            content: 'VS';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #DC2626;
+            color: #ffffff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+        }
+
+        @media (max-width: 968px) {
+            .split-container {
+                grid-template-columns: 1fr;
+            }
+
+            .divider {
+                top: auto;
+                bottom: auto;
+                left: 10%;
+                right: 10%;
+                width: auto;
+                height: 2px;
+                transform: none;
+            }
+
+            .divider::before {
+                left: 50%;
+                top: 50%;
+            }
+
+            .split-panel {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="label">Our Two-Pillar Approach</div>
+        <h2 class="headline">How Red Ox Digital Changes All That.</h2>
+        <p class="intro">
+            We reject the "doing digital" mindset. We operate on one principle: <strong>your digital marketing must generate profit.</strong>
+        </p>
+    </div>
+
+    <div class="split-container">
+        <!-- Left Panel: Profit-First Planning -->
+        <div class="split-panel active" data-panel="1">
+            <div class="panel-number">1</div>
+            <h3 class="panel-title">Profit-First Planning</h3>
+            <p class="panel-description">
+                Every strategy we build starts and ends with one goal in mind: <strong>$1 Spent = $3+ Back</strong>. We meticulously design campaigns to deliver this multiplier, focusing only on the channels and tactics that have a clear, measurable path to revenue.
+            </p>
+            <ul class="panel-features">
+                <li>Deep research into your business and market</li>
+                <li>Relentless A/B testing and data analysis</li>
+                <li>Identify exact keywords and audiences that convert</li>
+                <li>Scale only proven profitable channels</li>
+                <li>Zero vanity metrics—only revenue drivers</li>
+            </ul>
+            <button class="panel-cta">
+                <span>Learn More About Our Process</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0L6.59 1.41L12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Right Panel: Bottom-Line Partnership -->
+        <div class="split-panel" data-panel="2">
+            <div class="panel-number">2</div>
+            <h3 class="panel-title">Bottom-Line Partnership</h3>
+            <p class="panel-description">
+                Forget vanity metrics. We don't report on clicks; we partner with you on your actual bottom line. Our dashboards showcase verifiable ROI, customer acquisition cost, and lifetime value – the numbers that truly matter to your business's growth. We translate digital performance into business profit.
+            </p>
+            <ul class="panel-features">
+                <li>Real-time ROI tracking and reporting</li>
+                <li>Customer acquisition cost (CAC) optimization</li>
+                <li>Lifetime value (LTV) maximization</li>
+                <li>Clear profit attribution across all channels</li>
+                <li>Monthly profit reviews—not vanity reports</li>
+            </ul>
+            <button class="panel-cta">
+                <span>See Our Dashboard</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0L6.59 1.41L12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const panels = document.querySelectorAll('.split-panel');
+
+        panels.forEach(panel => {
+            panel.addEventListener('click', function() {
+                // Remove active from all panels
+                panels.forEach(p => p.classList.remove('active'));
+                
+                // Add active to clicked panel
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

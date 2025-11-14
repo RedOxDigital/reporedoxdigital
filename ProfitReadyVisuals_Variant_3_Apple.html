@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Ready Visuals - Apple Style with Fading Carousel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+            background: #000000;
+            color: #f5f5f7;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+        }
+
+        .profit-ready-container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 120px 20px;
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profit-ready-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .location-tag {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #86868b;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: 64px;
+            font-weight: 700;
+            color: #f5f5f7;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .offer-section {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(220, 38, 38, 0.05) 100%);
+            border-radius: 24px;
+            padding: 60px 48px;
+            margin-bottom: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-headline {
+            font-size: 48px;
+            font-weight: 700;
+            color: #f5f5f7;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .offer-highlight {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .description {
+            font-size: 21px;
+            color: #86868b;
+            margin-bottom: 48px;
+            line-height: 1.5;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .description strong {
+            color: #f5f5f7;
+            font-weight: 600;
+        }
+
+        /* Fading Carousel */
+        .fade-carousel {
+            margin: 60px 0;
+            height: 500px;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            transform: scale(1.1);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .carousel-slide.fade-out {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 4;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #dc2626;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .details-section {
+            margin-bottom: 60px;
+        }
+
+        .toggle-button {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 19px;
+            font-weight: 500;
+            color: #f5f5f7;
+            backdrop-filter: blur(20px);
+        }
+
+        .toggle-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(220, 38, 38, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .toggle-button:focus {
+            outline: 2px solid #dc2626;
+            outline-offset: 4px;
+        }
+
+        .toggle-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(220, 38, 38, 0.2);
+            color: #dc2626;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toggle-button.active .toggle-icon {
+            transform: rotate(45deg);
+            background: rgba(220, 38, 38, 0.3);
+        }
+
+        .deliverables-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        .deliverables-container.expanded {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 32px;
+        }
+
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .deliverable-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+        }
+
+        .deliverable-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(220, 38, 38, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .deliverable-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(220, 38, 38, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: #dc2626;
+        }
+
+        .deliverable-icon svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .deliverable-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #f5f5f7;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .deliverable-description {
+            font-size: 17px;
+            color: #86868b;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 64px 0 40px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 980px;
+            padding: 18px 40px;
+            font-size: 19px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-width: 280px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(220, 38, 38, 0.4);
+        }
+
+        .cta-button:hover::before {
+            transform: translateX(0);
+        }
+
+        .cta-button:focus {
+            outline: 2px solid #dc2626;
+            outline-offset: 4px;
+        }
+
+        .small-print {
+            text-align: center;
+            font-size: 14px;
+            color: #6e6e73;
+            margin-top: 32px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 980px) {
+            .profit-ready-container {
+                padding: 80px 20px;
+            }
+
+            .main-title {
+                font-size: 48px;
+            }
+
+            .offer-headline {
+                font-size: 36px;
+            }
+
+            .description {
+                font-size: 19px;
+            }
+
+            .fade-carousel {
+                height: 400px;
+            }
+
+            .deliverables-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .profit-ready-container {
+                padding: 60px 16px;
+            }
+
+            .main-title {
+                font-size: 40px;
+            }
+
+            .offer-section {
+                padding: 40px 24px;
+            }
+
+            .offer-headline {
+                font-size: 32px;
+            }
+
+            .fade-carousel {
+                height: 300px;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="profit-ready-container" id="profit-ready-visuals" role="region" aria-label="Brisbane Local Profit Kickstart Offer">
+        <div class="content-wrapper">
+            <div class="header-section">
+                <div class="location-tag">Brisbane Exclusive</div>
+                <h2 class="main-title">Live in Brisbane & Ready for Proof?</h2>
+            </div>
+
+            <div class="offer-section">
+                <h3 class="offer-headline">
+                    Turn a <span class="offer-highlight">$199</span> Photoshoot into <span class="offer-highlight">$600+</span> Profit!
+                </h3>
+            </div>
+
+            <p class="description">
+                This exclusive offer for Brisbane businesses is your low-risk entry point to experience our <strong>digital marketing for profit</strong> approach firsthand. See how we deliver verifiable returns, not just vanity metrics.
+            </p>
+
+            <!-- Fading Carousel -->
+            <div class="fade-carousel">
+                <div class="carousel-slide active">
+                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=1200&h=800&fit=crop&q=80" alt="Professional photography" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&h=800&fit=crop&q=80" alt="Business photography" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&q=80" alt="Marketing visuals" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&q=80" alt="Digital marketing" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=800&fit=crop&q=80" alt="Professional images" loading="lazy">
+                </div>
+                <div class="carousel-overlay"></div>
+                <div class="carousel-indicators" id="carouselIndicators"></div>
+            </div>
+
+            <div class="details-section">
+                <button class="toggle-button" id="toggleButton" aria-expanded="false" aria-controls="deliverablesContainer">
+                    <span>Here's what you get for just $199</span>
+                    <span class="toggle-icon" id="toggleIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" x2="12" y1="5" y2="19"/>
+                            <line x1="5" x2="19" y1="12" y2="12"/>
+                        </svg>
+                    </span>
+                </button>
+                
+                <div class="deliverables-container" id="deliverablesContainer" aria-hidden="true">
+                    <div class="deliverables-grid">
+                        <div class="deliverable-card">
+                            <div class="deliverable-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                            </div>
+                            <h4 class="deliverable-title">20-Minute Professional Photoshoot</h4>
+                            <p class="deliverable-description">
+                                Get stunning, high-quality images tailored specifically for your potential customers – perfect for your website, Google My Business, and social media.
+                            </p>
+                        </div>
+                        
+                        <div class="deliverable-card">
+                            <div class="deliverable-icon" aria-hidden="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                                    <polyline points="16 7 22 7 22 13"/>
+                                </svg>
+                            </div>
+                            <h4 class="deliverable-title">'Profit-Ready Visuals' Guide</h4>
+                            <p class="deliverable-description">
+                                We'll provide a step-by-step guide demonstrating exactly how to leverage these assets across your digital channels to directly drive customer engagement, inquiries, and ultimately, turn this visual investment into $600+ in profit for your business.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <button class="cta-button" onclick="handleCtaClick()" aria-label="Get Your Profit-Ready Visuals for $199">
+                    Get Your Profit-Ready Visuals for $199!
+                </button>
+            </div>
+
+            <p class="small-print">
+                Limited slots available each month. Offer exclusive to businesses operating in the Brisbane metro area.
+            </p>
+        </div>
+
+        <div class="sr-only">
+            <p>Exclusive Brisbane offer: Professional photoshoot for $199 that generates $600+ in profit, including high-quality images and a profit-ready visuals guide for digital marketing success.</p>
+        </div>
+    </section>
+
+    <script>
+        // Carousel functionality
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicatorsContainer = document.getElementById('carouselIndicators');
+        let currentSlide = 0;
+
+        // Create indicators
+        slides.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator' + (index === 0 ? ' active' : '');
+            indicator.addEventListener('click', () => goToSlide(index));
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            slides[currentSlide].classList.add('fade-out');
+            
+            const indicators = indicatorsContainer.querySelectorAll('.indicator');
+            indicators[currentSlide].classList.remove('active');
+            
+            currentSlide = index;
+            
+            setTimeout(() => {
+                slides.forEach(slide => {
+                    slide.classList.remove('fade-out');
+                });
+                slides[currentSlide].classList.add('active');
+                indicators[currentSlide].classList.add('active');
+            }, 100);
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % slides.length;
+            goToSlide(next);
+        }
+
+        // Auto-advance carousel
+        setInterval(nextSlide, 4000);
+
+        // Toggle functionality
+        const toggleButton = document.getElementById('toggleButton');
+        const deliverablesContainer = document.getElementById('deliverablesContainer');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        toggleButton.addEventListener('click', function() {
+            const isExpanded = deliverablesContainer.classList.contains('expanded');
+            
+            if (isExpanded) {
+                deliverablesContainer.classList.remove('expanded');
+                toggleButton.classList.remove('active');
+                toggleButton.setAttribute('aria-expanded', 'false');
+                deliverablesContainer.setAttribute('aria-hidden', 'true');
+            } else {
+                deliverablesContainer.classList.add('expanded');
+                toggleButton.classList.add('active');
+                toggleButton.setAttribute('aria-expanded', 'true');
+                deliverablesContainer.setAttribute('aria-hidden', 'false');
+            }
+        });
+
+        function handleCtaClick() {
+            alert('CTA clicked - integrate with your booking form');
+        }
+    </script>
+</body>
+</html>

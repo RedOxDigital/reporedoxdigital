@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhenDidIt Variant 4 - Interactive Tiles with Flip Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+            color: #2A323C;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .headline {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            line-height: 1.2;
+            color: #2A323C;
+        }
+
+        .headline .highlight {
+            text-decoration: underline;
+            text-decoration-color: #DC2626;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 6px;
+        }
+
+        /* Flip Tiles Grid */
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .tile {
+            height: 420px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .tile-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .tile.flipped .tile-inner {
+            transform: rotateY(180deg);
+        }
+
+        .tile-front,
+        .tile-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        /* Front of Tile */
+        .tile-front {
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .tile-front-image {
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tile-front-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .tile:hover .tile-front-image img {
+            transform: scale(1.08);
+        }
+
+        .tile-front-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+        }
+
+        .tile-front-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #DC2626;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+        }
+
+        .tile-front-content {
+            padding: 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tile-front-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #FEE2E2;
+            color: #DC2626;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .tile-front-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2A323C;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .tile-front-preview {
+            font-size: 0.95rem;
+            color: #6B7280;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .tile-front-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #DC2626;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 16px;
+        }
+
+        .tile-front-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .tile:hover .tile-front-cta svg {
+            transform: translateX(4px);
+        }
+
+        /* Back of Tile */
+        .tile-back {
+            background: #DC2626;
+            transform: rotateY(180deg);
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+        }
+
+        .tile-back-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.2);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .tile-back-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .tile-back-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .tile-back-close {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            align-self: flex-start;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .tile-back-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        @media (max-width: 1200px) {
+            .tiles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tile {
+                height: 380px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="headline">
+            Digital marketing can be a waste of <span class="highlight">time</span> and <span class="highlight">money</span>!
+        </h2>
+
+        <div class="tiles-grid">
+            <!-- Tile 1 -->
+            <div class="tile" data-tile="1">
+                <div class="tile-inner">
+                    <div class="tile-front">
+                        <div class="tile-front-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Vanity Metrics">
+                            <div class="tile-front-badge">Problem #1</div>
+                        </div>
+                        <div class="tile-front-content">
+                            <div class="tile-front-number">1</div>
+                            <h3 class="tile-front-title">The Rise of "Vanity Metrics"</h3>
+                            <p class="tile-front-preview">As platforms like social media grew, metrics became easier to report but harder to convert into actual revenue...</p>
+                            <div class="tile-front-cta">
+                                <span>Read More</span>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-back">
+                        <div class="tile-back-number">01</div>
+                        <h3 class="tile-back-title">The Rise of "Vanity Metrics"</h3>
+                        <p class="tile-back-description">As platforms like social media grew, metrics like "likes," "shares," "impressions," and "clicks" became easy to report. While these can indicate engagement, they often don't directly correlate with revenue. Agencies and internal teams started optimizing for these easier-to-achieve numbers rather than the harder-to-track ROI.</p>
+                        <div class="tile-back-close">
+                            <span>← Back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tile 2 -->
+            <div class="tile" data-tile="2">
+                <div class="tile-inner">
+                    <div class="tile-front">
+                        <div class="tile-front-image">
+                            <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=600&q=80" alt="Complexity">
+                            <div class="tile-front-badge">Problem #2</div>
+                        </div>
+                        <div class="tile-front-content">
+                            <div class="tile-front-number">2</div>
+                            <h3 class="tile-front-title">Increased Complexity & Overwhelm</h3>
+                            <p class="tile-front-preview">The sheer volume of channels and tactics makes it overwhelming for businesses to maintain focus...</p>
+                            <div class="tile-front-cta">
+                                <span>Read More</span>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-back">
+                        <div class="tile-back-number">02</div>
+                        <h3 class="tile-back-title">Increased Complexity & Overwhelm</h3>
+                        <p class="tile-back-description">Digital marketing isn't just one thing anymore. It's SEO, SEM, social media, content marketing, email marketing, display ads, video, analytics, conversion rate optimization... the sheer volume of channels and tactics makes it overwhelming. Many businesses simply try to "do a bit of everything" without a cohesive, profit-driven strategy.</p>
+                        <div class="tile-back-close">
+                            <span>← Back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tile 3 -->
+            <div class="tile" data-tile="3">
+                <div class="tile-inner">
+                    <div class="tile-front">
+                        <div class="tile-front-image">
+                            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80" alt="Competition">
+                            <div class="tile-front-badge">Problem #3</div>
+                        </div>
+                        <div class="tile-front-content">
+                            <div class="tile-front-number">3</div>
+                            <h3 class="tile-front-title">The "Keeping Up With The Joneses" Effect</h3>
+                            <p class="tile-front-preview">Reactive marketing leads to presence without purpose, activity without profit...</p>
+                            <div class="tile-front-cta">
+                                <span>Read More</span>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-back">
+                        <div class="tile-back-number">03</div>
+                        <h3 class="tile-back-title">The "Keeping Up With The Joneses" Effect</h3>
+                        <p class="tile-back-description">Competitors are online, so businesses feel they have to be online. This leads to reactive, rather than proactive, marketing where the goal is simply presence, not necessarily profit.</p>
+                        <div class="tile-back-close">
+                            <span>← Back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tile 4 -->
+            <div class="tile" data-tile="4">
+                <div class="tile-inner">
+                    <div class="tile-front">
+                        <div class="tile-front-image">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Attribution">
+                            <div class="tile-front-badge">Problem #4</div>
+                        </div>
+                        <div class="tile-front-content">
+                            <div class="tile-front-number">4</div>
+                            <h3 class="tile-front-title">Lack of Clear Attribution & Tracking</h3>
+                            <p class="tile-front-preview">Without robust analytics, proving ROI becomes nearly impossible for smaller businesses...</p>
+                            <div class="tile-front-cta">
+                                <span>Read More</span>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-back">
+                        <div class="tile-back-number">04</div>
+                        <h3 class="tile-back-title">Lack of Clear Attribution & Tracking</h3>
+                        <p class="tile-back-description">Especially for smaller businesses, truly understanding the journey from ad click to customer purchase can be difficult. Without robust analytics, it's hard to prove ROI, so focus shifts to more visible (even if less valuable) metrics.</p>
+                        <div class="tile-back-close">
+                            <span>← Back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tile 5 -->
+            <div class="tile" data-tile="5">
+                <div class="tile-inner">
+                    <div class="tile-front">
+                        <div class="tile-front-image">
+                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80" alt="Agency">
+                            <div class="tile-front-badge">Problem #5</div>
+                        </div>
+                        <div class="tile-front-content">
+                            <div class="tile-front-number">5</div>
+                            <h3 class="tile-front-title">Agency Model Incentives</h3>
+                            <p class="tile-front-preview">When agencies profit from spend rather than results, misaligned incentives become inevitable...</p>
+                            <div class="tile-front-cta">
+                                <span>Read More</span>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-back">
+                        <div class="tile-back-number">05</div>
+                        <h3 class="tile-back-title">Agency Model Incentives</h3>
+                        <p class="tile-back-description">Some agencies are incentivized by ad spend (taking a percentage) rather than actual client profit. This can lead to recommendations for larger budgets or broader campaigns that generate more clicks, even if the conversion rate is poor.</p>
+                        <div class="tile-back-close">
+                            <span>← Back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tile 6 -->
+            <div class="tile" data-tile="6">
+                <div class="tile-inner">
+                    <div class="tile-front">
+                        <div class="tile-front-image">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80" alt="Strategy">
+                            <div class="tile-front-badge">Problem #6</div>
+                        </div>
+                        <div class="tile-front-content">
+                            <div class="tile-front-number">6</div>
+                            <h3 class="tile-front-title">"Best Practices" vs. Bespoke Strategy</h3>
+                            <p class="tile-front-preview">Generic templates can't address your business's unique profit levers and competitive advantages...</p>
+                            <div class="tile-front-cta">
+                                <span>Read More</span>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-back">
+                        <div class="tile-back-number">06</div>
+                        <h3 class="tile-back-title">"Best Practices" vs. Bespoke Strategy</h3>
+                        <p class="tile-back-description">The proliferation of generic "digital marketing best practices" often leads to cookie-cutter campaigns that aren't optimized for a specific business's unique profit levers.</p>
+                        <div class="tile-back-close">
+                            <span>← Back</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tile').forEach(tile => {
+            tile.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Ready Visuals - Google Material Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FAFAFA;
+            color: #202124;
+            line-height: 1.5;
+        }
+
+        .profit-ready-container {
+            width: 100%;
+            min-height: 100vh;
+            padding: 80px 20px;
+            background: #ffffff;
+        }
+
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(220, 38, 38, 0.1);
+            color: #DC2626;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        /* Smaller, compact offer card */
+        .offer-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+            border-radius: 16px;
+            padding: 20px 32px;
+            margin-bottom: 48px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .offer-text {
+            font-size: 20px;
+            font-weight: 500;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .description {
+            font-size: 18px;
+            color: #5f6368;
+            margin-bottom: 48px;
+            line-height: 1.7;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .description strong {
+            color: #DC2626;
+            font-weight: 500;
+        }
+
+        /* Main Content Grid: Deliverables Left, Bento Right */
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            margin-bottom: 48px;
+            align-items: start;
+        }
+
+        /* Deliverables Section - Always Visible */
+        .deliverables-section {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            height: 600px;
+            justify-content: flex-start;
+        }
+
+        .section-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #5f6368;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .deliverable-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .deliverable-card:hover {
+            box-shadow: 0 2px 6px rgba(60, 64, 67, 0.15), 0 1px 2px rgba(60, 64, 67, 0.3);
+            border-color: rgba(220, 38, 38, 0.2);
+        }
+
+        .deliverable-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .deliverable-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #DC2626;
+        }
+
+        .deliverable-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .deliverable-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: #202124;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .deliverable-description {
+            font-size: 16px;
+            color: #5f6368;
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        /* Bento Grid Carousel - Dual Column Vertical Scroll */
+        .bento-carousel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            height: 600px;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .bento-column {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #F9FAFB;
+        }
+
+        .bento-track {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: 100%;
+        }
+
+        .bento-column.up .bento-track {
+            animation: scrollUp 25s linear infinite;
+        }
+
+        .bento-column.down .bento-track {
+            animation: scrollDown 25s linear infinite;
+        }
+
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 12px;
+            height: 600px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .bento-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.95;
+        }
+
+        .bento-item:nth-child(1) { grid-row: span 2; }
+        .bento-item:nth-child(2) { grid-row: span 1; }
+        .bento-item:nth-child(3) { grid-row: span 1; }
+
+        .bento-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bento-item:hover {
+            opacity: 1;
+            z-index: 10;
+            transform: scale(1.02);
+        }
+
+        .bento-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .bento-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(220, 38, 38, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bento-item:hover::after {
+            opacity: 1;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 48px 0 32px;
+        }
+
+        .cta-button {
+            background: #DC2626;
+            color: #ffffff;
+            border: none;
+            border-radius: 24px;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            min-width: 200px;
+        }
+
+        .cta-button:hover {
+            background: #991B1B;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-button:focus {
+            outline: 2px solid #DC2626;
+            outline-offset: 4px;
+        }
+
+        .small-print {
+            text-align: center;
+            font-size: 14px;
+            color: #80868b;
+            margin-top: 24px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .bento-carousel {
+                height: 500px;
+            }
+
+            .bento-grid {
+                height: 500px;
+            }
+
+            .bento-column {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profit-ready-container {
+                padding: 40px 16px;
+            }
+
+            .main-title {
+                font-size: 32px;
+            }
+
+            .offer-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 24px;
+            }
+
+            .offer-text {
+                font-size: 18px;
+            }
+
+            .offer-price {
+                font-size: 28px;
+            }
+
+            .description {
+                font-size: 16px;
+            }
+
+            .deliverables-section {
+                height: auto;
+            }
+
+            .deliverable-card {
+                min-height: auto;
+            }
+
+            .bento-carousel {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .bento-column {
+                height: 400px;
+            }
+
+            .bento-grid {
+                height: 400px;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <section class="profit-ready-container" id="profit-ready-visuals" role="region" aria-label="Brisbane Local Profit Kickstart Offer">
+        <div class="content-wrapper">
+            <div class="header-section">
+                <div class="location-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    Brisbane Metro Area
+                </div>
+                <h2 class="main-title">Live in Brisbane & Ready for Proof?</h2>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="offer-card">
+                    <span class="offer-text">Turn a $199 Photoshoot into</span>
+                    <span class="offer-price">$600+</span>
+                </div>
+            </div>
+
+            <p class="description">
+                This exclusive offer for Brisbane businesses is your low-risk entry point to experience our <strong>digital marketing for profit</strong> approach firsthand. See how we deliver verifiable returns, not just vanity metrics.
+            </p>
+
+            <!-- Main Content Grid: Deliverables Left, Bento Right -->
+            <div class="main-content-grid">
+                <!-- Left: Deliverables -->
+                <div class="deliverables-section">
+                    <div class="section-label">What's Included</div>
+                    
+                    <div class="deliverable-card">
+                        <div class="deliverable-header">
+                            <div class="deliverable-icon" aria-hidden="true">
+                                <!-- Lucide React Camera Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 class="deliverable-title">20-Minute Professional Photoshoot</h4>
+                            </div>
+                        </div>
+                        <p class="deliverable-description">
+                            Get stunning, high-quality images tailored specifically for your potential customers – perfect for your website, Google My Business, and social media.
+                        </p>
+                    </div>
+                    
+                    <div class="deliverable-card">
+                        <div class="deliverable-header">
+                            <div class="deliverable-icon" aria-hidden="true">
+                                <!-- Lucide React TrendingUp Icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                                    <polyline points="16 7 22 7 22 13"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <h4 class="deliverable-title">'Profit-Ready Visuals' Guide</h4>
+                            </div>
+                        </div>
+                        <p class="deliverable-description">
+                            We'll provide a step-by-step guide demonstrating exactly how to leverage these assets across your digital channels to directly drive customer engagement, inquiries, and ultimately, turn this visual investment into $600+ in profit for your business.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Bento Grid Carousel - Dual Column -->
+                <div class="bento-carousel">
+                    <!-- Left Column - Scrolls Up -->
+                    <div class="bento-column up">
+                        <div class="bento-track">
+                            <div class="bento-grid">
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&h=400&fit=crop&q=80" alt="Professional photography" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600&h=400&fit=crop&q=80" alt="Business photography" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80" alt="Marketing visuals" loading="lazy">
+                                </div>
+                            </div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="bento-grid">
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&h=400&fit=crop&q=80" alt="Professional photography" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600&h=400&fit=crop&q=80" alt="Business photography" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80" alt="Marketing visuals" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Scrolls Down -->
+                    <div class="bento-column down">
+                        <div class="bento-track">
+                            <div class="bento-grid">
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80" alt="Digital marketing" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=400&fit=crop&q=80" alt="Professional images" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80" alt="Business growth" loading="lazy">
+                                </div>
+                            </div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="bento-grid">
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80" alt="Digital marketing" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&h=400&fit=crop&q=80" alt="Professional images" loading="lazy">
+                                </div>
+                                <div class="bento-item">
+                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop&q=80" alt="Business growth" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <button class="cta-button" onclick="handleCtaClick()" aria-label="Get Your Profit-Ready Visuals for $199">
+                    Get Your Profit-Ready Visuals for $199!
+                </button>
+            </div>
+
+            <p class="small-print">
+                Limited slots available each month. Offer exclusive to businesses operating in the Brisbane metro area.
+            </p>
+        </div>
+
+        <div class="sr-only">
+            <p>Exclusive Brisbane offer: Professional photoshoot for $199 that generates $600+ in profit, including high-quality images and a profit-ready visuals guide for digital marketing success.</p>
+        </div>
+    </section>
+
+    <script>
+        function handleCtaClick() {
+            alert('CTA clicked - integrate with your booking form');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Home - Full Screen Image Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .header-section {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #d32f2f;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 60px;
+        }
+
+        .slider-wrapper {
+            margin-bottom: 100px;
+        }
+
+        .slider-container {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .slider-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+
+        .slider-main.image-right {
+            direction: rtl;
+        }
+
+        .slider-main.image-right > * {
+            direction: ltr;
+        }
+
+        .image-column {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 12rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-image.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .slider-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+        }
+
+        .slider-image:nth-child(1) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .slider-image:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .slider-image:nth-child(3) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .slider-image:nth-child(4) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .content-column {
+            background: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slider-content {
+            display: none;
+            flex: 1;
+        }
+
+        .slider-content.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideInContent 0.6s ease;
+        }
+
+        @keyframes slideInContent {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        .content-number {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #d32f2f;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .content-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .content-description {
+            font-size: 1.125rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .slider-nav {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot:hover {
+            background: #d32f2f;
+            transform: scale(1.2);
+        }
+
+        .nav-dot.active {
+            width: 40px;
+            border-radius: 6px;
+            background: #d32f2f;
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .nav-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #d32f2f;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .divider {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 3rem;
+            color: #d32f2f;
+        }
+
+        @media (max-width: 968px) {
+            .slider-main,
+            .slider-main.image-right {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .image-column {
+                min-height: 400px;
+            }
+
+            .slider-image {
+                font-size: 8rem;
+            }
+
+            .content-column {
+                padding: 40px;
+            }
+
+            .content-title {
+                font-size: 2.25rem;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 40px 15px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .intro-text {
+                font-size: 1.125rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-column {
+                padding: 30px 20px;
+            }
+
+            .content-title {
+                font-size: 1.75rem;
+            }
+
+            .image-column {
+                min-height: 300px;
+            }
+
+            .slider-image {
+                font-size: 6rem;
+            }
+
+            .slider-main {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="main-title">Your Business Shouldn't Accept, One-Size-Fits-All.</h1>
+            <p class="intro-text">
+                We reject cookie-cutter solutions that force you into a pre-defined box. Instead, our process begins with a deep dive into your specific market, your customers, and your ambition to grow!
+            </p>
+            <h2 class="section-title">Our Profit-Driving Services (The Solution)</h2>
+        </div>
+
+        <!-- First 4 Services Slider -->
+        <div class="slider-wrapper">
+            <div class="slider-container" id="slider-1">
+                <div class="slider-main">
+                    <div class="image-column">
+                        <div class="slider-image active">🎯</div>
+                        <div class="slider-image">🔍</div>
+                        <div class="slider-image">📍</div>
+                        <div class="slider-image">💻</div>
+                    </div>
+
+                    <div class="content-column">
+                        <div class="slider-content active">
+                            <div>
+                                <span class="content-icon">🎯</span>
+                                <div class="content-number">SERVICE 01</div>
+                                <h3 class="content-title">Performance Advertising</h3>
+                                <p class="content-description">
+                                    We deep research your business and its unique market. Through relentless A/B testing and data analysis, we identify the exact keywords and audiences that convert, then scale these proven channels to maximize your $1 Spent = $3+ Back goal.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slider-content">
+                            <div>
+                                <span class="content-icon">🔍</span>
+                                <div class="content-number">SERVICE 02</div>
+                                <h3 class="content-title">SEO (Search Engine Optimization)</h3>
+                                <p class="content-description">
+                                    Go beyond basic rankings. Our SEO strategies are built to capture high-intent organic traffic that converts. From technical optimization to content strategy, we ensure your business is visible exactly when potential customers are searching for what you offer, driving sustainable, profitable growth.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slider-content">
+                            <div>
+                                <span class="content-icon">📍</span>
+                                <div class="content-number">SERVICE 03</div>
+                                <h3 class="content-title">Local SEO</h3>
+                                <p class="content-description">
+                                    Dominate your local market. We optimize your online presence to ensure you're the first choice for customers in your geographic area. Perfect for brick-and-mortar businesses, our local SEO tactics drive foot traffic and local conversions directly to your door.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slider-content">
+                            <div>
+                                <span class="content-icon">💻</span>
+                                <div class="content-number">SERVICE 04</div>
+                                <h3 class="content-title">Web Design</h3>
+                                <p class="content-description">
+                                    Your website isn't just an online brochure; it's your primary sales tool. We design high-converting, user-friendly websites engineered for performance, not just aesthetics. Every element is optimized to guide visitors towards conversion, making your site a true profit machine.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="slider-nav">
+                            <div class="nav-dot active" onclick="goToSlide(0, 'slider-1')"></div>
+                            <div class="nav-dot" onclick="goToSlide(1, 'slider-1')"></div>
+                            <div class="nav-dot" onclick="goToSlide(2, 'slider-1')"></div>
+                            <div class="nav-dot" onclick="goToSlide(3, 'slider-1')"></div>
+                            <div class="nav-arrows">
+                                <button class="nav-button" onclick="prevSlide('slider-1')">←</button>
+                                <button class="nav-button" onclick="nextSlide('slider-1')">→</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">⬇️</div>
+
+        <!-- Next 4 Services Slider - Image on Right -->
+        <div class="slider-wrapper">
+            <div class="slider-container" id="slider-2">
+                <div class="slider-main image-right">
+                    <div class="image-column">
+                        <div class="slider-image active">📄</div>
+                        <div class="slider-image">📷</div>
+                        <div class="slider-image">🎬</div>
+                        <div class="slider-image">🛡️</div>
+                    </div>
+
+                    <div class="content-column">
+                        <div class="slider-content active">
+                            <div>
+                                <span class="content-icon">📄</span>
+                                <div class="content-number">SERVICE 05</div>
+                                <h3 class="content-title">Landing Pages</h3>
+                                <p class="content-description">
+                                    Turn clicks into customers. We create hyper-focused landing pages, optimized with persuasive copy and clear calls-to-action, specifically designed to convert paid traffic into leads and sales. Each page is a profit-generating funnel unto itself.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slider-content">
+                            <div>
+                                <span class="content-icon">📷</span>
+                                <div class="content-number">SERVICE 06</div>
+                                <h3 class="content-title">Photography</h3>
+                                <p class="content-description">
+                                    Visuals sell. Our professional photography services capture your brand's essence, products, and services in a way that resonates with your target audience, enhancing trust, engagement, and ultimately, conversion rates across all your digital channels.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slider-content">
+                            <div>
+                                <span class="content-icon">🎬</span>
+                                <div class="content-number">SERVICE 07</div>
+                                <h3 class="content-title">Videography</h3>
+                                <p class="content-description">
+                                    Engage, inform, and convert with compelling video content. From short-form ads to in-depth brand stories, our videography services help you connect with your audience on a deeper level, boosting brand recall and driving action.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slider-content">
+                            <div>
+                                <span class="content-icon">🛡️</span>
+                                <div class="content-number">SERVICE 08</div>
+                                <h3 class="content-title">Reputation Management</h3>
+                                <p class="content-description">
+                                    Your online reputation is your most valuable asset. We actively monitor, protect, and enhance your brand's image across all digital platforms, ensuring positive sentiment and building the trust essential for sustained business growth.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="slider-nav">
+                            <div class="nav-dot active" onclick="goToSlide(0, 'slider-2')"></div>
+                            <div class="nav-dot" onclick="goToSlide(1, 'slider-2')"></div>
+                            <div class="nav-dot" onclick="goToSlide(2, 'slider-2')"></div>
+                            <div class="nav-dot" onclick="goToSlide(3, 'slider-2')"></div>
+                            <div class="nav-arrows">
+                                <button class="nav-button" onclick="prevSlide('slider-2')">←</button>
+                                <button class="nav-button" onclick="nextSlide('slider-2')">→</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = {
+            'slider-1': 0,
+            'slider-2': 0
+        };
+
+        function goToSlide(index, sliderId) {
+            const slider = document.getElementById(sliderId);
+            currentSlide[sliderId] = index;
+
+            // Update images
+            const images = slider.querySelectorAll('.slider-image');
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+
+            // Update content
+            const contents = slider.querySelectorAll('.slider-content');
+            contents.forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+
+            // Update dots
+            const dots = slider.querySelectorAll('.nav-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide(sliderId) {
+            const totalSlides = document.getElementById(sliderId).querySelectorAll('.slider-image').length;
+            const nextIndex = (currentSlide[sliderId] + 1) % totalSlides;
+            goToSlide(nextIndex, sliderId);
+        }
+
+        function prevSlide(sliderId) {
+            const totalSlides = document.getElementById(sliderId).querySelectorAll('.slider-image').length;
+            const prevIndex = (currentSlide[sliderId] - 1 + totalSlides) % totalSlides;
+            goToSlide(prevIndex, sliderId);
+        }
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            nextSlide('slider-1');
+        }, 5000);
+
+        setInterval(() => {
+            nextSlide('slider-2');
+        }, 5300);
+    </script>
+</body>
+</html>
+

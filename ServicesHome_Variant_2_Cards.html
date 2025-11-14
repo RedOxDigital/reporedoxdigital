@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Home - Horizontal Carousel with Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #d32f2f 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .carousel-section {
+            background: white;
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
+        }
+
+        .carousel-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .carousel-tabs::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .carousel-tabs::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .carousel-tabs::-webkit-scrollbar-thumb {
+            background: #d32f2f;
+            border-radius: 10px;
+        }
+
+        .carousel-tab {
+            flex: 0 0 auto;
+            padding: 16px 24px;
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .carousel-tab:hover {
+            background: #fff;
+            border-color: #d32f2f;
+        }
+
+        .carousel-tab.active {
+            background: #d32f2f;
+            color: white;
+            box-shadow: 0 4px 16px rgba(211, 47, 47, 0.3);
+        }
+
+        .carousel-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .carousel-content-wrapper.image-right {
+            direction: rtl;
+        }
+
+        .carousel-content-wrapper.image-right > * {
+            direction: ltr;
+        }
+
+        .carousel-image-box {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .carousel-image.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .carousel-image:nth-child(1) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .carousel-image:nth-child(2) {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .carousel-image:nth-child(3) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .carousel-image:nth-child(4) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .carousel-description-box {
+            padding: 40px;
+        }
+
+        .carousel-description {
+            display: none;
+        }
+
+        .carousel-description.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .description-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .description-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d32f2f;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .description-text {
+            font-size: 1.125rem;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .navigation-arrows {
+            display: flex;
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: #d32f2f;
+            color: white;
+            border-color: #d32f2f;
+        }
+
+        .divider {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 3rem;
+        }
+
+        @media (max-width: 968px) {
+            .carousel-content-wrapper,
+            .carousel-content-wrapper.image-right {
+                grid-template-columns: 1fr;
+                direction: ltr;
+            }
+
+            .carousel-image-box {
+                height: 350px;
+            }
+
+            .carousel-image {
+                font-size: 6rem;
+            }
+
+            .carousel-section {
+                padding: 40px 30px;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .description-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 40px 15px;
+            }
+
+            .header-section {
+                padding: 40px 20px;
+            }
+
+            .carousel-section {
+                padding: 30px 20px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .intro-text {
+                font-size: 1.125rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .carousel-image-box {
+                height: 300px;
+            }
+
+            .carousel-image {
+                font-size: 5rem;
+            }
+
+            .description-title {
+                font-size: 1.75rem;
+            }
+
+            .carousel-description-box {
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1 class="main-title">Your Business Shouldn't Accept, One-Size-Fits-All.</h1>
+            <p class="intro-text">
+                We reject cookie-cutter solutions that force you into a pre-defined box. Instead, our process begins with a deep dive into your specific market, your customers, and your ambition to grow!
+            </p>
+            <h2 class="section-title">Our Profit-Driving Services (The Solution)</h2>
+        </div>
+
+        <!-- First 4 Services Carousel -->
+        <div class="carousel-section" id="carousel-1">
+            <div class="carousel-tabs">
+                <button class="carousel-tab active" onclick="showCarousel(0, 'carousel-1')">
+                    <span>🎯</span> Performance Advertising
+                </button>
+                <button class="carousel-tab" onclick="showCarousel(1, 'carousel-1')">
+                    <span>🔍</span> SEO
+                </button>
+                <button class="carousel-tab" onclick="showCarousel(2, 'carousel-1')">
+                    <span>📍</span> Local SEO
+                </button>
+                <button class="carousel-tab" onclick="showCarousel(3, 'carousel-1')">
+                    <span>💻</span> Web Design
+                </button>
+            </div>
+
+            <div class="carousel-content-wrapper">
+                <div class="carousel-image-box">
+                    <div class="carousel-image active">🎯</div>
+                    <div class="carousel-image">🔍</div>
+                    <div class="carousel-image">📍</div>
+                    <div class="carousel-image">💻</div>
+                </div>
+
+                <div class="carousel-description-box">
+                    <div class="carousel-description active">
+                        <span class="description-icon">🎯</span>
+                        <h3 class="description-title">Performance Advertising</h3>
+                        <p class="description-text">
+                            We deep research your business and its unique market. Through relentless A/B testing and data analysis, we identify the exact keywords and audiences that convert, then scale these proven channels to maximize your $1 Spent = $3+ Back goal.
+                        </p>
+                    </div>
+                    <div class="carousel-description">
+                        <span class="description-icon">🔍</span>
+                        <h3 class="description-title">SEO (Search Engine Optimization)</h3>
+                        <p class="description-text">
+                            Go beyond basic rankings. Our SEO strategies are built to capture high-intent organic traffic that converts. From technical optimization to content strategy, we ensure your business is visible exactly when potential customers are searching for what you offer, driving sustainable, profitable growth.
+                        </p>
+                    </div>
+                    <div class="carousel-description">
+                        <span class="description-icon">📍</span>
+                        <h3 class="description-title">Local SEO</h3>
+                        <p class="description-text">
+                            Dominate your local market. We optimize your online presence to ensure you're the first choice for customers in your geographic area. Perfect for brick-and-mortar businesses, our local SEO tactics drive foot traffic and local conversions directly to your door.
+                        </p>
+                    </div>
+                    <div class="carousel-description">
+                        <span class="description-icon">💻</span>
+                        <h3 class="description-title">Web Design</h3>
+                        <p class="description-text">
+                            Your website isn't just an online brochure; it's your primary sales tool. We design high-converting, user-friendly websites engineered for performance, not just aesthetics. Every element is optimized to guide visitors towards conversion, making your site a true profit machine.
+                        </p>
+                    </div>
+
+                    <div class="navigation-arrows">
+                        <button class="nav-arrow" onclick="prevCarousel('carousel-1')">←</button>
+                        <button class="nav-arrow" onclick="nextCarousel('carousel-1')">→</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">⬇️</div>
+
+        <!-- Next 4 Services Carousel - Image on Right -->
+        <div class="carousel-section" id="carousel-2">
+            <div class="carousel-tabs">
+                <button class="carousel-tab active" onclick="showCarousel(0, 'carousel-2')">
+                    <span>📄</span> Landing Pages
+                </button>
+                <button class="carousel-tab" onclick="showCarousel(1, 'carousel-2')">
+                    <span>📷</span> Photography
+                </button>
+                <button class="carousel-tab" onclick="showCarousel(2, 'carousel-2')">
+                    <span>🎬</span> Videography
+                </button>
+                <button class="carousel-tab" onclick="showCarousel(3, 'carousel-2')">
+                    <span>🛡️</span> Reputation Management
+                </button>
+            </div>
+
+            <div class="carousel-content-wrapper image-right">
+                <div class="carousel-image-box">
+                    <div class="carousel-image active">📄</div>
+                    <div class="carousel-image">📷</div>
+                    <div class="carousel-image">🎬</div>
+                    <div class="carousel-image">🛡️</div>
+                </div>
+
+                <div class="carousel-description-box">
+                    <div class="carousel-description active">
+                        <span class="description-icon">📄</span>
+                        <h3 class="description-title">Landing Pages</h3>
+                        <p class="description-text">
+                            Turn clicks into customers. We create hyper-focused landing pages, optimized with persuasive copy and clear calls-to-action, specifically designed to convert paid traffic into leads and sales. Each page is a profit-generating funnel unto itself.
+                        </p>
+                    </div>
+                    <div class="carousel-description">
+                        <span class="description-icon">📷</span>
+                        <h3 class="description-title">Photography</h3>
+                        <p class="description-text">
+                            Visuals sell. Our professional photography services capture your brand's essence, products, and services in a way that resonates with your target audience, enhancing trust, engagement, and ultimately, conversion rates across all your digital channels.
+                        </p>
+                    </div>
+                    <div class="carousel-description">
+                        <span class="description-icon">🎬</span>
+                        <h3 class="description-title">Videography</h3>
+                        <p class="description-text">
+                            Engage, inform, and convert with compelling video content. From short-form ads to in-depth brand stories, our videography services help you connect with your audience on a deeper level, boosting brand recall and driving action.
+                        </p>
+                    </div>
+                    <div class="carousel-description">
+                        <span class="description-icon">🛡️</span>
+                        <h3 class="description-title">Reputation Management</h3>
+                        <p class="description-text">
+                            Your online reputation is your most valuable asset. We actively monitor, protect, and enhance your brand's image across all digital platforms, ensuring positive sentiment and building the trust essential for sustained business growth.
+                        </p>
+                    </div>
+
+                    <div class="navigation-arrows">
+                        <button class="nav-arrow" onclick="prevCarousel('carousel-2')">←</button>
+                        <button class="nav-arrow" onclick="nextCarousel('carousel-2')">→</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = {
+            'carousel-1': 0,
+            'carousel-2': 0
+        };
+
+        function showCarousel(index, carouselId) {
+            const carousel = document.getElementById(carouselId);
+            currentIndex[carouselId] = index;
+            
+            // Update tabs
+            const tabs = carousel.querySelectorAll('.carousel-tab');
+            tabs.forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+
+            // Update images
+            const images = carousel.querySelectorAll('.carousel-image');
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+
+            // Update descriptions
+            const descriptions = carousel.querySelectorAll('.carousel-description');
+            descriptions.forEach((desc, i) => {
+                desc.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const totalItems = carousel.querySelectorAll('.carousel-tab').length;
+            const nextIndex = (currentIndex[carouselId] + 1) % totalItems;
+            showCarousel(nextIndex, carouselId);
+        }
+
+        function prevCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const totalItems = carousel.querySelectorAll('.carousel-tab').length;
+            const prevIndex = (currentIndex[carouselId] - 1 + totalItems) % totalItems;
+            showCarousel(prevIndex, carouselId);
+        }
+    </script>
+</body>
+</html>

@@ -307,3 +307,4 @@ The work done so far (image dimensions, lazy loading, priority hints) achieves *
 *All other HIGH & MEDIUM priority items: ✅ COMPLETED*
 
 
+

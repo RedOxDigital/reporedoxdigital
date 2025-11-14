@@ -1,68 +1,107 @@
 import React, { useState } from 'react'
+import { 
+  Layers, 
+  DollarSign, 
+  TrendingUp, 
+  HelpCircle, 
+  ChevronDown, 
+  ChevronUp,
+  Settings
+} from 'lucide-react'
 import FaqSchema from '../seo/FaqSchema'
 
 const Faq = ({ onCtaClick }) => {
+  const [openIndex, setOpenIndex] = useState(null)
   const [activeFaqCategory, setActiveFaqCategory] = useState('all')
+
+  // Toggle accordion
+  const toggleFaq = (index) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
 
   // FAQ category filter
   const handleFaqCategoryFilter = (category) => {
     setActiveFaqCategory(category)
-    const faqCards = document.querySelectorAll('.faq-card')
-    
-    faqCards.forEach(card => {
-      const cardCategory = card.getAttribute('data-category')
-      
-      if (category === 'all' || cardCategory === category) {
-        card.style.display = 'flex'
-        card.style.animation = 'fadeIn 0.3s ease-in-out'
-      } else {
-        card.style.display = 'none'
-      }
-    })
+    setOpenIndex(null) // Close all accordions when switching categories
+  }
+
+  // Get icon for category
+  const getCategoryIcon = (category) => {
+    switch (category) {
+      case 'services':
+        return Layers
+      case 'pricing':
+        return DollarSign
+      case 'results':
+        return TrendingUp
+      case 'process':
+        return Settings
+      default:
+        return HelpCircle
+    }
   }
 
   const faqData = [
     {
-      question: "How quickly can I expect to see results with your strategy?",
-      answer: "You're ready to stop wasting money on marketing that doesn't make sense. Most clients start seeing clarity within the first few weeks as we build your comprehensive plan. We create a clear, step-by-step strategy that makes all your online efforts work together, so every dollar you spend is working towards your business goals. The real transformation happens as your connected marketing efforts continuously build momentum over time."
+      question: "What makes Red Ox Digital different from other marketing agencies?",
+      answer: "We reject the 'doing digital' mindset. We operate on one principle: your digital marketing must generate profit. Our goal is simple: $1 Spent = $3+ Back. We're not an agency that reports on clicks and impressions. We're your Architect and Project Manager who designs profit-first strategies and manages vetted freelancers to execute them at a fraction of traditional agency costs. You get strategic expertise without the agency markup.",
+      category: "services"
     },
     {
-      question: "What makes your approach different from just running ads?",
-      answer: "We don't just drive traffic. We create your Blueprint for Sustainable Digital Growth. While others focus on boosting posts and running ads, we build a comprehensive plan that connects your website, social media, and email marketing as one team. You're not paying for clicks; you're investing in a clear strategy that creates a smooth and professional experience for your customers."
+      question: "How does your $1 Spent = $3+ Back model actually work?",
+      answer: "Every strategy we build starts and ends with one goal: verifiable ROI. Through relentless A/B testing, data analysis, and continuous optimization, we identify the exact channels and tactics that convert. We then scale only what's proven to generate consistent returns. We meticulously design campaigns to deliver this 3x multiplier, focusing only on activities with a clear, measurable path to revenue—not vanity metrics.",
+      category: "results"
     },
     {
-      question: "What types of businesses do you work with?",
-      answer: "We work with local businesses that are tired of leaving money on the table and want marketing that actually makes sense. Whether you're a professional service (dentist, med spa, lawyer), service area business (plumber, electrician, contractor), or any local business looking to stop wasting money on scattered marketing efforts, our strategy is designed to help you understand your customer's path and maximize every opportunity."
+      question: "What's included in your Custom 3x Growth Blueprint?",
+      answer: "Your Blueprint is a bespoke profit roadmap tailored specifically to your business. It includes: a deep dive into your market and competitors, identification of high-intent channels that convert (Performance Advertising, SEO, Local SEO), conversion-optimized web design and landing pages, professional photography and videography, and a clear implementation timeline. This comprehensive plan outlines the precise strategies designed to turn your marketing into a verifiable profit engine.",
+      category: "services"
     },
     {
-      question: "What exactly is included in your Growth Blueprint?",
-      answer: "Your complete strategy includes a comprehensive online review and competitive analysis, connecting all your marketing efforts (website, social media, email), creating your message and building trust through content, mapping your customer's journey, using data to get better results, and providing clear reports and planning for growth. Everything works together seamlessly to turn views into leads, leads into sales, and sales into advocates."
+      question: "How does your 4-step process work from start to finish?",
+      answer: "Step 1: Apply for Your 3x Growth Discussion—tell us about your business goals. Step 2: Free Alignment Chat—we validate if you're the right fit for our profit-driven approach. Step 3: Custom 3x Growth Blueprint—we craft your bespoke roadmap outlining exactly how we'll achieve your $1 Spent = $3+ Back target. Step 4: Launch & Continuous Profit Optimization—our expert network implements your campaigns, monitors performance, and scales what works.",
+      category: "process"
     },
     {
-      question: "How much does it cost to build my Growth Blueprint?",
-      answer: "Investment varies based on your business goals, market competition, and current systems. We offer two pathways: our complete Growth Blueprint for businesses ready to build their comprehensive strategy, or our $199 Photography & Strategy Session as an accessible entry point to experience our quality and start building trust with your audience immediately."
+      question: "Why shouldn't I just hire freelancers myself?",
+      answer: "Because you'll end up managing chaos instead of running your business. Freelancers are specialists in execution, not strategy. Who coordinates them? Who ensures they're all working toward YOUR profit goals? That's where we come in. We design the unified strategy, hire and manage vetted specialists, guarantee quality, and ensure every piece works together. You pay your strategist for strategy, not repetitive execution tasks—and you maintain full visibility with the option to take over management when ready.",
+      category: "services"
     },
     {
-      question: "How does your strategic approach actually work day-to-day?",
-      answer: "Once we've built your strategy, your marketing works as a connected team. We track your results and turn confusing numbers into simple, actionable insights. You'll know (in plain English) what's working, what's not, and how we can improve. We give you easy-to-understand reports that show your progress, and as your business grows, we make sure your marketing strategy grows with you."
+      question: "Can you work with my existing team (web developer, social media assistant)?",
+      answer: "Absolutely! We act as your Architect and Project Manager. If you have a trusted web developer or a junior staff member handling social media, we'll provide them with detailed, data-driven briefs and strategic direction. This turns their time into a highly valuable asset by giving them a clear, professionally designed plan to execute. They handle the posting; we handle the profit-driving strategy. You save time and money while guaranteeing their work contributes to measurable growth.",
+      category: "services"
+    },
+    {
+      question: "How do you keep costs low while delivering premium strategy?",
+      answer: "Simple: we separate high-value strategy from routine execution. You pay us a management fee for expert strategy and oversight—the thinking and planning that drives profit. For execution tasks (posting, scheduling, web integration), we manage vetted, lower-cost specialist freelancers (~$35/hr) who you pay directly. This ensures maximum transparency and cost efficiency. You get agency-level strategy at a fraction of the cost.",
+      category: "pricing"
+    },
+    {
+      question: "How will I know the strategy is actually making me money?",
+      answer: "We track what matters to your bottom line: qualified leads, booked appointments, new customers, and positive ROI. Forget vanity metrics like \"likes\" or \"impressions.\" Our dashboards showcase verifiable ROI, customer acquisition cost, and lifetime value. You'll get easy-to-understand reports (in plain English) showing exactly how your views turn into leads, leads into sales, and sales into advocates. Real results you can bank on.",
+      category: "results"
     },
     {
       question: "I'm not ready for the full strategy yet—what are my options?",
-      answer: "Start with our $199 Photography & Strategy Session! This is the first step in our Growth Blueprint. You'll get professional on-site photography (delivered in 24 hours), your 'First Step' consultation on using photos to build trust and convert leads, and a clear picture of how our comprehensive approach can transform your business. It's the perfect low-risk way to experience our quality and start making every view count."
+      answer: "Start with our $199 Profit-Ready Visuals package! This Brisbane-exclusive offer is your low-risk entry point to experience our digital marketing for profit approach firsthand. You'll get a 20-minute professional photoshoot (delivered in 24 hours), plus a step-by-step 'Profit-Ready Visuals' Guide showing exactly how to turn this investment into $600+ in profit. It's proof our approach works before you commit to the full Blueprint.",
+      category: "services"
     },
     {
-      question: "What if the strategy doesn't deliver results for my business?",
-      answer: "Our Blueprint for Sustainable Digital Growth is built on proven strategies that help you find the right words and content to attract your ideal customers. We only work with methods that maximize every dollar you invest. If you're not seeing improvements, we don't just walk away—we analyze, optimize, and adjust until your connected marketing efforts are performing at their peak. Your success is our success."
-    },
-    {
-      question: "How will I know if the strategy is working and making me money?",
-      answer: "We track what actually matters to your bottom line: qualified leads, booked appointments, new customers, and positive ROI. You'll have easy-to-understand reports showing exactly what's working. We turn confusing numbers into simple insights, showing you (in plain English) how your views are turning into leads, leads into sales, and sales into advocates. No vanity metrics—just real results you can understand and bank on."
+      question: "What if I'm primarily looking for website design or social media management?",
+      answer: "We're probably not the right fit. If you want a pretty website with no strategy behind it, or more \"likes\" on social media without measurable ROI, we won't be a good match. We work exclusively with businesses demanding measurable profit from their marketing—businesses aiming for that $1 Spent = $3+ Back vision. If profit is your priority, not just presence, let's talk.",
+      category: "services"
     }
   ]
 
   return (
     <>
-      <section className="faq-section" id="faq" aria-label="Frequently Asked Questions">
+      <section 
+        className="faq-section" 
+        id="faq" 
+        role="region"
+        aria-label="Frequently Asked Questions"
+      >
         <div className="faq-container">
           {/* Header */}
           <div className="faq-header">
@@ -70,7 +109,7 @@ const Faq = ({ onCtaClick }) => {
               YOUR QUESTIONS ANSWERED
             </h2>
             <p className="faq-subtitle">
-              Everything you need to know about creating your Blueprint for Sustainable Digital Growth and how we help you turn views into leads, leads into sales, and sales into advocates.
+              Everything you need to know about our profit-first approach, the $1 Spent = $3+ Back model, and how we transform your digital marketing from a cost center into a verifiable profit machine.
             </p>
           </div>
 
@@ -108,133 +147,55 @@ const Faq = ({ onCtaClick }) => {
             </button>
           </div>
 
-          {/* FAQ Cards Grid */}
+          {/* FAQ Accordion Grid */}
           <div className="faq-grid">
-            {/* FAQ Card 1 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'results' ? 'hidden' : ''}`} data-category="results">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12,6 12,12 16,14"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">How quickly can I expect to see results with your strategy?</h3>
-              <p className="faq-card-answer">
-                You're ready to stop wasting money on marketing that doesn't make sense. Most clients start seeing clarity within the first few weeks as we build your comprehensive plan. We create a clear, step-by-step strategy that makes all your online efforts work together, so every dollar you spend is working towards your business goals. The real transformation happens as your connected marketing efforts continuously build momentum over time.
-              </p>
-            </div>
-
-            {/* FAQ Card 2 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'services' ? 'hidden' : ''}`} data-category="services">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">What makes your approach different from just running ads?</h3>
-              <p className="faq-card-answer">
-                We don't just drive traffic. We create your Blueprint for Sustainable Digital Growth. While others focus on boosting posts and running ads, we build a comprehensive plan that connects your website, social media, and email marketing as one team. You're not paying for clicks; you're investing in a clear strategy that creates a smooth and professional experience for your customers.
-              </p>
-            </div>
-
-            {/* FAQ Card 3 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'services' ? 'hidden' : ''}`} data-category="services">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                  <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
-                  <line x1="12" y1="22.08" x2="12" y2="12"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">What types of businesses do you work with?</h3>
-              <p className="faq-card-answer">
-                We work with local businesses that are tired of leaving money on the table and want marketing that actually makes sense. Whether you're a professional service (dentist, med spa, lawyer), service area business (plumber, electrician, contractor), or any local business looking to stop wasting money on scattered marketing efforts, our strategy is designed to help you understand your customer's path and maximize every opportunity.
-              </p>
-            </div>
-
-            {/* FAQ Card 4 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'services' ? 'hidden' : ''}`} data-category="services">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                  <line x1="16" y1="2" x2="16" y2="6"/>
-                  <line x1="8" y1="2" x2="8" y2="6"/>
-                  <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">What exactly is included in your Growth Blueprint?</h3>
-              <p className="faq-card-answer">
-                Your complete strategy includes a comprehensive online review and competitive analysis, connecting all your marketing efforts (website, social media, email), creating your message and building trust through content, mapping your customer's journey, using data to get better results, and providing clear reports and planning for growth. Everything works together seamlessly to turn views into leads, leads into sales, and sales into advocates.
-              </p>
-            </div>
-
-            {/* FAQ Card 5 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'pricing' ? 'hidden' : ''}`} data-category="pricing">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="1" x2="12" y2="23"/>
-                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">How much does it cost to build my Growth Blueprint?</h3>
-              <p className="faq-card-answer">
-                Investment varies based on your business goals, market competition, and current systems. We offer two pathways: our complete Growth Blueprint for businesses ready to build their comprehensive strategy, or our $199 Photography & Strategy Session as an accessible entry point to experience our quality and start building trust with your audience immediately.
-              </p>
-            </div>
-
-            {/* FAQ Card 6 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'process' ? 'hidden' : ''}`} data-category="process">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                  <circle cx="12" cy="13" r="3"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">How does your strategic approach actually work day-to-day?</h3>
-              <p className="faq-card-answer">
-                Once we've built your strategy, your marketing works as a connected team. We track your results and turn confusing numbers into simple, actionable insights. You'll know (in plain English) what's working, what's not, and how we can improve. We give you easy-to-understand reports that show your progress, and as your business grows, we make sure your marketing strategy grows with you.
-              </p>
-            </div>
-
-            {/* FAQ Card 7 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'services' ? 'hidden' : ''}`} data-category="services">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">I'm not ready for the full strategy yet—what are my options?</h3>
-              <p className="faq-card-answer">
-                Start with our $199 Photography & Strategy Session! This is the first step in our Growth Blueprint. You'll get professional on-site photography (delivered in 24 hours), your 'First Step' consultation on using photos to build trust and convert leads, and a clear picture of how our comprehensive approach can transform your business. It's the perfect low-risk way to experience our quality and start making every view count.
-              </p>
-            </div>
-
-            {/* FAQ Card 8 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'results' ? 'hidden' : ''}`} data-category="results">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">What if the strategy doesn't deliver results for my business?</h3>
-              <p className="faq-card-answer">
-                Our Blueprint for Sustainable Digital Growth is built on proven strategies that help you find the right words and content to attract your ideal customers. We only work with methods that maximize every dollar you invest. If you're not seeing improvements, we don't just walk away—we analyze, optimize, and adjust until your connected marketing efforts are performing at their peak. Your success is our success.
-              </p>
-            </div>
-
-            {/* FAQ Card 9 */}
-            <div className={`faq-card ${activeFaqCategory !== 'all' && activeFaqCategory !== 'process' ? 'hidden' : ''}`} data-category="process">
-              <div className="faq-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
-                </svg>
-              </div>
-              <h3 className="faq-card-question">How will I know if the strategy is working and making me money?</h3>
-              <p className="faq-card-answer">
-                We track what actually matters to your bottom line: qualified leads, booked appointments, new customers, and positive ROI. You'll have easy-to-understand reports showing exactly what's working. We turn confusing numbers into simple insights, showing you (in plain English) how your views are turning into leads, leads into sales, and sales into advocates. No vanity metrics—just real results you can understand and bank on.
-              </p>
-            </div>
+            {faqData
+              .filter(faq => activeFaqCategory === 'all' || faq.category === activeFaqCategory)
+              .map((faq, index) => (
+                <div 
+                  key={index}
+                  className="faq-accordion-card"
+                  data-category={faq.category}
+                >
+                  <button
+                    className="faq-accordion-header"
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={openIndex === index}
+                    aria-controls={`faq-content-${index}`}
+                  >
+                    <div className="faq-question-wrapper">
+                      <div className="faq-card-icon">
+                        {React.createElement(getCategoryIcon(faq.category), { 
+                          size: 20,
+                          strokeWidth: 2
+                        })}
+                      </div>
+                      <h3 className="faq-card-question">{faq.question}</h3>
+                    </div>
+                    <span className="faq-toggle-icon">
+                      {openIndex === index ? (
+                        <ChevronUp size={24} strokeWidth={2} />
+                      ) : (
+                        <ChevronDown size={24} strokeWidth={2} />
+                      )}
+                    </span>
+                  </button>
+                  <div
+                    id={`faq-content-${index}`}
+                    className="faq-accordion-content"
+                    aria-hidden={openIndex !== index}
+                    style={{
+                      maxHeight: openIndex === index ? '1000px' : '0',
+                      opacity: openIndex === index ? '1' : '0',
+                      overflow: 'hidden',
+                      transition: 'max-height 0.4s ease-in-out, opacity 0.4s ease-in-out'
+                    }}
+                  >
+                    <p className="faq-card-answer">{faq.answer}</p>
+                  </div>
+                </div>
+              ))
+            }
           </div>
 
           {/* Final CTA */}

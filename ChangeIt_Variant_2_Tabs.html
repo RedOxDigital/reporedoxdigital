@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChangeIt Variant 2 - Tab Interface (Material Design)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #ffffff;
+            color: #202124;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #FEE2E2;
+            color: #DC2626;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .headline {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .intro {
+            font-size: 1.25rem;
+            color: #5f6368;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .intro strong {
+            color: #DC2626;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #e8eaed;
+            margin-bottom: 48px;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 20px 32px;
+            background: transparent;
+            border: none;
+            color: #5f6368;
+            font-size: 1.125rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #DC2626;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: #202124;
+            background: #f8f9fa;
+        }
+
+        .tab-button.active {
+            color: #DC2626;
+        }
+
+        .tab-button.active::after {
+            transform: scaleX(1);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-text h3 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        .content-text p {
+            font-size: 1.125rem;
+            color: #5f6368;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 1rem;
+            color: #5f6368;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            background: #FEE2E2;
+            color: #DC2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .content-visual {
+            position: relative;
+            padding: 48px;
+            background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .metric-display {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #DC2626;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .metric-label {
+            font-size: 1.5rem;
+            color: #991B1B;
+            font-weight: 500;
+        }
+
+        .metric-arrow {
+            font-size: 3rem;
+            color: #DC2626;
+            margin: 20px 0;
+        }
+
+        .learn-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: #DC2626;
+            color: #ffffff;
+            border: none;
+            border-radius: 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .learn-more-btn:hover {
+            background: #b91c1c;
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 968px) {
+            .tab-content.active {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .tab-navigation {
+                flex-direction: column;
+                border-bottom: none;
+            }
+
+            .tab-button {
+                border-bottom: 1px solid #e8eaed;
+            }
+
+            .tab-button::after {
+                left: 0;
+                right: auto;
+                width: 3px;
+                height: 100%;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="label">OUR APPROACH</div>
+            <h2 class="headline">How Red Ox Digital Changes All That.</h2>
+            <p class="intro">
+                We reject the "doing digital" mindset. We operate on one principle: <strong>your digital marketing must generate profit.</strong>
+            </p>
+        </div>
+
+        <div class="tab-navigation">
+            <button class="tab-button active" data-tab="profit-first">
+                Profit-First Planning
+            </button>
+            <button class="tab-button" data-tab="bottom-line">
+                Bottom-Line Partnership
+            </button>
+        </div>
+
+        <!-- Tab 1: Profit-First Planning -->
+        <div class="tab-content active" data-content="profit-first">
+            <div class="content-text">
+                <h3>Profit-First Planning</h3>
+                <p>
+                    Every strategy we build starts and ends with one goal in mind: <strong>$1 Spent = $3+ Back</strong>. We meticulously design campaigns to deliver this multiplier, focusing only on the channels and tactics that have a clear, measurable path to revenue.
+                </p>
+                <ul class="feature-list">
+                    <li>Deep market research and competitor analysis</li>
+                    <li>Relentless A/B testing and data analysis</li>
+                    <li>Identify exact keywords and audiences that convert</li>
+                    <li>Scale only proven, profitable channels</li>
+                    <li>Zero vanity metrics—only revenue drivers</li>
+                </ul>
+                <button class="learn-more-btn">
+                    <span>See How It Works</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0L6.59 1.41L12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="content-visual">
+                <div class="metric-display">
+                    <div class="metric-value">$1</div>
+                    <div class="metric-label">Spent</div>
+                    <div class="metric-arrow">↓</div>
+                    <div class="metric-value">$3+</div>
+                    <div class="metric-label">Back</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Bottom-Line Partnership -->
+        <div class="tab-content" data-content="bottom-line">
+            <div class="content-text">
+                <h3>Bottom-Line Partnership</h3>
+                <p>
+                    Forget vanity metrics. We don't report on clicks; we partner with you on your actual bottom line. Our dashboards showcase verifiable ROI, customer acquisition cost, and lifetime value – the numbers that truly matter to your business's growth.
+                </p>
+                <ul class="feature-list">
+                    <li>Real-time ROI tracking and reporting</li>
+                    <li>Customer acquisition cost (CAC) optimization</li>
+                    <li>Lifetime value (LTV) maximization</li>
+                    <li>Clear profit attribution across all channels</li>
+                    <li>Monthly profit reviews—not vanity reports</li>
+                </ul>
+                <button class="learn-more-btn">
+                    <span>See Our Dashboards</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0L6.59 1.41L12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="content-visual">
+                <div class="metric-display">
+                    <div style="font-size: 1.5rem; color: #991B1B; margin-bottom: 20px;">We Track What Matters</div>
+                    <div class="metric-value">ROI</div>
+                    <div class="metric-label">Not Clicks</div>
+                    <div style="margin: 30px 0; font-size: 2rem; color: #DC2626;">•••</div>
+                    <div class="metric-value">CAC</div>
+                    <div class="metric-label">Not Impressions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.dataset.tab;
+
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.querySelector(`[data-content="${tabId}"]`).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

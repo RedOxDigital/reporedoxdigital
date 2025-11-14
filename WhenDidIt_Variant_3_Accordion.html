@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhenDidIt Variant 3 - Accordion with Side-by-Side Image Reveal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: #ffffff;
+            color: #2A323C;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .headline {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            line-height: 1.2;
+        }
+
+        .headline .highlight {
+            text-decoration: underline;
+            text-decoration-color: #DC2626;
+            text-decoration-thickness: 4px;
+            text-underline-offset: 6px;
+        }
+
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .accordion-item {
+            border-radius: 20px;
+            overflow: hidden;
+            background: #F9FAFB;
+            border: 2px solid #E5E7EB;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item.active {
+            background: #ffffff;
+            border-color: #DC2626;
+            box-shadow: 0 12px 40px rgba(220, 38, 38, 0.15);
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 28px 32px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .accordion-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .accordion-number {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: #DC2626;
+            color: #ffffff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-number {
+            transform: scale(1.1);
+        }
+
+        .accordion-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #2A323C;
+            line-height: 1.3;
+        }
+
+        .accordion-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            background: #E5E7EB;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            color: #2A323C;
+        }
+
+        .accordion-item.active .accordion-icon {
+            background: #DC2626;
+            color: #ffffff;
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            padding: 0 32px;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 600px;
+            opacity: 1;
+            padding: 0 32px 32px 32px;
+        }
+
+        .accordion-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .accordion-description {
+            font-size: 1.05rem;
+            color: #4B5563;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .accordion-stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            flex: 1;
+            padding: 16px;
+            background: #FEE2E2;
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #DC2626;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #991B1B;
+            font-weight: 500;
+        }
+
+        .accordion-image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            height: 340px;
+            transform: translateX(20px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-item.active .accordion-image-wrapper {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .accordion-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 968px) {
+            .accordion-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .accordion-image-wrapper {
+                height: 240px;
+                transform: translateY(20px);
+            }
+
+            .accordion-item.active .accordion-image-wrapper {
+                transform: translateY(0);
+            }
+
+            .accordion-title {
+                font-size: 1.1rem;
+            }
+
+            .accordion-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="headline">
+            When Did Digital Marketing Become Something You Just Did, and <span class="highlight">Stop Being for Profit!</span>
+        </h2>
+
+        <div class="accordion">
+            <div class="accordion-item" data-item="1">
+                <div class="accordion-header">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-number">1</div>
+                        <h3 class="accordion-title">The Rise of "Vanity Metrics"</h3>
+                    </div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <p class="accordion-description">As platforms like social media grew, metrics like "likes," "shares," "impressions," and "clicks" became easy to report. While these can indicate engagement, they often don't directly correlate with revenue. Agencies and internal teams started optimizing for these easier-to-achieve numbers rather than the harder-to-track ROI.</p>
+                        <div class="accordion-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">85%</span>
+                                <span class="stat-label">Track vanity metrics</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">12%</span>
+                                <span class="stat-label">Track actual ROI</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="Vanity Metrics Dashboard" class="accordion-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-item="2">
+                <div class="accordion-header">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-number">2</div>
+                        <h3 class="accordion-title">Increased Complexity & Overwhelm</h3>
+                    </div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <p class="accordion-description">Digital marketing isn't just one thing anymore. It's SEO, SEM, social media, content marketing, email marketing, display ads, video, analytics, conversion rate optimization... the sheer volume of channels and tactics makes it overwhelming. Many businesses simply try to "do a bit of everything" without a cohesive, profit-driven strategy.</p>
+                        <div class="accordion-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">12+</span>
+                                <span class="stat-label">Marketing channels</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">67%</span>
+                                <span class="stat-label">Feel overwhelmed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=700&q=80" alt="Marketing Complexity" class="accordion-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-item="3">
+                <div class="accordion-header">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-number">3</div>
+                        <h3 class="accordion-title">The "Keeping Up With The Joneses" Effect</h3>
+                    </div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <p class="accordion-description">Competitors are online, so businesses feel they have to be online. This leads to reactive, rather than proactive, marketing where the goal is simply presence, not necessarily profit.</p>
+                        <div class="accordion-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">73%</span>
+                                <span class="stat-label">Follow competitors</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">$0</span>
+                                <span class="stat-label">Strategy investment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=80" alt="Competition" class="accordion-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-item="4">
+                <div class="accordion-header">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-number">4</div>
+                        <h3 class="accordion-title">Lack of Clear Attribution & Tracking</h3>
+                    </div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <p class="accordion-description">Especially for smaller businesses, truly understanding the journey from ad click to customer purchase can be difficult. Without robust analytics, it's hard to prove ROI, so focus shifts to more visible (even if less valuable) metrics.</p>
+                        <div class="accordion-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">58%</span>
+                                <span class="stat-label">Can't track ROI</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">3hr</span>
+                                <span class="stat-label">Weekly on reports</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80" alt="Analytics Dashboard" class="accordion-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-item="5">
+                <div class="accordion-header">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-number">5</div>
+                        <h3 class="accordion-title">Agency Model Incentives</h3>
+                    </div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <p class="accordion-description">Some agencies are incentivized by ad spend (taking a percentage) rather than actual client profit. This can lead to recommendations for larger budgets or broader campaigns that generate more clicks, even if the conversion rate is poor.</p>
+                        <div class="accordion-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">15%</span>
+                                <span class="stat-label">Commission on spend</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">$0</span>
+                                <span class="stat-label">Performance tied to profit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=700&q=80" alt="Agency Meeting" class="accordion-image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item" data-item="6">
+                <div class="accordion-header">
+                    <div class="accordion-title-wrapper">
+                        <div class="accordion-number">6</div>
+                        <h3 class="accordion-title">"Best Practices" vs. Bespoke Strategy</h3>
+                    </div>
+                    <div class="accordion-icon">+</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <p class="accordion-description">The proliferation of generic "digital marketing best practices" often leads to cookie-cutter campaigns that aren't optimized for a specific business's unique profit levers.</p>
+                        <div class="accordion-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">91%</span>
+                                <span class="stat-label">Use templates</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">9%</span>
+                                <span class="stat-label">Custom strategy</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&q=80" alt="Bespoke Strategy" class="accordion-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const items = document.querySelectorAll('.accordion-item');
+        
+        items.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                items.forEach(i => i.classList.remove('active'));
+                
+                // Open clicked item if it wasn't already open
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

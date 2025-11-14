@@ -1,0 +1,307 @@
+/* WhenDidIt Component Styles - Flip Card Design */
+
+.when-did-it-container {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F9FAFB 0%, #E5E7EB 100%);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.when-did-it-content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.when-did-it-headline {
+  font-size: clamp(2.1rem, 5.6vw, 4.2rem) !important;
+  font-weight: 400 !important;
+  text-align: center;
+  margin-bottom: 60px;
+  line-height: 1.1;
+  color: #2A323C;
+  letter-spacing: -0.02em;
+}
+
+.when-did-it-highlight {
+  text-decoration: underline;
+  text-decoration-color: #DC2626;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+}
+
+/* Flip Tiles Grid */
+.when-did-it-tiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.when-did-it-tile {
+  height: 420px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.when-did-it-tile-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.when-did-it-tile.flipped .when-did-it-tile-inner {
+  transform: rotateY(180deg);
+}
+
+.when-did-it-tile-front,
+.when-did-it-tile-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* Front of Tile */
+.when-did-it-tile-front {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.when-did-it-tile-front-image {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.when-did-it-tile-front-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.when-did-it-tile:hover .when-did-it-tile-front-image img {
+  transform: scale(1.08);
+}
+
+.when-did-it-tile-front-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.when-did-it-tile-front-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #DC2626;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+.when-did-it-tile-front-content {
+  padding: 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.when-did-it-tile-front-number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: #FEE2E2;
+  color: #DC2626;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.when-did-it-tile-front-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2A323C;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.when-did-it-tile-front-preview {
+  font-size: 0.95rem;
+  color: #6B7280;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.when-did-it-tile-front-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #DC2626;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 16px;
+}
+
+.when-did-it-tile-front-cta svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.when-did-it-tile:hover .when-did-it-tile-front-cta svg {
+  transform: translateX(4px);
+}
+
+/* Back of Tile */
+.when-did-it-tile-back {
+  background: #DC2626;
+  transform: rotateY(180deg);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+}
+
+.when-did-it-tile-back-number {
+  font-size: 4rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.when-did-it-tile-back-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.when-did-it-tile-back-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.when-did-it-tile-back-close {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  align-self: flex-start;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.when-did-it-tile-back-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .when-did-it-tiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .when-did-it-tiles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .when-did-it-tile {
+    height: 380px;
+  }
+
+  .when-did-it-content-wrapper {
+    padding: 30px 20px;
+  }
+
+  .when-did-it-headline {
+    font-size: clamp(2.1rem, 5.6vw, 4.2rem) !important;
+    margin-bottom: 40px;
+  }
+
+  .when-did-it-tile-front-content {
+    padding: 24px;
+  }
+
+  .when-did-it-tile-back {
+    padding: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .when-did-it-tile {
+    height: 360px;
+  }
+
+  .when-did-it-tile-front-image {
+    height: 180px;
+  }
+
+  .when-did-it-tile-front-title {
+    font-size: 1.25rem;
+  }
+
+  .when-did-it-tile-front-preview {
+    font-size: 0.875rem;
+  }
+
+  .when-did-it-tile-back-number {
+    font-size: 3rem;
+  }
+
+  .when-did-it-tile-back-title {
+    font-size: 1.25rem;
+  }
+
+  .when-did-it-tile-back-description {
+    font-size: 0.9375rem;
+  }
+}
+

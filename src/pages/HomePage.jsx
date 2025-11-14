@@ -8,13 +8,13 @@ import ServiceSchema from '../components/seo/ServiceSchema'
 import Breadcrumbs from '../components/ui/Breadcrumbs'
 import NavigationBar from '../components/sections/NavigationBar'
 import Hero from '../components/sections/Hero'
-import Services from '../components/sections/Services'
-import ProblemAgitationSolution from '../components/sections/ProblemAgitationSolution'
+import WhenDidIt from '../components/sections/WhenDidIt'
+import ChangeIt from '../components/sections/ChangeIt'
+import ServicesHome from '../components/sections/ServicesHome'
+import HowItWorksHome from '../components/sections/HowItWorksHome'
+import ProfitReadyVisuals from '../components/sections/ProfitReadyVisuals'
 
 // Lazy load heavy components
-const MythBusting = lazy(() => import('../components/sections/MythBusting'))
-const HowItWorks = lazy(() => import('../components/sections/HowItWorks'))
-const PhotographyServices = lazy(() => import('../components/sections/PhotographyServices'))
 const Testimonials = lazy(() => import('../components/sections/Testimonials'))
 const Faq = lazy(() => import('../components/sections/Faq'))
 const GoogleMapSection = lazy(() => import('../components/sections/GoogleMapSection'))
@@ -257,25 +257,25 @@ const HomePage = () => {
         {/* Hero Section */}
         <Hero onCtaClick={openPanel} />
 
-      {/* Services Section */}
-        <Services onCtaClick={openPanel} />
+        {/* When Did It Section */}
+        <WhenDidIt onCtaClick={openPanel} />
 
-        {/* Problem-Agitation-Solution Section */}
-        <ProblemAgitationSolution onCtaClick={openPanel} />
+        {/* Change It Section */}
+        <ChangeIt onCtaClick={openPanel} />
+
+        {/* Services Home Section */}
+        <ServicesHome onCtaClick={openPanel} />
+
+        {/* How It Works Home Section */}
+        <HowItWorksHome onCtaClick={openPanel} />
+
+        {/* Profit Ready Visuals Section */}
+        <ProfitReadyVisuals onCtaClick={openPanel} />
 
       {/* Lazy-loaded sections with Suspense */}
       <Suspense fallback={<div style={{minHeight: '100vh', background: 'hsl(var(--creative-secondary))'}} />}>
-        {/* Myth Busting Section */}
-        <MythBusting onCtaClick={openPanel} />
-
-        {/* How It Works Section */}
-        <HowItWorks onCtaClick={openPanel} />
-
-        {/* Photography Services Section */}
-        <PhotographyServices onCtaClick={openPanel} />
-
-        {/* Testimonials Section */}
-        <Testimonials />
+        {/* Testimonials Section - Hidden until real testimonials are available */}
+        {/* <Testimonials /> */}
 
         {/* Resources/Blog Section - Hidden until content is ready */}
         {/* <ResourcesSection /> */}

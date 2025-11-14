@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChangeIt Variant 1 - Side-by-Side Cards (Google Chrome Style)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f8f9fa;
+            color: #202124;
+            line-height: 1.6;
+            padding: 60px 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #5f6368;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .headline {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .intro {
+            font-size: 1.25rem;
+            color: #5f6368;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        .intro .highlight {
+            color: #DC2626;
+            font-weight: 500;
+        }
+
+        /* Two Column Layout */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 48px 40px;
+            box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #DC2626 0%, #EF4444 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before,
+        .card.active::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            box-shadow: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .card-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: #FEE2E2;
+            color: #DC2626;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #5f6368;
+            line-height: 1.7;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card.active .card-description {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+
+        .card-toggle {
+            position: absolute;
+            bottom: 32px;
+            right: 32px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #f1f3f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #5f6368;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .card.active .card-toggle {
+            background: #DC2626;
+            color: #ffffff;
+            transform: rotate(45deg);
+        }
+
+        .card-toggle:hover {
+            background: #e8eaed;
+        }
+
+        .card.active .card-toggle:hover {
+            background: #b91c1c;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+            border-radius: 28px;
+            color: #ffffff;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .cta-description {
+            font-size: 1.125rem;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: #ffffff;
+            color: #DC2626;
+            border: none;
+            border-radius: 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 968px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .card {
+                padding: 36px 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="label">Our Approach</div>
+            <h2 class="headline">How Red Ox Digital Changes All That.</h2>
+            <p class="intro">
+                We reject the <span class="highlight">"doing digital"</span> mindset. We operate on one principle: your digital marketing must generate profit.
+            </p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card" data-card="1">
+                <div class="card-number">1</div>
+                <h3 class="card-title">Profit-First Planning</h3>
+                <p class="card-description">
+                    Every strategy we build starts and ends with one goal in mind: $1 Spent = $3+ Back. We meticulously design campaigns to deliver this multiplier, focusing only on the channels and tactics that have a clear, measurable path to revenue.
+                </p>
+                <button class="card-toggle" aria-label="Expand">+</button>
+            </div>
+
+            <div class="card" data-card="2">
+                <div class="card-number">2</div>
+                <h3 class="card-title">Bottom-Line Partnership</h3>
+                <p class="card-description">
+                    Forget vanity metrics. We don't report on clicks; we partner with you on your actual bottom line. Our dashboards showcase verifiable ROI, customer acquisition cost, and lifetime value – the numbers that truly matter to your business's growth. We translate digital performance into business profit.
+                </p>
+                <button class="card-toggle" aria-label="Expand">+</button>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3 class="cta-title">Ready to Stop Accepting Clicks?</h3>
+            <p class="cta-description">Let's transform your digital marketing into a profit machine with our proven $1 = $3+ Back approach.</p>
+            <button class="cta-button">
+                <span>Get Your Custom Blueprint</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 0L6.59 1.41L12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Toggle current card
+                this.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Home - Chrome Inspired Design</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #ffffff;
+            color: #202124;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .header-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #FEE2E2;
+            color: #DC2626;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .main-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .intro-text {
+            font-size: 1.25rem;
+            color: #5f6368;
+            line-height: 1.8;
+        }
+
+        .intro-text strong {
+            color: #DC2626;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: #202124;
+            margin-top: 40px;
+        }
+
+        .services-section {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 80px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .services-grid.image-left {
+            grid-template-columns: 500px 1fr;
+        }
+
+        .image-area {
+            position: sticky;
+            top: 100px;
+        }
+
+        .services-grid.image-left .image-area {
+            order: 1;
+        }
+
+        .services-grid.image-left .services-list {
+            order: 2;
+        }
+
+        .image-box {
+            width: 100%;
+            height: 450px;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .service-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%);
+        }
+
+        .service-image.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+        }
+
+        .progress-indicator {
+            display: none;
+        }
+
+        .service-item {
+            border-radius: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #e8eaed;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-header {
+            padding: 24px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .service-header:hover {
+            background: #f8f9fa;
+        }
+
+        .service-item.active .service-header {
+            background: transparent;
+        }
+
+        .service-item.active .service-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #DC2626;
+        }
+
+        .service-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FEE2E2;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            color: #DC2626;
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2;
+        }
+
+        .service-item.active .service-icon {
+            background: #DC2626;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .service-title-wrapper {
+            flex: 1;
+        }
+
+        .service-title {
+            font-size: 1.375rem;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 0;
+            line-height: 1.3;
+            transition: color 0.2s ease;
+        }
+
+        .service-item.active .service-title {
+            color: #DC2626;
+        }
+
+        .service-description {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .service-item.active .service-description {
+            max-height: 300px;
+            padding: 0 20px 24px 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-description p {
+            font-size: 1rem;
+            color: #5f6368;
+            line-height: 1.7;
+            padding-left: 80px;
+        }
+
+        .divider {
+            display: none;
+        }
+
+        @media (max-width: 1100px) {
+            .services-grid,
+            .services-grid.image-left {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .image-area {
+                position: relative;
+                top: 0;
+                order: -1;
+            }
+
+            .services-grid.image-left .image-area {
+                order: -1;
+            }
+
+            .services-grid.image-left .services-list {
+                order: unset;
+            }
+
+
+            .service-image {
+                font-size: 6rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 60px 20px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .intro-text {
+                font-size: 1.125rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .service-header {
+                padding: 20px 16px;
+            }
+
+            .service-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .service-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .service-title {
+                font-size: 1.125rem;
+            }
+
+            .service-description p {
+                font-size: 0.9375rem;
+                padding-left: 70px;
+            }
+
+            .service-item.active .service-description {
+                padding: 0 16px 20px 16px;
+            }
+
+            .image-box {
+                height: 300px;
+            }
+
+            .service-image {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="label">OUR SERVICES</div>
+            <h1 class="main-title">Your Business Shouldn't Accept One-Size-Fits-All</h1>
+            <p class="intro-text">
+                We reject cookie-cutter solutions. Our process begins with a deep dive into your specific market, your customers, and <strong>your ambition to grow</strong>.
+            </p>
+            <h2 class="section-title">Our Profit-Driving Services</h2>
+        </div>
+
+        <!-- First 4 Services - Image on Right -->
+        <div class="services-section">
+            <div class="services-grid" id="group-1">
+                <div class="services-list">
+                    <!-- Progress Indicator -->
+                    <div class="progress-indicator">
+                        <div class="progress-line active"></div>
+                        <div class="progress-line"></div>
+                        <div class="progress-line"></div>
+                        <div class="progress-line"></div>
+                    </div>
+
+                    <div class="service-item active">
+                        <button class="service-header" onclick="toggleService(0, 'group-1')">
+                            <div class="service-icon">
+                                <i data-lucide="target"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">Performance Advertising</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>Deep market research and A/B testing to identify keywords and audiences that convert, maximizing your $1 spent = $3+ back goal.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <button class="service-header" onclick="toggleService(1, 'group-1')">
+                            <div class="service-icon">
+                                <i data-lucide="search"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">SEO (Search Engine Optimization)</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>Capture high-intent organic traffic with technical optimization and content strategy that ensures visibility when customers are searching.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <button class="service-header" onclick="toggleService(2, 'group-1')">
+                            <div class="service-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">Local SEO</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>Dominate your local market and become the first choice for customers in your area, driving foot traffic and local conversions.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <button class="service-header" onclick="toggleService(3, 'group-1')">
+                            <div class="service-icon">
+                                <i data-lucide="monitor"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">Web Design</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>High-converting, user-friendly websites engineered for performance. Every element guides visitors towards conversion.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-area">
+                    <div class="image-box">
+                        <div class="service-image active" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop');"></div>
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&h=600&fit=crop');"></div>
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&h=600&fit=crop');"></div>
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=600&fit=crop');"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider">⬇</div>
+
+        <!-- Next 4 Services - Image on Left -->
+        <div class="services-section">
+            <div class="services-grid image-left" id="group-2">
+                <div class="services-list">
+                    <!-- Progress Indicator -->
+                    <div class="progress-indicator">
+                        <div class="progress-line active"></div>
+                        <div class="progress-line"></div>
+                        <div class="progress-line"></div>
+                        <div class="progress-line"></div>
+                    </div>
+
+                    <div class="service-item active">
+                        <button class="service-header" onclick="toggleService(0, 'group-2')">
+                            <div class="service-icon">
+                                <i data-lucide="file-text"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">Landing Pages</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>Hyper-focused landing pages with persuasive copy and clear CTAs, designed to convert paid traffic into leads and sales.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <button class="service-header" onclick="toggleService(1, 'group-2')">
+                            <div class="service-icon">
+                                <i data-lucide="camera"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">Photography</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>Professional photography that captures your brand's essence and resonates with your audience, enhancing trust and engagement.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <button class="service-header" onclick="toggleService(2, 'group-2')">
+                            <div class="service-icon">
+                                <i data-lucide="video"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">Videography</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>Compelling video content from short-form ads to brand stories that connect with your audience and drive action.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <button class="service-header" onclick="toggleService(3, 'group-2')">
+                            <div class="service-icon">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                            <div class="service-title-wrapper">
+                                <h3 class="service-title">Reputation Management</h3>
+                            </div>
+                        </button>
+                        <div class="service-description">
+                            <p>Actively monitor, protect, and enhance your brand's image across all platforms, building trust essential for growth.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-area">
+                    <div class="image-box">
+                        <div class="service-image active" style="background-image: url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&h=600&fit=crop');"></div>
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&h=600&fit=crop');"></div>
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800&h=600&fit=crop');"></div>
+                        <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop');"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let autoAdvanceTimers = {};
+        let currentVisibleSection = null;
+
+        function toggleService(index, groupId) {
+            const group = document.getElementById(groupId);
+            
+            // Get all service items in this group
+            const items = group.querySelectorAll('.service-item');
+            const images = group.querySelectorAll('.service-image');
+            
+            // Toggle the clicked item
+            items.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Update images
+            images.forEach((img, i) => {
+                if (i === index) {
+                    img.classList.add('active');
+                } else {
+                    img.classList.remove('active');
+                }
+            });
+
+            // Restart auto-advance for this group if it's visible
+            if (currentVisibleSection === groupId) {
+                startAutoAdvance(groupId);
+            }
+        }
+
+        function nextService(groupId) {
+            const group = document.getElementById(groupId);
+            const items = group.querySelectorAll('.service-item');
+            const currentIndex = Array.from(items).findIndex(item => item.classList.contains('active'));
+            const nextIndex = (currentIndex + 1) % items.length;
+            toggleService(nextIndex, groupId);
+        }
+
+        function startAutoAdvance(groupId) {
+            // Clear all existing timers first
+            Object.keys(autoAdvanceTimers).forEach(key => {
+                clearTimeout(autoAdvanceTimers[key]);
+            });
+
+            // Only set timer for the visible section
+            if (currentVisibleSection === groupId) {
+                autoAdvanceTimers[groupId] = setTimeout(() => {
+                    nextService(groupId);
+                }, 5000);
+            }
+        }
+
+        function stopAllAutoAdvance() {
+            Object.keys(autoAdvanceTimers).forEach(key => {
+                clearTimeout(autoAdvanceTimers[key]);
+            });
+        }
+
+        // Set up Intersection Observer to detect which section is in view
+        function setupIntersectionObserver() {
+            const options = {
+                root: null,
+                rootMargin: '-20% 0px -20% 0px', // Trigger when section is 20% into viewport
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.closest('.services-grid').id;
+                        
+                        // Stop all timers
+                        stopAllAutoAdvance();
+                        
+                        // Set the current visible section
+                        currentVisibleSection = sectionId;
+                        
+                        // Start auto-advance only for this section
+                        startAutoAdvance(sectionId);
+                    }
+                });
+            }, options);
+
+            // Observe both service sections
+            document.querySelectorAll('.services-section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            
+            // Set up intersection observer
+            setupIntersectionObserver();
+            
+            // Initially start with the first visible section
+            currentVisibleSection = 'group-1';
+            startAutoAdvance('group-1');
+        });
+
+        // Add click listeners to service headers to restart auto-advance
+        document.querySelectorAll('.service-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const groupId = header.closest('.services-grid').id;
+                if (currentVisibleSection === groupId) {
+                    startAutoAdvance(groupId);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
